@@ -129,12 +129,12 @@ documentation in $CALLISTO_HOME/docs/index.html
 ## Build from source distribution
 Callisto can be build from the source distribution using `ant`.  
 
-`ant` will compile the core and tasks 
-`ant` from any task directory will compile just that task
-`ant run` will compile and run Callisto
-`ant installer` will generate an installer
-* Note that this requires Maven version 1.0.2 (a legacy version)
-`ant javadoc` will generate the javadoc
+* `ant` will compile the core and tasks 
+* `ant` from any task directory will compile just that task
+* `ant run` will compile and run Callisto
+* `ant installer` will generate an installer
+** Note that this requires Maven version 1.0.2 (a legacy version)
+* `ant javadoc` will generate the javadoc
 
 Note that the toplevel build will succeed even if a task build fails. 
 
