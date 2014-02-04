@@ -64,8 +64,7 @@ Callisto/                  (aka $CALLISTO_HOME)
 
 ## Requirements
 
-Callisto is implemented in Java, requiring Java version 1.4 or later,
-obtainable from Sun Microsystems at http://java.sun.com/. Other
+Callisto is implemented in Java, requiring Java version 1.5 or later. Other
 required libraries are included with the distribution of Callisto, as
 mentioned in the Acknowledgements.
 
@@ -73,11 +72,9 @@ Java 1.6 is recommended.
 
 ## Installation
 
-1. Install java 2 Runtime Environment version 1.4 or later.
+1. Install java 2 Runtime Environment version 1.5 or later.
 
-   Note that java is already installed in many systems.  See the
-   manual at http://callisto.mitre.org/manual/install.html for more
-   information.
+   Note that java is already installed in many systems.  
 
 2. Double click the callisto-<version>-installer.jar icon to start the
    installer. You can also start the installer from the command line
