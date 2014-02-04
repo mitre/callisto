@@ -70,7 +70,7 @@ mentioned in the Acknowledgements.
 
 Java 1.6 is recommended.
 
-## Installation
+## Installation (using downloaded installer)
 
 1. Install java 2 Runtime Environment version 1.5 or later.
 
@@ -100,7 +100,7 @@ Java 1.6 is recommended.
 
     2. Sun Solaris, Linux, MacOSX:
 
-          If you put $CALLISTO_HOME/bin on your path, invoke Callist
+          If you put $CALLISTO_HOME/bin on your path, invoke Callisto
           with:
 
              $ callisto
@@ -119,6 +119,18 @@ Java 1.6 is recommended.
 
 For more information on installing Task plugins refer to the user
 documentation in $CALLISTO_HOME/docs/index.html
+
+## Build from source distribution
+Callisto can be build from the source distribution using `ant`.  
+
+`ant` will compile the core and tasks 
+`ant` from any task directory will compile just that task
+`ant run` will compile and run Callisto
+`ant installer` will generate an installer
+* Note that this requires Maven version 1.0.2 (a legacy version)
+`ant javadoc` will generate the javadoc
+
+Note that the toplevel build will succeed even if a task build fails. 
 
 
 ## Support
