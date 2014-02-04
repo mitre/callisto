@@ -1,0 +1,224 @@
+This file is intended to be used as a bulletin board whereby the Atlas
+Annotation Workbench developers exchange ideas, notes, task and any
+other comments that would be useful.
+
+########################
+##  Code Development  ##
+########################
+
+
+########################
+##  Coding Pointers   ##
+########################
+
+To initialize a file for annotation:
+1. Retrieve the implementation to be used for the corpus if we don't
+already have it
+	· implementation = ATLASImplementationManager.getDefaultImplementation();
+	· implementation = corpus.getAtlasImplementation(); // if existing corpus
+2. retrieve the AtlasElementFactory for the chosen implementation if we
+don't already have it:
+	· factory = ATLASElementFactory.getFactoryFor(implementation);
+3. Create a corpus for the file (or figure out which one you're adding
+it to) - type "simple"?? (type must be defined in MAIA file)
+	· corpus = factory.createCorpus(type)
+4. Create a simpleSignal for the file and add it to the corpus
+	· Signal signal = factory.createSimpleSignal("text", corpus, 
+		MIMEClass.TEXT, mimetype, encoding, null, "file://somefile.txt");
+5. Create analyses or annotationSets (??) appropriate to the task type??????
+6. Create LinkedListATLASElementSet for anchors and regions, so we can 
+iterate over them later
+7. Create hash tables to index elements as needed (needs to be determined as 
+we progress...)
+
+
+
+##########################
+##  EDT Specifications  ##
+##########################
+
+[These should help populate the various pulldown menus
+ and other relevant parts of the GUI.]
+
+Timex2 mention:
+  - start character offset (integer)
+  - end character offset (integer)
+  - value: ISO++ date/time value
+  - other?????
+
+Mention:
+  - start character offset (integer) of extent
+  - end character offset (integer) of extent
+  - start character offset (integer) of head
+  - end character offset (integer) of head
+  - syntactic type: name, nominal, pronoun
+  - metonymic level: literal, intended
+  - metonymic role (for GPE's entity mentions only):
+      GPE.ORG, GPE.GPE, GPE.LOC, GPE.FAC, GPE.PER
+  - preferred display mention? (boolean)
+
+EDT Entity:
+  - all mentions that refer to this entity
+  - specificity: specific, general
+  - type: Person, Organization, Location, Facility,
+      GeoPolitical-Entity (GPE)
+
+RDC Relation:
+  - type: at, part, role, soc, near
+  - subtypes:
+      at: located, based-in, residence, part-of
+      part: part-of, member, subsidiary, affiliate-partner, other
+      role: general-staff, client, management, owner, founder, citizen-of,
+            other-professional
+      soc: parent, sibling, spouse, grandparent, other-relative, other-personal
+      near: relative-location, associate
+  - class: explicit, implicit
+  - arg1: an entity
+  - arg2: an entity
+  - relation mentions: (entity-mention X entity-mention X timex2-mention)
+
+
+#################
+##  GUI Ideas  ##
+#################
+
+Main Widget
+  - title bar
+  - Incorporates menus across the top
+  - Identifies current source file/corpus being annotated
+  - Contains Text Widget
+  - Tear-off-capable Text-Selection-Prefs menu
+  - "mouse line" text bar (at top or bottom of text pane) in which
+    advice to user of various kinds can be displayed.
+  - Includes info indicating current pre-defined annotation task
+    preferences (combination of TAG-preferences and TASK preferences
+    in Alembic Workbench): NE, EDT, RDC.
+
+
+Text-Widget-Behavior-Prefs menu:
+  - Select text for EDT mention
+  - Select mentions for EDT
+
+
+Text Widget:
+  - Displays multi-lingual UTF-8 text
+  - Handles bi-directionality of texts
+  - Renders arabic properly (ligatures, etc.)
+  - Scrolling text
+  - Swipe: select text
+  - All text that is part of a mention of an entity is colored
+    according to the user's preferences for entities/mentions
+    of that type.
+  - As mouse moves over text, any text that is part of a mention
+    of an entity is further highlighted and the mouse icon changes
+    to indicate that this mention is selectable.
+  - Right-button over text that is ALREADY part of a mention:
+      Bring up Manipulate-MENTION-Selection menu.
+  - Left-button over text that is ALREADY part of a mention:
+      Bring the entity and this mention into "focus"
+        - in the Mentions-List widget
+        - in the Entity-List widget
+        - in the Entity-Relations widget
+      (If this is a Timex2 mention, then it only becomes the
+       focus of the Mentions-List widget.)
+  - Left-button over text that is *not* already part of a mention:
+      - If no current text selection, then select "word" under
+        mouse as current text selection (as appropriate for language)
+      - If there already is a "current text selection," then extend
+        it left one more "word"
+  - Right-button over text that is *not* already part of a mention
+      - If no current text selection, then select "word"
+      - If there already is a "current text selection," then extend
+        it right one more "word"
+  - Double-Right-Button (or, gulp, Ctrl-Right-Button?):
+    - If current text selection is in progress, then bring up
+      the Manipulate-TEXT-Selection menu pop-up (see below)
+      [I know, this might be too-many clicks to get this basic
+       menu to appear.  But the left/right button thing to
+       select the contents of a mentions just seems so "right."]
+  - Left-Arrow
+      - If current text selection, extend left one more "word"
+  - Right-Arrow
+      - If current text selection, extend right one more "word"
+  - Escape
+      - Kill any "current context," especially those in which
+        more user input is being waited for by the application
+
+
+Manipulate-TEXT-Selection popup menu contents:
+  - Add mention to existing entity --> (cascades to Select-Entity menu)
+  - Create new entity with this mention --> (cascades to Create-Entity menu)
+  - Create timex2 mention
+  - Remove selection (don't want to tag this text after all)
+
+
+Select-Entity popup menu:
+  - Scrolling list of all entities (preferred names + unique IDs)
+  - Cancel addition of mention to entity
+    (selected mention text disappears)
+
+  ==> After entity is selected, text in "mouse line" text bar appears
+   requesting that HEAD of mention should be specified/selected. [This
+   also has the effect of causing the text selection via the mouse to
+   behave as if there were no mention underneath text being selected.]
+   If head identical to extent, then user can hit <Return>.  Hitting
+   ESC will cancel the mention creation altogether.]
+
+
+Create-Entity popup menu:
+  - Select Entity Type (listed right here in widget, no more cascading)
+  - Cancel creation of entity
+    (selected mention text disappears)
+
+  ==> After entity is created, same HEAD prompting as above.
+
+
+Manipulate-MENTION-Selection popup menu contents:
+
+    Mention-Level Actions
+  - Remove mention from this entity
+  - Set as Preferred-Mention-Display (toggle on only)
+  - Set Syntactic-Type --> (cascades to syntactic type list)
+  - Set Metonymic-Level --> (cascades to metonymic level list)
+  - Set Metonymic-Role (greyed out unless this is a GPE) -->
+     (cascades to GPE metonymic role list)
+  - Change extent of mention (causes mention to be in "select" mode
+    so that it's left/right boundaries can be manipulated, using
+    either left/right mouse buttons or arrow keys)
+  - Change extent of mention head (same as above)
+
+    Entity-Level Actions
+  - Remove this entity (the one for which this is a mention)
+  - Change Entity Type --> (cascades to entity type list)
+  - Change Specific/Generic value (toggle)
+  - Add Relation to Entity --> (cascades to specifying RDC type
+      and thence to subtype lists)
+    ==> Enter Relation-Definition-Mode.
+
+Relation-Definition-Mode:
+  After relation type/subtype is specified, this entity and new
+  relation becomes "focus" in RDC widget, with the type/subtype values
+  already set.  Default values are pre-set for Explicit/Implicit
+  value.  In the absence of semantic constraints, the selected entity
+  becomes the "Arg-1" for this relation.  At the same time, the user
+  is "prompted" for Arg-2 and then Timex2 Mention, if any (with
+  directions provided via "mouse line" text pane).  Arg-2 entity, the
+  entity mention, and the Timex2 mention must all have been defined
+  already (they can't be defined at this point).  If the user hits
+  <Return> to either or both of the Arg-2 and Timex2 prompts, then
+  these values are left empty (to be filled in through interactions
+  with the RDC-Relations widget).
+
+
+        
+Mentions-List widget:
+  [Display all the mentions for a particular entity in tabular form,
+   one per line]
+
+
+EDT-Entity-List widget:
+  [Display all the entities in tabular form, one per line]
+
+
+RDC-Entity-Relations-List widget:
+  [Display all the relations for a particular EDT entity in tabular form.]

@@ -1,0 +1,22 @@
+#Callisto v0.1 Default Preferences
+#Wed Dec 04 12:19:41 EST 2002
+backup.count=10
+callisto.text.type=sgml
+callisto.text.caret.visible=false
+fonts.autodetected=Default,MingLiU
+fonts.last.size.enabled=true
+fonts.last.family.enabled=false
+history.max=10
+option.advanced.title=Advanced
+option.general.title=General
+option.fonts.title=Fonts
+option.highlights.title=Highlights
+option.jawb.title=Callisto
+para.last.line.spacing=0.2
+para.last.line.spacing.enabled=true
+sort.case.sensitive=false
+windows.jawb.bounds={20,40,609,724}
+windows.storeGeometry=true
+windows.mainTextPalette.visible=true
+callisto.autotag.forward=true
+callisto.autotag.untagged=true

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE Scheme SYSTEM 'maia.dtd'>
+
+<!-- The Scheme name here is the same as the task name. which needn't
+     correspond exactly to the class name, it need only be unambiguous
+     amongst Callisto Tasks.
+  -->
+<Scheme name='org.mitre.sample'>
+  <TypeDefinitions>
+    <SignalType name='text' mimeClass='text'/>
+
+    <AnalysisType name='all-tags'>
+      <AnnotationType ref='tag' hasIndefiniteCardinality='true'/>
+    </AnalysisType>
+
+    <AnchorType name='text-point'>
+      <SignalType ref='text' role='text'/>
+      <ParameterType ref='char' role='char'/>
+    </AnchorType>
+
+    <RegionType name='text-extent'>
+      <AnchorType ref='text-point' role='start'/>
+      <AnchorType ref='text-point' role='end'/>
+    </RegionType>
+
+    <AnnotationType name='tag'>
+      <RegionType ref='text-extent' role='text-extent'/>
+      <ContentType ref='tag-content' role='content'/>
+    </AnnotationType>
+
+    <ContentType name='tag-content'>
+      <ParameterType ref='string' role='type'/>
+    </ContentType>
+
+    <ParameterType name='char'/>    
+    <ParameterType name='string'/>
+
+    <CorpusType name='sample'>
+      <SignalType ref='text' hasIndefiniteCardinality='true'/>
+      <AnchorType ref='text-point' hasIndefiniteCardinality='true'/>
+      <RegionType ref='text-extent' hasIndefiniteCardinality='true'/>
+      <AnalysisType ref='all-tags' role='all-tags'/>
+    </CorpusType>
+  </TypeDefinitions>
+</Scheme>

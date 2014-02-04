@@ -1,0 +1,41 @@
+<!--
+
+    You may omit the ENTITY tags, as these may be entered using the
+    Callisto GUI, but by setting them the values will be filled in
+    automatically.
+
+ -->
+
+<!-- Unique name for task disambiguation -->
+<!ENTITY callisto_task_name "org.mitre.example.food">
+
+<!-- Human readable title for display in GUI -->
+<!ENTITY callisto_task_title "Food Annotation Task">
+
+<!-- Version string -->
+<!ENTITY callisto_task_version "1.0">
+
+<!-- Optional human readable description for display in GUI -->
+<!ENTITY callisto_task_description
+         "Annotate food and associated data">
+
+<!-- An annotation type -->
+<!ELEMENT food (#PCDATA)>
+
+  <!-- Two attributes, each with an enumeration of values, and no default -->
+  <!ATTLIST food type (fruit|grain|proteins|dairy|vegetable) #IMPLIED
+                 taste (salty|sour|sweet|bitter|umami) #IMPLIED>
+
+  <!-- An attribute with any text as value -->
+  <!ATTLIST food color CDATA #IMPLIED>
+
+  <!-- An attribute with an enumeration of values and a default -->
+  <!ATTLIST food flavor (awful|bad|bland|good|delicious) "bland">
+
+  <!-- A boolean attribute and default which uses a checkbox in the table -->
+  <!ATTLIST food perishable (true|false) "false">
+
+
+<!-- Another annotation type with a single attribute -->
+<!ELEMENT consumption (#PCDATA)>
+  <!ATTLIST consumption timeframe (past|present|future) #IMPLIED>

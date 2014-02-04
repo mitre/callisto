@@ -1,0 +1,1 @@
+java -Djava.protocol.handler.pkgs=gov.nist.atlas.impl org.mitre.jawb.atlas.PhraseTaggingTest "file:/C:/a_projects/ATLAS/jAWB/maia/AttrValPhraseTagging.maia.xml" "file:/C:/a_projects/ATLAS/jAWB/data/test.txt" "C:/a_projects/ATLAS/ATLAS AWB/data/test.aif"

@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!DOCTYPE source_file SYSTEM "ace-rdc.dtd">
+<source_file TYPE="text" VERSION="2.0" SOURCE="unknown" URI="VOA19980624.1800.1997.utf8" ENCODING="UTF-8">
+  <document DOCID="VOA19980624.1800.1997.utf8">
+
+    <entity ID="VOA19980624.1800.1997.utf8-1">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+      <entity_mention ID="VOA19980624.1800.1997.utf8-1-1" TYPE="NAME">
+        <extent>
+          <charseq>
+            <!-- string = "China" -->
+            <start>1</start><end>5</end></charseq>
+        </extent>
+        <head>
+          <charseq>
+            <!-- string = "China" -->
+            <start>1</start><end>5</end></charseq>
+        </head>
+      </entity_mention>
+      <entity_mention ID="VOA19980624.1800.1997.utf8-1-3" TYPE="NAME">
+        <extent>
+          <charseq>
+            <!-- string = "Chinese" -->
+            <start>1156</start><end>1162</end></charseq>
+        </extent>
+        <head>
+          <charseq>
+            <!-- string = "Chinese" -->
+            <start>1156</start><end>1162</end></charseq>
+        </head>
+      </entity_mention>
+      <entity_attributes>
+        <name>
+          <charseq>
+            <!-- string = "China" -->
+            <start>1</start><end>5</end></charseq>
+        </name>
+        <name>
+          <charseq>
+            <!-- string = "Chinese" -->
+            <start>1156</start><end>1162</end></charseq>
+        </name>
+      </entity_attributes>
+    </entity>
+
+    <entity ID="VOA19980624.1800.1997.utf8-2">
+      <entity_type GENERIC="FALSE">PERSON</entity_type>
+      <entity_mention ID="VOA19980624.1800.1997.utf8-2-1" TYPE="NAME">
+        <extent>
+          <charseq>
+            <!-- string = "Clinton" -->
+            <start>72</start><end>78</end></charseq>
+        </extent>
+        <head>
+          <charseq>
+            <!-- string = "Clinton" -->
+            <start>72</start><end>78</end></charseq>
+        </head>
+      </entity_mention>
+      <entity_mention ID="VOA19980624.1800.1997.utf8-2-2" TYPE="PRONOUN">
+        <extent>
+          <charseq>
+            <!-- string = "his" -->
+            <start>115</start><end>117</end></charseq>
+        </extent>
+        <head>
+          <charseq>
+            <!-- string = "his" -->
+            <start>115</start><end>117</end></charseq>
+        </head>
+      </entity_mention>
+      <entity_attributes>
+        <name>
+          <charseq>
+            <!-- string = "Clinton" -->
+            <start>72</start><end>78</end></charseq>
+        </name>
+      </entity_attributes>
+    </entity>
+
+    <entity ID="VOA19980624.1800.1997.utf8-3">
+      <entity_type GENERIC="FALSE">FACILITY</entity_type>
+      <entity_mention ID="VOA19980624.1800.1997.utf8-3-1" TYPE="NAME">
+        <extent>
+          <charseq>
+            <!-- string = "Tiananmen Square" -->
+            <start>147</start><end>162</end></charseq>
+        </extent>
+        <head>
+          <charseq>
+            <!-- string = "Tiananmen Square" -->
+            <start>147</start><end>162</end></charseq>
+        </head>
+      </entity_mention>
+      <entity_attributes>
+        <name>
+          <charseq>
+            <!-- string = "Tiananmen Square" -->
+            <start>147</start><end>162</end></charseq>
+        </name>
+      </entity_attributes>
+    </entity>
+
+  </document>
+</source_file>

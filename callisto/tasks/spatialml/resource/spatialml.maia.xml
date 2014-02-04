@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Scheme SYSTEM "maia.dtd" >
+
+<!-- The Scheme name here is the same as the task name. which needn't
+     correspond exactly to the class name, it need only be unambiguous
+     amongst Callisto Tasks.
+  -->
+
+<Scheme name="org.mitre.spatialml">
+  <TypeDefinitions>
+    <SignalType name="text" mimeClass="text" />
+    
+    <ParameterType name="char" />
+    <ParameterType name="string" />
+
+    <AnchorType name="text-point">
+      <SignalType ref="text" role="text"/>
+      <ParameterType ref="char" role="char"/>
+    </AnchorType>
+
+    <RegionType name="text-extent">
+      <AnchorType ref="text-point" role="start"/>
+      <AnchorType ref="text-point" role="end"/>
+    </RegionType>
+
+	<RegionType name="rlink-subordinates">
+		<AnnotationType ref="PLACE" role="source" />
+		<AnnotationType ref="PLACE" role="target" />
+<!--		<AnnotationType ref="iPLACE" role="iSource" />-->
+<!--		<AnnotationType ref="iPLACE" role="iTarget" />-->
+		<AnnotationType ref="SIGNAL" hasIndefiniteCardinality="true" />
+	</RegionType>
+
+	<RegionType name="link-subordinates">
+		<AnnotationType ref="PLACE" role="source" />
+		<AnnotationType ref="PLACE" role="target" />
+		<AnnotationType ref="RLINK" role="sourceRlink" />
+		<AnnotationType ref="RLINK" role="targetRlink" />
+		<AnnotationType ref="SIGNAL" hasIndefiniteCardinality="true" />
+<!--		<AnnotationType ref="PLACE" hasIndefiniteCardinality="true" />-->
+	</RegionType>
+
+    <ContentType name="null-content"></ContentType>
+    
+    <ContentType name="place-content">
+    	<ParameterType ref="string" role="id" />
+    	<ParameterType ref="string" role="gazref" />
+    	<ParameterType ref="string" role="comment" />
+    	<ParameterType ref="string" role="type" />
+    	<ParameterType ref="string" role="mod" />
+    	<ParameterType ref="string" role="continent" />
+    	<ParameterType ref="string" role="country" />
+    	<ParameterType ref="string" role="county" />
+    	<ParameterType ref="string" role="state" />
+    	<ParameterType ref="string" role="latLong" />
+    	<ParameterType ref="string" role="nonLocUse" />
+    	<ParameterType ref="string" role="predicative" />
+    	<ParameterType ref="string" role="description" />
+		<ParameterType ref="string" role="form" />
+    	<ParameterType ref="string" role="CTV" />
+    </ContentType>
+
+	<AnnotationType name="PLACE">
+		<RegionType ref="text-extent" role="text-extent" />
+		<ContentType ref="place-content" role="content" />
+	</AnnotationType>
+
+<!--	<AnnotationType name="iPLACE">-->
+<!--		<RegionType ref="text-extent" role="text-extent" />-->
+<!--		<ContentType ref="place-content" role="content" />-->
+<!--	</AnnotationType>-->
+		
+
+	<ContentType name="rlink-content">
+    	<ParameterType ref="string" role="id" />
+    	<ParameterType ref="string" role="comment" />
+    	<ParameterType ref="string" role="frame" />
+    	<ParameterType ref="string" role="direction" />
+    	<ParameterType ref="string" role="distance" />
+	</ContentType>
+	
+	<AnnotationType name="RLINK">
+		<RegionType ref="rlink-subordinates" role="subordinates" />
+		<ContentType ref="rlink-content" role="content" />
+	</AnnotationType>
+
+	<AnnotationType name="rlink-extent">
+		<RegionType ref="text-extent" role="text-extent" />
+		<ContentType ref="null-content" role="content" />
+	</AnnotationType>
+	
+	<ContentType name="signal-content">
+    	<ParameterType ref="string" role="id" />
+    	<ParameterType ref="string" role="comment" />
+    	<ParameterType ref="string" role="signalType" />
+	</ContentType>
+	
+	<AnnotationType name="SIGNAL">
+		<RegionType ref="text-extent" role="text-extent" />
+		<ContentType ref="signal-content" role="content" />
+	</AnnotationType>
+
+	<AnnotationType name="link-extent">
+		<RegionType ref="text-extent" role="text-extent" />
+		<ContentType ref="null-content" role="content" />
+	</AnnotationType>
+
+	<ContentType name="link-content">
+    	<ParameterType ref="string" role="id" />
+    	<ParameterType ref="string" role="comment" />
+    	<ParameterType ref="string" role="linkType" />
+	</ContentType>
+
+	<AnnotationType name="LINK">
+		<RegionType ref="link-subordinates" role="subordinates" />
+		<ContentType ref="link-content" role="content" />
+	</AnnotationType>
+
+    <AnalysisType name="place-set">
+    	<AnnotationType ref="PLACE" hasIndefiniteCardinality="true" />
+    </AnalysisType>
+    
+    <AnalysisType name="rlink-set">
+    	<AnnotationType ref="RLINK" hasIndefiniteCardinality="true" />
+    </AnalysisType>
+
+    <AnalysisType name="rlink-extent-set">
+    	<AnnotationType ref="rlink-extent" hasIndefiniteCardinality="true" />
+    </AnalysisType>
+    
+    <AnalysisType name="signal-set">
+    	<AnnotationType ref="SIGNAL" hasIndefiniteCardinality="true" />
+    </AnalysisType>
+    
+    <AnalysisType name="link-extent-set">
+    	<AnnotationType ref="link-extent" hasIndefiniteCardinality="true" />
+    </AnalysisType>
+
+    <AnalysisType name="link-set">
+    	<AnnotationType ref="LINK" hasIndefiniteCardinality="true" />
+    </AnalysisType>
+    
+    
+    
+    <CorpusType name="spatialml">
+    	<SignalType ref="text" hasIndefiniteCardinality="true" />
+    	<AnchorType ref="text-point" hasIndefiniteCardinality="true" />
+    	
+    	<RegionType ref="text-extent" hasIndefiniteCardinality="true" />
+    	<RegionType ref="link-subordinates" hasIndefiniteCardinality="true" />
+    	<RegionType ref="rlink-subordinates" hasIndefiniteCardinality="true" />
+    	
+    	<AnalysisType ref="place-set" hasIndefiniteCardinality="true" />
+    	<AnalysisType ref="rlink-set" hasIndefiniteCardinality="true" />
+    	<AnalysisType ref="rlink-extent-set" hasIndefiniteCardinality="true" />
+    	<AnalysisType ref="signal-set" hasIndefiniteCardinality="true" />
+    	<AnalysisType ref="link-set" hasIndefiniteCardinality="true" />
+    	<AnalysisType ref="link-extent-set" hasIndefiniteCardinality="true" />
+    	
+    </CorpusType>
+    
+  </TypeDefinitions>
+</Scheme>

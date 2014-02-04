@@ -1,0 +1,7 @@
+<plugin>
+  <task name="org.mitre.ace2004"
+        classname="org.mitre.ace2004.callisto.ACE2004Task"
+        classpath="ace2004-task.jar">
+    <property name="org.mitre.ace2004.constraints.rng" value="ace2004.rng" />
+  </task>
+</plugin>

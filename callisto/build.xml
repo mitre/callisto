@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project name="callisto" default="build">
+
+  <!-- Note: The Callisto project used to be called "jawb",
+       and our package heriarchy still uses "jawb" -->
+
+  <!-- Give user a chance to override without editing this file
+       (and without typing -D each time compiling) -->
+  <property file="${user.home}/build.properties"/>
+  <property file="build.properties"/>
+  <property environment="env"/>
+
+  <!-- This import defines a macro that allows us to call maven goals from ant. -->
+  <!--   It also defines the "check-maven" task, usful as a dependancy. -->
+  <!-- Optional here, as the few targets that need it depend on check-maven. -->
+
+  <import file="maven-macro.xml" optional="true" />
+
+  <property name="callisto.debug" value="false" />
+  <property name="debug"       value="true"/>
+  <property name="optimize"    value="true"/>
+  <property name="deprecation" value="false"/>
+
+  <property name="name"       value="callisto" />
+  <property name="Name"       value="Callisto" />
+  <!-- see 'init' target to change version -->
+  <property name="vendor"     value="The MITRE Corporation" />
+  <property name="copyright"  value="2002-2014 ${vendor}" />
+  <property name="url"        value="http://callisto.mitre.org" />
+  <property name="main.class" value="org.mitre.jawb.Jawb" />
+
+  <!-- directory names -->
+  <!-- These must remain simple values, (relative to basedir) -->
+  <property name="src"            value="src"/>
+  <property name="lib"            value="lib"/>
+  <property name="docs"           value="docs"/>  <!-- should be 'docs' -->
+  <property name="bin.src"        value="${src}/bin"/>
+  <property name="docs.src"       value="xdocs"/>
+  <property name="tasks.src"      value="tasks"/>
+  <property name="data"           value="data"/>
+
+  <property name="build"          location="build"/>
+  <property name="classes"        location="${build}/classes"/>
+  <property name="test.classes"   location="${build}/test-classes"/>
+  <property name="lib.build"      location="${build}/lib" />
+  <property name="docs.generated" location="${build}/generated-xdocs"/>
+  <property name="docs.build"     location="${build}/docs"/>
+  <property name="api.build"      location="${docs.build}/apidocs"/>
+  <property name="dist"           location="dist"/>
+
+  <property name="callisto.tasks.build"    location="${build}/tasks"/>
+  <property name="callisto.tasks.dist"     location="${dist}/tasks" />
+
+  <!-- 'package' in classpath to place resources -->
+  <property name="resource.path" value="org/mitre/jawb/resources"/>
+
+  <!-- versioning -->
+  <property name="version.info" value="${resource.path}/version.info" />
+
+  <!-- fragile! -->
+  <property name="ext.src.archive.dir" value="${basedir}/../ext"/>
+
+  <!-- directories of tasks to build and distribute -->
+  <dirset id="tasks.dirs" dir="${tasks.src}">
+    <!-- Restrict tasks compiled here -->
+    <include name="*" /> <!-- required else the dirset recurses -->
+   <!-- Just comment out the exclude line for your task(s) of interest -->
+
+<!-- Include them all for release
+
+    <exclude name="ace2004" />
+    <exclude name="muc" />
+    <exclude name="sample" />
+    <exclude name="spatialml" />
+    <exclude name="timex2" />
+    -->
+
+  </dirset>
+
+  <!-- files for the distributions -->
+  <fileset id="docs.files" dir=".">
+    <include name="README.txt" />
+    <include name="INSTALL.txt" />
+    <include name="LICENSE.txt" />
+  </fileset>
+  <fileset id="data.files" dir=".">
+    <!-- <include name="${data}/ACE/" /> -->
+    <include name="${data}/arabic/" />
+    <include name="${data}/chinese/" />
+    <include name="${data}/english/" />
+    <include name="${data}/hindi/" />
+    <include name="${data}/*.dtd" />
+  </fileset>
+
+  <!-- external libraries -->
+  <fileset id="ext.libs" dir="${lib}">
+    <include name="dom4j-1.5.2.jar" />
+    <include name="jaxen-1.1-beta-4.jar" />
+    <include name="jATLAS.jar" />
+    <include name="log4j.jar" />
+    <include name="dtdparser121.jar" />
+    <include name="zchat.jar" />
+    <include name="servlet-api.jar" />
+    <include name="icu4j_3_4_4.jar" />
+    <include name="persiancalendar.jar" /> 
+  </fileset>
+
+  <!-- class paths -->
+  <path id="ext.cp">
+    <fileset refid="${ext.libs}" />
+  </path>
+
+  <path id="installer.cp">
+    <path refid="classpath" />
+    <pathelement location="${izpack.home}/lib/standalone-compiler.jar"/>
+  </path>
+
+  <path id="classpath">
+    <pathelement location="${classes}" />
+    <fileset dir="${lib.build}" includes="*.jar" />
+  </path>
+
+  <path id="junit.cp">
+    <pathelement location="lib/junit.jar"/>
+    <pathelement location="${classes}" />
+    <pathelement location="${test.classes}" />
+    <fileset dir="${lib.build}" includes="*.jar" />
+  </path>
+
+  <path id="jrat.cp">
+    <pathelement location="lib/shiftone-jrat.jar"/>
+    <pathelement location="lib/bcel-5.1.jar"/>
+    <fileset dir="${lib.build}" includes="*.jar" />
+    <dirset dir="${build}" includes="injected-classes" />
+  </path>
+
+
+  <!-- ************************************** -->
+  <!-- Initialization -->
+  <!-- ************************************** -->
+
+  <target name="init">
+    <echo message="${Name}" />
+    <tstamp>
+      <format property="date" pattern="MMM d, yyyy"/>
+    </tstamp>
+
+    <!-- version under development, e.g. 1.1, 1.2, 2.0-SNAPSHOT -->
+    <!-- here to allow datestamps -->
+    <property name="version"  value="1.8-release" />
+
+    <!-- packaging -->
+    <property name="proj.jar" value="${Name}.jar"/>
+    <property name="jar.classpath"
+              value="lib/jATLAS.jar lib/dom4j-1.5.2.jar lib/jaxen-1.1-beta-4.jar lib/log4j.jar lib/dtdparser121.jar lib/icu4j_3_4_4.jar lib/persiancalendar.jar lib/jannotmgr.jar" />
+
+
+
+    <property name="dist.name"     value="${name}-${version}" />
+    <property name="dist.src.name" value="${dist.name}-src" />
+    <property name="dist.ext.name" value="ext" />
+
+    <property name="dist.tgz"      value="${dist}/${dist.name}.tar.gz"/>
+    <property name="dist.src.tgz"  value="${dist}/${dist.src.name}.tar.gz"/>
+    <property name="installer.jar" value="${dist}/${dist.name}-installer.jar" />
+    <property name="dist.site.tgz" value="${dist}/${dist.name}-site.tar.gz"/>
+    <property name="dist.cd.tgz"   value="${dist}/${dist.name}-CD.tar.gz"/>
+
+    <copy toDir="${callisto.tasks.build}"
+          file="${tasks.src}/build.common.xml" />
+  </target>
+
+  <target name="init-build" depends="init">
+    <copy toDir="${lib.build}">
+      <fileset refid="ext.libs" />
+    </copy>
+  </target>
+
+  <!-- ************************************** -->
+  <!-- Third party dependancy checks -->
+  <!-- ************************************** -->
+
+  <target name="check-junit" depends="init-build">
+    <available property="junit.present"
+               classname="junit.framework.TestCase"
+               classpathref="junit.cp" />
+  </target>
+
+  <target name="check-izpack" depends="init-build">
+    <available property="izpack.present"
+               classname="com.izforge.izpack.ant.IzPackTask"
+               classpathref="installer.cp" />
+    <fail unless="izpack.present">.
+
+       The IzPack program is not available.  Download it from
+       http://www.izforge.com/izpack/.  Install it, and set the
+       'izpack.home' property in your local build.properties.
+    </fail>
+    <taskdef name="izpack" classname="com.izforge.izpack.ant.IzPackTask"
+             classpathref="installer.cp"/>
+  </target>
+
+  <target name="check-dtdparser" depends="init-build">
+    <available property="dtdparser.present"
+               classname="com.wutka.dtd.DTD"
+               classpathref="ext.cp" />
+  </target>
+
+  <target name="check-bcel" depends="init-build">
+    <available property="bcel.present"
+               classname="org.apache.bcel.classfile.ClassParser"
+               classpathref="jrat.cp" />
+    <fail unless="bcel.present">.
+
+       The jrat program requires the BCEL library.  Download it from
+       http://jakarta.apache.org/bcel/.  Copy the bcel-5.1.jar
+       file into the lib directory.
+    </fail>
+  </target>
+
+  <target name="check-jrat" depends="init-build,check-bcel">
+    <available property="jrat.present"
+               classname="org.shiftone.jrat.inject.ant.InjectCopyTask"
+               classpathref="jrat.cp" />
+    <fail unless="jrat.present">.
+
+       The jrat program is not available.  Download it from
+       http://jrat.sourceforge.net/.  Copy the shiftone-jrat.jar
+       file into the lib directory.
+    </fail>
+    <taskdef name="injectCopy"
+             classname="org.shiftone.jrat.inject.ant.InjectCopyTask"
+             classpathref="jrat.cp"/>
+  </target>
+
+  <target name="check-maven">
+    <!-- only checks for env var, not the actually libs yet -->
+    <condition property="maven.present" value="${env.MAVEN_HOME}">
+      <isset property="env.MAVEN_HOME"></isset>
+    </condition>
+    <fail unless="maven.present">.
+
+       Apache Maven (1.0.2) must be installed and MAVEN_HOME set.
+    </fail>
+  </target>
+
+  <!-- ************************************** -->
+  <!-- Sub-Projects (Tasks) -->
+  <!-- ************************************** -->
+
+  <!--
+     Each directory in ${tasks.src} will have ant invoked within.
+     Only specified properties are inherited.
+     Failure of sub-proj is not fatal
+    -->
+
+  <!-- Invoked by targets to recurse into tasks. Won't fail on error -->
+  <macrodef name="build-tasks">
+    <attribute name="ant-build" description="target to build in all tasks" />
+    <sequential>
+      <subant target="@{ant-build}" failonerror="false" inheritall="false">
+
+        <dirset refid="tasks.dirs" />
+
+        <!-- Set of properties to pass to task builds -->
+        <property name="callisto.home" value="${build}" />
+        <property name="callisto.prefs.debug" value="${build}/../.callisto/callisto.prefs"/>
+        <property name="callisto.debug" value="${callisto.debug}" />
+        <propertyset>
+          <propertyref name="dist.name" />
+          <propertyref name="dist.src.name" />
+          <propertyref name="callisto.tasks.build" />
+          <propertyref name="callisto.tasks.dist" />
+        </propertyset>
+      </subant>
+    </sequential>
+  </macrodef>
+
+  <target name="init-task" if="debug">
+    <echo message="user.task.dir.${task.count}=${basedir}/build/classes" />
+  </target>
+
+
+  <!-- ************************************** -->
+  <!-- Version info targets -->
+  <!-- ************************************** -->
+
+  <target name="version-exists">
+    <available file="${classes}/${version.info}" property="version.exists"/>
+  </target>
+
+  <target name="version-check" depends="version-exists" if="version-exists">
+    <checksum property="version.checksum" file="${build}/${version.info}" />
+    <checksum property="version.checksum" file="${classes}/${version.info}" verifyproperty="version.uptodate" />
+  </target>
+
+  <target name="version-copy" unless="version.uptodate" depends="version-check">
+    <copy file="${build}/${version.info}" tofile="${classes}/${version.info}" />
+  </target>
+
+  <target name="version-init">
+    <!-- version updates when info build.xml changes -->
+    <dependset>
+      <srcfilelist dir="${basedir}" files="build.xml" />
+      <targetfilelist dir="${classes}" files="${version.info}"/>
+    </dependset>
+    <copy preservelastmodified="true" file="${src}/${version.info}.in" tofile="${build}/${version.info}">
+      <filterset>
+        <filter token="VERSION" value="${version}" />
+        <filter token="COPYRIGHT" value="${copyright}" />
+      </filterset>
+    </copy>
+  </target>
+
+  <target name="init-version" depends="version-init,version-copy" />
+
+  <!-- ************************************** -->
+  <!-- Compilation targets -->
+  <!-- ************************************** -->
+
+  <!-- Compile the java code from ${src} into ${classes} -->
+  <target name="compile" depends="init-build,init-version"
+          description="Compile class files into 'classes'.">
+    <mkdir dir="${classes}" />
+    <javac srcdir="${src}"
+           destdir="${classes}"
+           classpathref="classpath"
+           debug="${debug}"
+           optimize="${optimize}"
+           deprecation="${deprecation}"/>
+
+    <!-- Program resources -->
+    <copy toDir="${classes}/${resource.path}">
+      <fileset dir="${src}/${resource.path}">
+        <exclude name="version.info.in" />
+      </fileset>
+    </copy>
+
+    <rmic base="${classes}">
+      <include name="org/mitre/jawb/tasks/preannotate/Phrag.class"/>
+      <include name="org/mitre/jawb/tasks/preannotate/Carafe.class"/>
+      <include name="org/mitre/jawb/tasks/preannotate/LPServer.class"/>
+    </rmic>
+
+  </target> <!-- name=compile -->
+
+  <!-- ************************************** -->
+  <!-- Executable jar creation/management targets -->
+  <!-- ************************************** -->
+
+  <!-- Check that the jar is up to date relative to anything in ${classes} -->
+  <target name="jar-uptodate">
+    <uptodate property="jar.uptodate">
+      <srcfiles dir="${classes}" />
+      <mapper type="merge" to="${build}/${proj.jar}"/>
+    </uptodate>
+  </target>
+
+  <!-- Build the jar, but only if it's out of date
+       (tasks can call this target with a subant call if they need to update it) -->
+  <target name="jar" depends="init,jar-uptodate" unless="jar.uptodate">
+    <jar destfile="${build}/${proj.jar}"
+         basedir="${classes}">
+      <manifest>
+        <attribute name="Main-Class"             value="${main.class}" />
+        <attribute name="Class-Path"             value="${jar.classpath}" />
+        <attribute name="Specification-Title"    value="${Name}" />
+        <attribute name="Specification-Version"  value="${version}" />
+        <attribute name="Specification-Vendor"   value="${vendor}" />
+        <attribute name="Implementation-Title"   value="${Name}" />
+        <attribute name="Implementation-Version" value="${version} ${DSTAMP}" />
+        <attribute name="Implementation-Vendor"  value="${vendor}" />
+      </manifest>
+    </jar>
+  </target>
+
+  <!-- Put everything in ${classes} into the ${name}.jar file -->
+  <target name="build" depends="compile,jar"
+          description="Create project jars and copy third-party jars.">
+
+    <!-- Build all task subpackages -->
+    <build-tasks ant-build="build" />
+
+    <copy todir="${callisto.tasks.build}">
+      <fileset dir="${tasks.src}" includes="*.jar" />
+    </copy>
+
+    <!-- copy binary scripts -->
+    <copy todir="${build}/bin">
+      <fileset dir="${bin.src}" includes="*,*.bat" />
+    </copy>
+    <chmod dir="${build}/bin" perm="755" includes="*,*.bat" />
+
+  </target> <!-- name=build -->
+
+
+  <!-- ************************************** -->
+  <!-- Run targets -->
+  <!-- ************************************** -->
+
+  <!-- Run from classes directory -->
+  <target name="run" depends="build"
+          description="Run Callisto from the compiled .class files.">
+    <java classname="${main.class}" fork="true" failonerror="true"
+          classpathref="classpath" />
+  </target>
+ 
+  <!-- Run from the jar file -->
+  <target name="runjar" depends="build"
+          description="Run Callisto from the jar file.">
+    <java jar="${build}/${proj.jar}" fork="true" failonerror="true" />
+  </target>
+
+  <!-- Instrument the jar file, and profile -->
+  <target name="profile" depends="check-jrat,build"
+          description="Instrument the Callisto jar file and run, to profile it.">
+    <injectCopy todir="${build}/injected-classes" verbose="true">
+       <fileset dir="${classes}" />
+    </injectCopy>
+
+    <java classname="${main.class}" fork="true" failonerror="true"
+          classpathref="jrat.cp">
+      <jvmarg value="-Djrat.factory=org.shiftone.jrat.provider.tree.TreeMethodHandlerFactory" />
+    </java>
+  </target>
+
+  <!-- ************************************** -->
+  <!-- Distribution targets -->
+  <!-- ************************************** -->
+
+  <!-- Create installer (needs better test for IzPack) -->
+  <target name="installer" depends="check-izpack,build,docs"
+          description="Create installer (Requires IzPack: http://www.izforge.com/izpack)">
+
+    <mkdir dir="${dist}"/>
+    <izpack input="${src}/installer/install.xml"
+            output="${installer.jar}"
+            installerType="standard"
+            basedir="."
+            izPackDir="${izpack.home}">
+      <property name="app.version" value="${version}"/>
+    </izpack>
+  </target>
+
+  <!-- Create distribution tarballs -->
+  <target name="dist" depends="build,docs"
+          description="Build all distribution jar files, including tasks.">
+    <property name="dist.tmp" value="${dist}/${dist.name}"/>
+    <delete dir="${dist.tmp}" quiet="true" />
+
+    <!-- no need for separte task distribution archives -->
+
+    <copy todir="${dist.tmp}" preservelastmodified="true">
+      <!-- administrivia and sample data -->
+      <fileset refid="docs.files" />
+      <fileset refid="data.files" />
+      <!-- program and libs -->
+      <fileset dir="${build}" includes="${proj.jar}" />
+      <fileset dir="${build}" includes="bin/" />
+      <fileset dir="${build}" includes="docs/" />
+      <fileset dir="${build}" includes="lib/" />
+      <fileset dir="${build}" includes="tasks/" />
+    </copy>
+    <tar destfile="${dist.tgz}" compression="gzip">
+      <tarfileset dir="${dist}" mode="755" includes="${dist.name}/bin/" />
+      <tarfileset dir="${dist}"
+                  includes="${dist.name}/"
+                  excludes="${dist.name}/bin/" />
+    </tar>
+
+    <!-- specially named README file -->
+    <copy tofile="${dist}/README.${dist.name}.txt" file="README.txt" />
+
+    <!-- clean up -->
+    <delete dir="${dist.tmp}" />
+
+  </target> <!-- name=dist -->
+
+  <!-- Create a tarball to update the website. Does not include .htaccess files, etc, -->
+  <!-- only web page updates and dist files -->
+  <target name="site" depends="dist,installer"
+          description="Create a website tarball, including installer and readme.">
+    <property name="site.tmp" value="${dist}/${dist.name}"/>
+    <delete dir="${site.tmp}" quiet="true" />
+
+    <copy todir="${site.tmp}" preservelastmodified="true">
+      <fileset dir="${docs.build}">
+        <!-- We wrote some, and Maven generates some things not for distribution -->
+        <!-- this list is also in src/installer/install.xml but excludes only "downloads.*" -->
+        <!-- allowing us to upload the new download info. -->
+        <exclude name="docs/developer/"/>
+        <exclude name="docs/cgi-template.html"/>
+        <exclude name="docs/downloads.*"/>
+        <exclude name="docs/navigation-pdf.html"/>
+        <exclude name="docs/*-lists.html"/>
+        <exclude name="docs/cvs-usage.html"/>
+        <exclude name="docs/dependencies.html"/>
+        <exclude name="docs/maven-reports.html"/>
+        <exclude name="docs/project-info.html"/>
+        <exclude name="docs/issue-tracking.html"/>
+      </fileset>
+    </copy>
+    <copy todir="${site.tmp}/download" preservelastmodified="true">
+      <fileset dir="${dist}" includes="README.${dist.name}.txt,${dist.name}-installer.jar" />
+    </copy>
+
+    <tar destfile="${dist.site.tgz}" compression="gzip"
+         basedir="${site.tmp}" includes="**" />
+
+    <echo message="Unpack ${dist.site.tgz} directly into the site servers htdocs directory" />
+
+    <!-- cleanup -->
+    <delete dir="${site.tmp}" includeEmptyDirs="true" quiet="true" />
+
+  </target> <!-- name=site -->
+
+  <!-- Create a source tarball suitable for building Callisto -->
+  <target name="src" depends="init"
+          description="Create a tarball of the source tree">
+    <property name="dist.src.tmp" value="${dist}/${dist.src.name}" />
+    <delete quiet="true" includeEmptyDirs="true">
+      <fileset dir="${dist.src.tmp}/" />
+      <fileset dir="${callisto.tasks.dist}/" />
+    </delete>
+
+    <mkdir dir="${callisto.tasks.dist}" />
+
+    <!-- New location starting w/ rdc -->
+    <fileset id="tasks.src.tgz" dir="${callisto.tasks.dist}"
+             includes="*-src.tar.gz" />
+    <fileset id="tasks.src.tgz.o" dir="${tasks.src}"
+             includes="*-src.tar.gz" />
+
+    <!-- src of all task subpackages to be included -->
+    <!--   each should put src.tgz in parent.src  -->
+    <build-tasks ant-build="src" />
+
+    <copy todir="${dist.src.tmp}" preservelastmodified="true">
+      <fileset refid="docs.files" />
+      <fileset refid="data.files" />
+      <fileset dir=".">
+        <include name="README.CD.txt" />
+        <include name="README.developer.txt" />
+        <include name="build.xml" />
+        <include name="project.xml" />
+        <include name="build.properties" />
+        <include name="project.properties" />
+        <include name="${src}/" />
+        <include name="${lib}/*.jar" />
+        <include name="${docs}/atlas/" />
+        <include name="${docs}/java1.4/" />
+        <include name="${docs}/LICENSE*" />
+        <include name="${docs.src}/" />
+      </fileset>
+    </copy>
+
+    <!-- old version expexts tasks to know entire directory stuct -->
+    <untar dest="${dist}/" compression="gzip">
+      <fileset refid="tasks.src.tgz.o" />
+    </untar>
+    <!-- untar tasks' sources: each should simply untar it's top directory  -->
+    <!--    e.g. rdc/build.xml, rdc/src, ... -->
+    <untar dest="${dist.src.tmp}/${tasks.src}" compression="gzip">
+      <fileset refid="tasks.src.tgz" />
+    </untar>
+
+    <copy toDir="${dist.src.tmp}/${tasks.src}"
+          file="${tasks.src}/build.common.xml" />
+
+    <tar destfile="${dist.src.tgz}" compression="gzip"
+         basedir="${dist}" includes="${dist.src.name}/" />
+
+    <!-- clean up -->
+    <delete includeEmptyDirs="true" quiet="true">
+      <fileset dir="${dist.src.tmp}/" defaultExcludes="no" />
+      <fileset dir="${callisto.tasks.dist}/" defaultExcludes="no" />
+      <fileset refid="tasks.src.tgz"/>
+    </delete>
+
+  </target> <!-- name=src -->
+
+
+  <!-- Create the CD dist: everything in dist, and src, -->
+  <!--   plus README.CD and src for external libs (which must be in -->
+  <!--   ${callisto.ext.src.archive.dir}, a variable you must specify -->
+  <!--   in your local build.properties) -->
+  <target name="dist-cd" depends="dist-clean,dist,src"
+          description="Large tarball including distribution and source"
+          if="ext.src.archive.dir">
+    <property name="dist.tmp" value="${dist}/${dist.name}"/>
+    <property name="dist.src.tmp" value="${dist}/${dist.src.name}"/>
+    <property name="dist.ext.tmp" value="${dist}/ext"/>
+
+    <untar dest="${dist}" compression="gzip">
+      <fileset dir="${dist}" includes="*.gz" />
+    </untar>
+
+    <mkdir dir="${dist.ext.tmp}" />
+    <copy todir="${dist.ext.tmp}" preservelastmodified="true">
+      <fileset dir="${ext.src.archive.dir}" includes="*.gz,*.zip" />
+    </copy>
+    <copy file="README.CD.txt" todir="${dist}" preservelastmodified="true" />
+
+    <tar destfile="${dist.cd.tgz}" compression="gzip">
+      <tarfileset dir="${dist}">
+        <include name="README.CD.txt" />
+        <include name="${dist.name}/" />
+        <include name="${dist.src.name}/" />
+        <include name="${dist.ext.name}/" />
+      </tarfileset>
+    </tar>
+
+    <!-- clean up -->
+    <delete includeEmptyDirs="true" quiet="true">
+      <fileset dir="${dist.tmp}/" defaultExcludes="no" />
+      <fileset dir="${dist.src.tmp}/" defaultExcludes="no" />
+      <fileset dir="${dist.ext.tmp}/" defaultExcludes="no" />
+    </delete>
+  </target> <!-- name=dist-cd -->
+
+
+  <!-- clean the distribution directory -->
+  <target name="dist-clean" depends="init">
+    <delete includeEmptyDirs="true" quiet="true">
+      <fileset dir="${dist}/" defaultExcludes="no" />
+    </delete>
+  </target>
+
+
+  <!-- ************************************** -->
+  <!-- Documentation targets -->
+  <!-- ************************************** -->
+
+  <target name="docs" depends="init-build,check-maven">
+    <!-- call to maven to generate the 'site' which includes the manual. -->
+    <maven.macro goal="site" />
+
+    <copy todir="${docs.build}">
+      <fileset dir="${docs}" includes="LICENSE*" />
+    </copy>
+  </target>
+
+  <target name="site-clean" depends="init"
+          description="Clean files created by generating the website.">
+    <delete includeEmptyDirs="true" quiet="true">
+      <fileset dir="${docs.generated}" defaultexcludes="no" />
+      <fileset dir="${docs.build}/" defaultexcludes="no" >
+        <exclude name="apidocs/"/>
+      </fileset>
+    </delete>
+  </target>
+
+  <!-- generate javadoc -->
+  <target name="javadoc" depends="init-build"
+          description="Creates javadoc in 'docs/apidocs'">
+    <mkdir dir="${api.build}" />
+    <javadoc sourcepath="${src}"
+             destdir="${api.build}"
+             classpathref="classpath"
+             author="true"
+             version="true"
+             overview="${src}/main-overview.html"
+             doctitle="${Name}, v${version}, API Specification"
+             windowtitle="${Name} v${version} API"
+             additionalparam="-breakiterator">
+      <packageset dir="${src}">
+        <include name="org/mitre/**" />
+        <exclude name="org/mitre/jawb/tasks/phrase" />
+      </packageset>
+      <tag name="todo" description="To do:" />
+      <header><![CDATA[<b><a target="_blank" href="${url}">${Name} v${version} API</a></b><br><font size="-2">Built ${date}</font>]]></header>
+      <bottom><![CDATA[<font size="-1">Submit requests for information to <a href="mailto:day@mitre.org">David Day</a> of the <a target="_blank" href="http://www.mitre.org">MITRE</a> Corporation.<br> &#169; ${copyright}.<br> 202 Burlington Road/Rte.62<br> Bedford, MA 07130-1420, U.S.A.<br> All Rights Reserved.</font>]]></bottom>
+      <link offline="true" packagelistLoc="${docs}/java1.4"
+            href="http://java.sun.com/j2se/1.4/docs/api" />
+      <link offline="true" packagelistLoc="${docs}/atlas"
+            href="http://rcf.mitre.org/project/Ace-Chinese/jAWB/extlib/jatlas-new/docs/javadoc/index.html" />
+    </javadoc>
+  </target> <!-- name=javadoc -->
+
+  <!-- ************************************** -->
+  <!-- Other targets -->
+  <!-- ************************************** -->
+
+  <!-- Delete all artifacts of the project, i.e. the ${build} directory -->
+  <target name="clean" depends="clean-tasks"
+          description="Cleans the project of all generated files">
+
+    <delete quiet="true" includeEmptyDirs="true">
+      <fileset dir="${build}/" defaultExcludes="no" />
+      <fileset dir="${dist}/" defaultExcludes="no" />
+      <fileset dir="${tasks.src}" includes="*.jar,*.gz" />
+    </delete>
+  </target> <!-- name=clean -->
+
+  <!-- Delete all artifacts of tasks -->
+  <target name="clean-tasks" depends="init"
+          description="Cleans the project of all task generated files">
+
+    <!-- clean all task subpackages -->
+    <build-tasks ant-build="clean" />
+
+    <delete quiet="true" includeEmptyDirs="true">
+      <fileset dir="${callisto.tasks.build}/" defaultExcludes="no" />
+      <fileset dir="${callisto.tasks.dist}/" defaultExcludes="no" />
+    </delete>
+  </target> <!-- name=clean-tasks -->
+
+</project>

@@ -1,0 +1,1009 @@
+<?xml version="1.0"?>
+<!DOCTYPE source_file SYSTEM "ace-rdc.dtd">
+<source_file TYPE="text" VERSION="2.0" SOURCE="broadcast news" URI="VOA19980414.1800.2745.sgm">
+  <document DOCID="VOA19980414.1800.2745.sgm">
+
+    <entity ID="VOA19980414.1800.2745.sgm-23">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-23-1" ROLE="GPE">
+          <extent>
+            <charseq>
+            <!-- string = "New York" -->
+               <start>1145</start><end>1152</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "New York" -->
+               <start>1145</start><end>1152</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-23-2" ROLE="LOC">
+          <extent>
+            <charseq>
+            <!-- string = "the  largest city in America" -->
+               <start>1525</start><end>1552</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "city" -->
+               <start>1538</start><end>1541</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "New York" -->
+               <start>1145</start><end>1152</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-24">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-24-3" ROLE="GPE" REFERENCE="LITERAL">
+          <extent>
+            <charseq>
+            <!-- string = "Anaheim" -->
+               <start>935</start><end>941</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Anaheim" -->
+               <start>935</start><end>941</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Anaheim" -->
+               <start>935</start><end>941</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-1">
+      <entity_type GENERIC="FALSE">FACILITY</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-1-4">
+          <extent>
+            <charseq>
+            <!-- string = "Yankee Stadium" -->
+               <start>80</start><end>93</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Yankee Stadium" -->
+               <start>80</start><end>93</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-1-5">
+          <extent>
+            <charseq>
+            <!-- string = "the House That Ruth  Built" -->
+               <start>1681</start><end>1706</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "House That Ruth  Built" -->
+               <start>1685</start><end>1706</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-1-6">
+          <extent>
+            <charseq>
+            <!-- string = "the stadium" -->
+               <start>702</start><end>712</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "stadium" -->
+               <start>706</start><end>712</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-1-7">
+          <extent>
+            <charseq>
+            <!-- string = "the stadium" -->
+               <start>813</start><end>823</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "stadium" -->
+               <start>817</start><end>823</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-1-8">
+          <extent>
+            <charseq>
+            <!-- string = "the old stadium, known affectionately as the House That Ruth  Built" -->
+               <start>1640</start><end>1706</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "stadium" -->
+               <start>1648</start><end>1654</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-1-9">
+          <extent>
+            <charseq>
+            <!-- string = "the original structure built seventy-five years ago" -->
+               <start>463</start><end>513</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "structure" -->
+               <start>476</start><end>484</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-1-10">
+          <extent>
+            <charseq>
+            <!-- string = "the  stadium that was built in nineteen twenty-three" -->
+               <start>587</start><end>638</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "stadium" -->
+               <start>592</start><end>598</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Yankee Stadium" -->
+               <start>80</start><end>93</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "House That Ruth  Built" -->
+               <start>1685</start><end>1706</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-2">
+      <entity_type GENERIC="FALSE">ORGANIZATION</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-2-11">
+          <extent>
+            <charseq>
+            <!-- string = "the Yankees" -->
+               <start>255</start><end>265</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Yankees" -->
+               <start>259</start><end>265</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-2-12">
+          <extent>
+            <charseq>
+            <!-- string = "The Yankees" -->
+               <start>886</start><end>896</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Yankees" -->
+               <start>890</start><end>896</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-2-13">
+          <extent>
+            <charseq>
+            <!-- string = "the Yankees" -->
+               <start>1087</start><end>1097</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Yankees" -->
+               <start>1091</start><end>1097</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-2-14">
+          <extent>
+            <charseq>
+            <!-- string = "the Yankees" -->
+               <start>1234</start><end>1244</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Yankees" -->
+               <start>1238</start><end>1244</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-2-15">
+          <extent>
+            <charseq>
+            <!-- string = "the Yankees" -->
+               <start>1443</start><end>1453</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Yankees" -->
+               <start>1447</start><end>1453</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-2-16">
+          <extent>
+            <charseq>
+            <!-- string = "Yankees" -->
+               <start>1558</start><end>1564</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Yankees" -->
+               <start>1558</start><end>1564</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-2-17">
+          <extent>
+            <charseq>
+            <!-- string = "the  team" -->
+               <start>1625</start><end>1633</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "team" -->
+               <start>1630</start><end>1633</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Yankees" -->
+               <start>259</start><end>265</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Yankees" -->
+               <start>890</start><end>896</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Yankees" -->
+               <start>1091</start><end>1097</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Yankees" -->
+               <start>1238</start><end>1244</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Yankees" -->
+               <start>1447</start><end>1453</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Yankees" -->
+               <start>1558</start><end>1564</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-3">
+      <entity_type GENERIC="FALSE">ORGANIZATION</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-3-18">
+          <extent>
+            <charseq>
+            <!-- string = "Anaheim Angels" -->
+               <start>272</start><end>285</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Anaheim Angels" -->
+               <start>272</start><end>285</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-3-19" REFERENCE="LITERAL">
+          <extent>
+            <charseq>
+            <!-- string = "Anaheim" -->
+               <start>935</start><end>941</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Anaheim" -->
+               <start>935</start><end>941</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Anaheim Angels" -->
+               <start>272</start><end>285</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Anaheim" -->
+               <start>935</start><end>941</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-4">
+      <entity_type GENERIC="FALSE">PERSON</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-4-20">
+          <extent>
+            <charseq>
+            <!-- string = "Sonny Hyeth, the Director of Stadium Operations" -->
+               <start>387</start><end>433</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Sonny Hyeth" -->
+               <start>387</start><end>397</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-4-21">
+          <extent>
+            <charseq>
+            <!-- string = "the Director of Stadium Operations" -->
+               <start>400</start><end>433</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Director" -->
+               <start>404</start><end>411</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Sonny Hyeth" -->
+               <start>387</start><end>397</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-5">
+      <entity_type GENERIC="FALSE">PERSON</entity_type>
+        <entity_mention TYPE="PRONOUN" ID="VOA19980414.1800.2745.sgm-5-22">
+          <extent>
+            <charseq>
+            <!-- string = "We" -->
+               <start>519</start><end>520</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "We" -->
+               <start>519</start><end>520</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="PRONOUN" ID="VOA19980414.1800.2745.sgm-5-23">
+          <extent>
+            <charseq>
+            <!-- string = "we" -->
+               <start>651</start><end>652</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "we" -->
+               <start>651</start><end>652</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="PRONOUN" ID="VOA19980414.1800.2745.sgm-5-24">
+          <extent>
+            <charseq>
+            <!-- string = "we" -->
+               <start>764</start><end>765</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "we" -->
+               <start>764</start><end>765</end></charseq>
+          </head>
+        </entity_mention>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-6">
+      <entity_type GENERIC="FALSE">FACILITY</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-6-25">
+          <extent>
+            <charseq>
+            <!-- string = "Nearby Shea Stadium" -->
+               <start>829</start><end>847</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Shea Stadium" -->
+               <start>836</start><end>847</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-6-26">
+          <extent>
+            <charseq>
+            <!-- string = "the home of the New York  Mets" -->
+               <start>946</start><end>975</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "home" -->
+               <start>950</start><end>953</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Shea Stadium" -->
+               <start>836</start><end>847</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-7">
+      <entity_type GENERIC="FALSE">ORGANIZATION</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-7-27">
+          <extent>
+            <charseq>
+            <!-- string = "the New York  Mets" -->
+               <start>958</start><end>975</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "New York  Mets" -->
+               <start>962</start><end>975</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-7-28">
+          <extent>
+            <charseq>
+            <!-- string = "the Mets" -->
+               <start>982</start><end>989</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Mets" -->
+               <start>986</start><end>989</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-7-29">
+          <extent>
+            <charseq>
+            <!-- string = "the Mets" -->
+               <start>1250</start><end>1257</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Mets" -->
+               <start>1254</start><end>1257</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-7-30">
+          <extent>
+            <charseq>
+            <!-- string = "the Mets" -->
+               <start>1460</start><end>1467</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Mets" -->
+               <start>1464</start><end>1467</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "New York  Mets" -->
+               <start>962</start><end>975</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Mets" -->
+               <start>986</start><end>989</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Mets" -->
+               <start>1254</start><end>1257</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Mets" -->
+               <start>1464</start><end>1467</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-8">
+      <entity_type GENERIC="FALSE">PERSON</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-8-31">
+          <extent>
+            <charseq>
+            <!-- string = "New York Mayor Rudolph Giuliani" -->
+               <start>1145</start><end>1175</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Rudolph Giuliani" -->
+               <start>1160</start><end>1175</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="PRONOUN" ID="VOA19980414.1800.2745.sgm-8-32">
+          <extent>
+            <charseq>
+            <!-- string = "I" -->
+               <start>1296</start><end>1296</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "I" -->
+               <start>1296</start><end>1296</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Rudolph Giuliani" -->
+               <start>1160</start><end>1175</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-9">
+      <entity_type GENERIC="FALSE">ORGANIZATION</entity_type>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-9-33">
+          <extent>
+            <charseq>
+            <!-- string = "both teams" -->
+               <start>1183</start><end>1192</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "teams" -->
+               <start>1188</start><end>1192</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="PRONOUN" ID="VOA19980414.1800.2745.sgm-9-34">
+          <extent>
+            <charseq>
+            <!-- string = "two of the best teams in baseball in the  largest city in America" -->
+               <start>1488</start><end>1552</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "two" -->
+               <start>1488</start><end>1490</end></charseq>
+          </head>
+        </entity_mention>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-10">
+      <entity_type GENERIC="FALSE">PERSON</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-10-35">
+          <extent>
+            <charseq>
+            <!-- string = "Yankees' owner George Steinbrenner" -->
+               <start>1558</start><end>1591</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "George Steinbrenner" -->
+               <start>1573</start><end>1591</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="PRONOUN" ID="VOA19980414.1800.2745.sgm-10-36">
+          <extent>
+            <charseq>
+            <!-- string = "he" -->
+               <start>1608</start><end>1609</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "he" -->
+               <start>1608</start><end>1609</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "George Steinbrenner" -->
+               <start>1573</start><end>1591</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-11">
+      <entity_type GENERIC="TRUE">FACILITY</entity_type>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-11-37">
+          <extent>
+            <charseq>
+            <!-- string = "new facilities" -->
+               <start>1210</start><end>1223</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "facilities" -->
+               <start>1214</start><end>1223</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-11-38">
+          <extent>
+            <charseq>
+            <!-- string = "new baseball fields" -->
+               <start>1275</start><end>1293</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "fields" -->
+               <start>1288</start><end>1293</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-11-39">
+          <extent>
+            <charseq>
+            <!-- string = "new baseball fields" -->
+               <start>1393</start><end>1411</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "fields" -->
+               <start>1406</start><end>1411</end></charseq>
+          </head>
+        </entity_mention>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-13">
+      <entity_type GENERIC="TRUE">FACILITY</entity_type>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-13-40">
+          <extent>
+            <charseq>
+            <!-- string = "a new stadium" -->
+               <start>1130</start><end>1142</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "stadium" -->
+               <start>1136</start><end>1142</end></charseq>
+          </head>
+        </entity_mention>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-14">
+      <entity_type GENERIC="FALSE">PERSON</entity_type>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-14-41">
+          <extent>
+            <charseq>
+            <!-- string = "Inspectors" -->
+               <start>44</start><end>53</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Inspectors" -->
+               <start>44</start><end>53</end></charseq>
+          </head>
+        </entity_mention>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-15">
+      <entity_type GENERIC="FALSE">PERSON</entity_type>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-15-42">
+          <extent>
+            <charseq>
+            <!-- string = "workmen" -->
+               <start>59</start><end>65</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "workmen" -->
+               <start>59</start><end>65</end></charseq>
+          </head>
+        </entity_mention>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-16">
+      <entity_type GENERIC="FALSE">ORGANIZATION</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-16-43">
+          <extent>
+            <charseq>
+            <!-- string = "the Chicago Cubs" -->
+               <start>1022</start><end>1037</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Chicago Cubs" -->
+               <start>1026</start><end>1037</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Chicago Cubs" -->
+               <start>1026</start><end>1037</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-17">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-17-44" ROLE="LOC">
+          <extent>
+            <charseq>
+            <!-- string = "the Bronx" -->
+               <start>1117</start><end>1125</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Bronx" -->
+               <start>1121</start><end>1125</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Bronx" -->
+               <start>1121</start><end>1125</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-18">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-18-45" ROLE="GPE">
+          <extent>
+            <charseq>
+            <!-- string = "the cities  that have new baseball fields" -->
+               <start>1371</start><end>1411</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "cities" -->
+               <start>1375</start><end>1380</end></charseq>
+          </head>
+        </entity_mention>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-20">
+      <entity_type GENERIC="TRUE">ORGANIZATION</entity_type>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.2745.sgm-20-46">
+          <extent>
+            <charseq>
+            <!-- string = "the best teams in baseball" -->
+               <start>1495</start><end>1520</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "teams" -->
+               <start>1504</start><end>1508</end></charseq>
+          </head>
+        </entity_mention>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.2745.sgm-22">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.2745.sgm-22-47" ROLE="LOC">
+          <extent>
+            <charseq>
+            <!-- string = "America" -->
+               <start>1546</start><end>1552</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "America" -->
+               <start>1546</start><end>1552</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "America" -->
+               <start>1546</start><end>1552</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+    <relation ID="VOA19980414.1800.2745.sgm-RDCID-1" TYPE="AT" SUBTYPE="LOCATED" CLASS="EXPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-2" ARGNUM="1">
+        <!-- String = "The Yankees" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-6" ARGNUM="2">
+        <!-- String = "the home of the New York  Mets" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1800.2745.sgm-RDCID-1-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-2-12" ARGNUM="1">
+            <!-- string = "The Yankees" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-6-26" ARGNUM="2">
+            <!-- string = "the home of the New York  Mets" -->
+            </rel_mention_arg>
+          <rel_mention_time TYPE="VALUE" VAL="TAF" MOD="" DIR="">
+            <!-- string = "afternoon" -->
+            </rel_mention_time>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1800.2745.sgm-RDCID-2" TYPE="PART" SUBTYPE="PART-OF" CLASS="EXPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-6" ARGNUM="1">
+        <!-- String = "the home of the New York  Mets" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-7" ARGNUM="2">
+        <!-- String = "the New York  Mets" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1800.2745.sgm-RDCID-2-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-6-26" ARGNUM="1">
+            <!-- string = "the home of the New York  Mets" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-7-27" ARGNUM="2">
+            <!-- string = "the New York  Mets" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1800.2745.sgm-RDCID-3" TYPE="AT" SUBTYPE="LOCATED" CLASS="IMPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-7" ARGNUM="1">
+        <!-- String = "the Mets" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-6" ARGNUM="2">
+        <!-- String = "the home of the New York  Mets" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1800.2745.sgm-RDCID-3-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-7-28" ARGNUM="1">
+            <!-- string = "the Mets" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-6-26" ARGNUM="2">
+            <!-- string = "the home of the New York  Mets" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1800.2745.sgm-RDCID-4" TYPE="AT" SUBTYPE="LOCATED" CLASS="IMPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-16" ARGNUM="1">
+        <!-- String = "the Chicago Cubs" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-6" ARGNUM="2">
+        <!-- String = "the home of the New York  Mets" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1800.2745.sgm-RDCID-4-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-16-43" ARGNUM="1">
+            <!-- string = "the Chicago Cubs" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-6-26" ARGNUM="2">
+            <!-- string = "the home of the New York  Mets" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1800.2745.sgm-RDCID-5" TYPE="AT" SUBTYPE="LOCATED" CLASS="IMPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-3" ARGNUM="1">
+        <!-- String = "Anaheim" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-6" ARGNUM="2">
+        <!-- String = "the home of the New York  Mets" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1800.2745.sgm-RDCID-5-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-3-19" ARGNUM="1">
+            <!-- string = "Anaheim" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-6-26" ARGNUM="2">
+            <!-- string = "the home of the New York  Mets" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1800.2745.sgm-RDCID-6" TYPE="AT" SUBTYPE="BASED-IN" CLASS="EXPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-2" ARGNUM="1">
+        <!-- String = "the Yankees" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-17" ARGNUM="2">
+        <!-- String = "the Bronx" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1800.2745.sgm-RDCID-6-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-2-13" ARGNUM="1">
+            <!-- string = "the Yankees" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-17-44" ARGNUM="2">
+            <!-- string = "the Bronx" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1800.2745.sgm-RDCID-7" TYPE="ROLE" SUBTYPE="MANAGEMENT" CLASS="EXPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-8" ARGNUM="1">
+        <!-- String = "New York Mayor Rudolph Giuliani" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-23" ARGNUM="2">
+        <!-- String = "New York" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1800.2745.sgm-RDCID-7-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-8-31" ARGNUM="1">
+            <!-- string = "New York Mayor Rudolph Giuliani" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-23-1" ARGNUM="2">
+            <!-- string = "New York" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1800.2745.sgm-RDCID-8" TYPE="ROLE" SUBTYPE="OWNER" CLASS="EXPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-10" ARGNUM="1">
+        <!-- String = "Yankees' owner George Steinbrenner" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-2" ARGNUM="2">
+        <!-- String = "Yankees" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1800.2745.sgm-RDCID-8-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-10-35" ARGNUM="1">
+            <!-- string = "Yankees' owner George Steinbrenner" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-2-16" ARGNUM="2">
+            <!-- string = "Yankees" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1800.2745.sgm-RDCID-9" TYPE="AT" SUBTYPE="BASED-IN" CLASS="EXPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-2" ARGNUM="1">
+        <!-- String = "the  team" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-1" ARGNUM="2">
+        <!-- String = "the old stadium, known affectionately as the House That Ruth  Built" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1800.2745.sgm-RDCID-9-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-2-17" ARGNUM="1">
+            <!-- string = "the  team" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-1-8" ARGNUM="2">
+            <!-- string = "the old stadium, known affectionately as the House That Ruth  Built" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1800.2745.sgm-RDCID-10" TYPE="ROLE" SUBTYPE="MANAGEMENT" CLASS="IMPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-4" ARGNUM="1">
+        <!-- String = "the Director of Stadium Operations" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1800.2745.sgm-1" ARGNUM="2">
+        <!-- String = "Yankee Stadium" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1800.2745.sgm-RDCID-10-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-4-21" ARGNUM="1">
+            <!-- string = "the Director of Stadium Operations" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1800.2745.sgm-1-4" ARGNUM="2">
+            <!-- string = "Yankee Stadium" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+  </document>
+</source_file>

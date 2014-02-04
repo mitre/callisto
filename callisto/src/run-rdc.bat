@@ -1,0 +1,1 @@
+java -Djava.protocol.handler.pkgs=gov.nist.atlas.impl org.mitre.jawb.atlas.RDCTest "file:/C:/a_projects/ATLAS/jAWB/maia/Ace.maia.xml" "file:/C:/a_projects/ATLAS/jAWB/data/test.txt" "C:/a_projects/ATLAS/jAWB/data/test-ace2.aif"

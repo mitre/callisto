@@ -1,0 +1,120 @@
+<body>
+
+This document is the API specification for Callisto, a configurable
+annotation tool. It currently only annotates text files, storing
+annotations in AIF format.  Support is available for SGML
+importing/exporting on a task by task basis.  Audio and Video which
+has been converted to an aif file with Speech to Text annotations is
+also among our goals.<p>
+
+<h1>Annotators</h1>
+
+Annotators are encouraged to look to the user documentation.
+Hopefully there will be documentation for the task you are working on,
+as the tool is rather configurable, and each may look and behave in a
+significantly different manner.<p>
+
+There was documentation made for the RDC task, and for lack of more
+specific task documentation, that is a good place to start.  If all
+fails, you should feel free to read through the javadoc here, but be
+warned that it is intended for developers wishing to maintain and
+extend the tool.<p>
+
+<h1>Developers</h1>
+
+<h3>Tasks</h3>
+
+Developers wishing to create a new task to the project should start by
+reading javadoc. So far, much effort has been put in during
+development, to include the important details. Hopefully by the time
+this is an issue, there will be some generic tools for building
+tasks.<p>
+
+Start with the {@link org.mitre.jawb.tasks.Task} class and get a feel
+for what it does. It controls the behavior of the whole tool,
+dictating annotation structure, GUI components, and some user
+preferences. For annotation structure, it makes use of the classes in
+the {@link org.mitre.jawb.atlas} package, and for GUI components look
+at the {@link org.mitre.jawb.gui} package.  There are also some
+generic GUI components in {@link org.mitre.jawb.swing} which may be
+used independantly of any Annotation tool code.<p>
+
+To load use your task, Callisto needs to find it! For information on how
+it locates and loads tasks at startup, see the initialization methods
+in {@link org.mitre.jawb.Jawb}<p>
+
+<h3>Initialization</h3>
+
+The "main" method for starting the tool is found in {@link
+org.mitre.jawb.Jawb} which initializes Preferences (default, system
+and user prefs), loads and verifies tasks, and acts as a central 'hub'
+for this global data. The Jawb class also provides some convience
+methods for accessing system wide resources.<p>
+
+<h3>Preferences</h3>
+
+Preferences are initialized in the Jawb class. Look at the
+initialization methods there for more information on the what files
+are used, which <font size='-1'>TODO: better link</font><p>
+
+<h3>Frames</h3>
+
+Frames primarily worry about themselves.  There is a static list of
+frames that is maintained and shares a {@link
+org.mitre.jawb.gui.DocumentManager} which maintains the list of currently
+open documents and a history. DocumentManager has hooks for Frames to
+get Menus to display the current documents and history.<p>
+
+Closing of windows and documents is handled within the frames in such
+a way that no document is closed until that request is explicitly made
+or the last frame is closed.  Even then the user may abort if there
+are unsaved files. See the open, close, save, closeFrame, openFrame
+methods in {@link org.mitre.jawb.gui.JawbFrame}<p>
+
+<h3>Exceptions</h3>
+
+Error handling for the various actions is also in the Frames, and will
+fail silently or display a warning or error message to the user as
+appropriate. Classes should allow unchecked exceptions (subclasses of
+{@link java.lang.RuntimeException} to propogate up to the JawbFrame
+which pretty much catches everything and coninues gracefully. Unless
+the Exception can be handled, and recovered from, at a lower level, do
+not catch it, and verify that it is caught in the GUI, where the user
+action which caused it was invoked.<p>
+
+The GUI does not attempt to catch all {@link java.lang.Throwable}
+objects, only {@link java.lang.Exception} subclasses, since Throwable
+is intended to imply an unrecoverable system error.<p>
+
+<h3>Model-Control-View</h3>
+
+One of the strengths of Callisto is that it maintains a strong
+separation between the data in the 'model' and what is displayed and
+maintained by individual widgets. In this way, no one gui component is
+responsible for maintaining data that others may need. For a more in
+depth discussion of the design pattern, see <a
+href="http://java.sun.com/">SUN's website</a>.
+
+The basic Model is the {@link org.mitre.jawb.gui.JawbDocument} object,
+which is the front end to all the data shared between GUI components.
+View Components should implement the {@link
+org.mitre.jawb.gui.JawbComponent} interface, which allows the
+JawbDocument to be set and retrieved. Control is done through the
+actions retrieved from the Task, and the Components that the task
+provides, which are ostensibly views as well, but presumably provide a
+measure of control and editing functionality.<p>
+
+<font size='-1'>TODO: events</font>
+<p>
+<p>
+
+<font size='-1'>TODO: Is this just plain too much for a 'top level'
+page?  I suspect it is... pare this down, and put something more of an
+index up</font>
+
+<hr>
+
+For more information, contact <a href="mailto:day@mitre.org">David
+Day</a> at The <a href="http://www.mitre.org">MITRE</a> Corp.
+
+</body>

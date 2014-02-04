@@ -1,0 +1,26 @@
+<!--
+
+    You may omit the ENTITY tags, as these may be entered using the
+    Callisto GUI, but by setting them the values will be filled in
+    automatically.
+
+ -->
+
+<!-- Unique name for task disambiguation -->
+<!ENTITY callisto_task_name "org.mitre.example.xp">
+
+<!-- Human readable title for display in GUI -->
+<!ENTITY callisto_task_title "XP Annotations">
+
+<!-- Human readable title for display in GUI -->
+<!ENTITY callisto_task_version "1.0">
+
+<!-- Optional human readable description for display in GUI -->
+<!ENTITY callisto_task_description
+         "Add NP, VP, and PP to text">
+
+<!ELEMENT NP (#PCDATA)>
+
+<!ELEMENT VP (#PCDATA)>
+
+<!ELEMENT PP (#PCDATA)>

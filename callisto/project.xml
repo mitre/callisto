@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project>
+
+  <!-- the version of maven's project object model -->
+  <pomVersion>3</pomVersion>
+  
+  <id>callisto</id>
+  <name>Callisto</name>
+  <groupId>org.mitre</groupId>
+
+  <!-- The version under development, e.g. 1.1, 1.2, 2.0-SNAPSHOT -->
+  <currentVersion>1.8-dev</currentVersion>
+  
+  <!-- details about the organization that 'owns' the project -->
+  <organization>
+    <name>The MITRE Corp.</name>
+    <logo>/images/mitre.png</logo>
+    <url>http://www.mitre.org</url>
+  </organization>
+  
+  <inceptionYear>2002</inceptionYear>
+  <package>org.mitre.callisto</package>
+  <logo>/images/callisto.supernova.png</logo>
+
+  <description>
+    The Callisto annotation tool was developed to support linguistic annotation
+    of textual sources for any Unicode-supported language. Information
+    Extraction (IE) systems are increasingly easy to adapt to varying domains,
+    and by using machine learning techniques, this process is becoming largely
+    automatic. However, adaptive/adaptable systems require training and test
+    data against which to measure and improve their performance. Hand
+    annotation can be an arduous task, but a well designed user interface can
+    greatly ease the burden. This is the function of Callisto.
+  </description>
+  <!-- a short description of what the project does -->
+  <shortDescription>
+    Callisto: An extensible annotation tool for lingusts.
+  </shortDescription>
+
+  <url>http://callisto.mitre.org</url>
+  <siteDirectory>c:/cygwin/usr/local/apache/callisto/docroot</siteDirectory>
+  <!--
+  <siteAddress>callisto.mitre.org</siteAddress>
+  <issueTrackingUrl>http://sf.net/tracker/?group_id=xxx...</issueTrackingUrl>
+  <distributionDirectory>/www/maven.apache.org/builds/</distributionDirectory>
+  -->
+
+  <!-- the version control repository and http url for online access
+       the connection element has the form:
+       scm:<system>:<system specific connection string> -->
+  <repository/>
+  <!--
+  <repository>
+    <connection>scm:localhost:/usr/local/cvsroot</connection>
+    <url>http://cvs.apache.org/viewcvs/maven/src/plugins-build/examples/</url>
+  </repository> -->
+
+  <!-- any mailing lists for the project -->
+  <mailingLists/>
+  
+  <!-- developers for the project -->
+  <developers>
+    <developer>
+      <name>Chadwick McHenry</name>
+      <id>red</id>
+      <email>red@mitre.org</email>
+      <organization>MITRE</organization>
+      <timezone>+5</timezone>
+    </developer>
+    <developer>
+      <name>Robyn Kozierok</name>
+      <id>robyn</id>
+      <email>robyn@mitre.org</email>
+      <organization>MITRE</organization>
+      <timezone>+5</timezone>
+    </developer>
+    <developer>
+      <name>Laurel Riek</name>
+      <id>laurel</id>
+      <email>laurel@mitre.org</email>
+      <organization>MITRE</organization>
+      <timezone>+5</timezone>
+    </developer>
+  </developers>
+
+  <!-- contributors for the project -->
+  <contributors>
+    <contributor>
+      <name>David Day</name>
+      <email>day@mitre.org</email>
+      <organization>MITRE</organization>
+      <roles>
+        <role>Project Lead</role>
+      </roles>
+      <url>http://www.mitre.org/tech/itc/g063/</url>
+      <timezone>+5</timezone>
+    </contributor>
+    <contributor>
+      <name>William Morgan</name>
+      <email>wmorgan@mitre.org</email>
+      <organization>MITRE</organization>
+      <timezone>+5</timezone>
+    </contributor>
+    <contributor>
+      <name>James Van Guilder</name>
+      <email>jamesv@mitre.org</email>
+      <organization>MITRE</organization>
+      <timezone>+5</timezone>
+    </contributor>
+    <contributor>
+      <name>Edward Slavich</name>
+      <email>eslavich@mitre.org</email>
+      <organization>MITRE</organization>
+      <timezone>+5</timezone>
+    </contributor>
+  </contributors>
+
+  <!-- jar files the project is dependent on -->
+  <dependencies>
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+      <version>1.5.2</version>
+      <url>http://www.dom4j.org</url>
+    </dependency>
+    <dependency>
+      <groupId>jATLAS</groupId>
+      <artifactId>jATLAS</artifactId>
+      <version>2.0beta5g</version>
+      <url>http://sourceforge.net/projects/jatlas/</url>
+    </dependency>
+    <dependency>
+      <groupId>dtdparser</groupId>
+      <artifactId>dtdparser</artifactId>
+      <version>1.21</version>
+      <jar>dtdparser121.jar</jar>
+      <url>http://www.wutka.com/dtdparser.html</url>
+    </dependency>
+  </dependencies>
+  
+  <!-- build information for the project -->
+  <build>
+    <nagEmailAddress>red@mitre.org</nagEmailAddress>
+    <sourceDirectory>src</sourceDirectory>
+    <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+
+    <unitTest>
+      <includes>
+        <include>**/*Test.java</include>
+      </includes>
+      <excludes>
+        <exclude>**/NaughtyTest.java</exclude>
+      </excludes>
+    </unitTest>
+
+    <resources>
+      <resource>
+        <directory>src/conf</directory>
+        <includes>
+          <include>*.properties</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <nagEmailAddress>callisto-dev@lists.mitre.org</nagEmailAddress>
+  </build>
+
+  <reports>
+     <report>maven-faq-plugin</report>
+     <report>maven-license-plugin</report>
+  </reports>
+  <!--
+     <report>maven-linkcheck-plugin</report>
+     <report>maven-checkstyle-plugin</report>
+     <report>maven-javadoc-plugin</report>
+     <report>maven-jxr-plugin</report>
+     <report>maven-jdepend-plugin</report>
+     <report>maven-junit-report-plugin</report>
+
+     <report>maven-changes-plugin</report>
+     <report>maven-changelog-plugin</report>
+     <report>maven-clover-plugin</report>
+     <report>maven-developer-activity-plugin</report>
+     <report>maven-file-activity-plugin</report>
+    -->
+</project>
+

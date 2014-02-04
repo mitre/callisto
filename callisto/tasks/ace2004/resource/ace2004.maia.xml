@@ -1,0 +1,336 @@
+<?xml version="1.0"?>
+<!DOCTYPE Scheme SYSTEM "maia.dtd">
+
+<Scheme name="test">
+  <TypeDefinitions>
+    <SignalType name="text" mimeClass="text" />
+
+    <!-- Basics -->
+
+    <ParameterType name="string" />
+    <ParameterType name="boolean" />
+    <ParameterType name="char" />
+
+    <AnchorType name="text-point">
+      <SignalType ref="text" />
+      <ParameterType ref="char" role="char" />
+    </AnchorType>
+
+    <RegionType name="text-extent">
+      <AnchorType ref="text-point" role="start" />
+      <AnchorType ref="text-point" role="end" />
+    </RegionType>
+
+    <RegionType name="head-full">
+      <RegionType ref="text-extent" role="head" />
+      <RegionType ref="text-extent" role="full" />
+    </RegionType>
+
+    <ContentType name="null_content"></ContentType>
+
+    <!-- Entities -->
+
+    <AnnotationType name="ace_entity">
+      <RegionType ref="ace_entity_region" role ="ace_entity-mentions" />
+      <ContentType ref="ace_entity_content" />
+    </AnnotationType>
+
+    <RegionType name="ace_entity_region">
+      <AnnotationType ref="ace_entity-mention" hasIndefiniteCardinality="true" />
+      <AnnotationType ref="ace_entity-mention" role="primary-mention" />
+    </RegionType>
+
+    <ContentType name="ace_entity_content">
+      <ParameterType ref="string" role="ace_id" />
+      <ParameterType ref="string" role="type" />
+      <ParameterType ref="string" role="subtype" />
+      <ParameterType ref="string" role="class" />
+      <ParameterType ref="string" role="external-link-resource-name" />
+      <ParameterType ref="string" role="external-link-resource-urn" />
+      <ParameterType ref="string" role="external-link-eid" />
+      <!-- generic removed -->
+    </ContentType>
+
+    <!-- Entity Mentions -->
+
+    <AnnotationType name="ace_entity-mention">
+      <RegionType ref="head-full" />
+      <ContentType ref="ace_entity-mention_content" />
+    </AnnotationType>
+
+    <ContentType name="ace_entity-mention_content">
+      <!-- syntactic form replaced by type -->
+      <ParameterType ref="string" role="ace_id" />
+      <ParameterType ref="string" role="type" />
+      <ParameterType ref="string" role="role" />
+      <ParameterType ref="string" role="ldctype" />
+      <ParameterType ref="string" role="reference" />
+      <ParameterType ref="boolean" role="metonymy" />
+      <ParameterType ref="boolean" role="ldcatr" />
+    </ContentType>
+
+
+    <!-- Relations -->
+
+    <AnnotationType name="ace_relation">
+      <RegionType ref="ace_relation_region" />
+      <ContentType ref="ace_relation_content" />
+    </AnnotationType>
+
+    <RegionType name="ace_relation_region">
+      <!-- entities can be extrapolated from the relation-mentions,
+           but including them explicitly makes runtime validations
+           easier -->
+      <AnnotationType ref="ace_entity" role ="arg1" />
+      <AnnotationType ref="ace_entity" role ="arg2" />
+      <AnnotationType ref="ace_relation-mention" hasIndefiniteCardinality="true" />
+      <!-- No longer used. See comments for ace_argument Annotation -->
+      <AnnotationType ref="ace_argument" hasIndefiniteCardinality="true" />
+      <!-- for now, VALUE relation_arguments are extracted from mentions -->
+    </RegionType>
+
+    <ContentType name="ace_relation_content">
+      <ParameterType ref="string" role="ace_id" />
+      <ParameterType ref="string" role="type" />
+      <ParameterType ref="string" role="subtype" />
+      <!-- ace_rdc-is-explicit removed -->
+      <ParameterType ref="string" role="modality" />
+      <ParameterType ref="string" role="tense" />
+    </ContentType>
+
+    <!-- Relation Mentions-->
+
+    <AnnotationType name="ace_relation-mention">
+      <RegionType ref="ace_relation-mention_region" />
+      <ContentType ref="ace_relation-mention_content" />
+    </AnnotationType>
+    
+    <RegionType name="ace_relation-mention_region">
+      <!-- Trying to fix big problems this day, Friday, July 29, 2005, DSD: -->
+      <!-- (AnchorType ref="text-point" role="start" /) -->
+      <!-- (AnchorType ref="text-point" role="end" />   -->
+      <AnnotationType ref="ace_relation-mention-extent" role="relation-mention-extent" />
+
+      <!-- relation_mention_argument -->
+      <AnnotationType ref="ace_entity-mention" role ="arg1" />
+      <!-- relation_mention_argument -->
+      <AnnotationType ref="ace_entity-mention" role ="arg2" />
+      <!-- relation_mention_argument...s sharing data structures -->
+      <AnnotationType ref="ace_argument-mention" hasIndefiniteCardinality="true" />
+    </RegionType>
+
+    <ContentType name="ace_relation-mention_content">
+      <ParameterType ref="string" role="ace_id" />
+      <ParameterType ref="string" role="lexicalcondition" />
+      <ParameterType ref="string" role="extent-start" />
+      <ParameterType ref="string" role="extent-end" />
+      <ParameterType ref="string" role="extent-string" />
+    </ContentType>
+
+    <AnnotationType name="ace_relation-mention-extent">
+      <RegionType ref="text-extent" role="text-extent"/>
+      <ContentType ref="null_content" />
+    </AnnotationType>
+
+    <!-- Additions for 2004 events -->
+
+    <!-- Timex2 -->
+
+    <AnnotationType name="timex2">
+      <RegionType ref="text-extent" role="text-extent" />
+      <ContentType ref="timex2-content"/>
+    </AnnotationType>
+
+    <ContentType name="timex2-content">
+      <ParameterType ref='string' role='ace_id'/>
+      <ParameterType ref='string' role='timex2-id'/>
+      <ParameterType ref='string' role='cal'/>
+      <ParameterType ref='string' role='val'/>
+      <ParameterType ref='string' role='mod'/>
+      <ParameterType ref='string' role='set'/> 
+      <ParameterType ref='string' role='non-specific'/>
+      <ParameterType ref='string' role='anchor-val'/>
+      <ParameterType ref='string' role='anchor-dir'/>
+      <ParameterType ref='string' role='comment'/> 
+    </ContentType>
+
+    <!-- Quantities -->
+
+    <AnnotationType name="ace_quantity">
+      <RegionType ref="ace_quantity_region" />
+      <ContentType ref="ace_quantity_content" />
+    </AnnotationType>
+
+    <ContentType name="ace_quantity_content">
+      <ParameterType ref="string" role="ace_id" />
+      <ParameterType ref="string" role="type" />
+      <ParameterType ref="string" role="subtype" />
+      
+      <!-- these are left to reduce annoying errors; should be removed later -->
+      <ParameterType ref="string" role="timex2_val" />
+      <ParameterType ref="string" role="timex2_mod" />
+      <ParameterType ref="string" role="timex2_anchor_val" />
+      <ParameterType ref="string" role="timex2_anchor_dir" />
+      <ParameterType ref="string" role="timex2_set" />
+      <ParameterType ref="string" role="timex2_non_specific" />
+      <ParameterType ref="string" role="timex2_comment" />
+    </ContentType>
+
+    <RegionType name="ace_quantity_region">
+      <AnnotationType ref="ace_quantity-mention" hasIndefiniteCardinality="true" />
+      <AnnotationType ref="ace_quantity-mention" role="primary-mention" />
+    </RegionType>
+
+    <!-- Quantity Mentions -->
+
+    <AnnotationType name="ace_quantity-mention">
+      <RegionType ref="text-extent" />
+      <ContentType ref="ace_quantity-mention_content" />
+    </AnnotationType>
+
+    <ContentType name="ace_quantity-mention_content">
+      <ParameterType ref="string" role="ace_id" />
+    </ContentType>
+
+    <!-- Events -->
+
+    <AnnotationType name="ace_event">
+      <RegionType ref="ace_event_region" />
+      <ContentType ref="ace_event_content" />
+    </AnnotationType>
+
+    <RegionType name="ace_event_region">
+      <AnnotationType ref="ace_event-mention" hasIndefiniteCardinality="true"/>
+      <AnnotationType ref="ace_event-mention" role="primary-mention" />
+      <!-- No longer used. See comments for ace_argument Annotation -->
+      <AnnotationType ref="ace_argument" hasIndefiniteCardinality="true" />
+    </RegionType>
+
+    <ContentType name="ace_event_content">
+      <ParameterType ref="string" role="ace_id" />
+      <ParameterType ref="string" role="type" />
+      <ParameterType ref="string" role="subtype" />
+      <ParameterType ref="string" role="modality" />
+      <ParameterType ref="string" role="polarity" />
+      <ParameterType ref="string" role="genericity" />
+      <ParameterType ref="string" role="tense" />
+    </ContentType>
+
+    <!-- Event Mentions -->
+
+    <AnnotationType name="ace_event-mention">
+      <RegionType ref="ace_event-mention_region" />
+      <ContentType ref="ace_event-mention_content" />
+    </AnnotationType>
+
+    <RegionType name="ace_event-mention_region">
+      <!-- these are offsets for 'anchor' region, w/ subannot for 'extent' -->
+      <!-- this is required because multiple subregions in Callisto are -->
+      <!-- hard coded to 'head' 'full' and expect 'head' nested in 'full' -->
+      <AnchorType ref="text-point" role="start" />
+      <AnchorType ref="text-point" role="end" />
+      <AnnotationType ref="ace_event-mention-extent" role="extent" />
+      <AnnotationType ref="ace_argument-mention" hasIndefiniteCardinality="true" />
+    </RegionType>
+
+    <ContentType name="ace_event-mention_content">
+      <ParameterType ref="string" role="ace_id" />
+      <ParameterType ref="string" role="level" />
+      <ParameterType ref="string" role="ldcscope-start" />
+      <ParameterType ref="string" role="ldcscope-end" />
+    </ContentType>
+
+    <AnnotationType name="ace_event-mention-extent">
+      <RegionType ref="text-extent" />
+      <ContentType ref="null_content" />
+    </AnnotationType>
+
+    <!-- Event/Relation Arguments -->
+
+    <!-- Note that arguments are not used. The are in the ACE DTD, but -->
+    <!-- useing them is redundant, since it can be inferred from the -->
+    <!-- (Event|Relation) Mentions. They have been left so documents -->
+    <!-- created during the pilot annotation session still open -->
+    <AnnotationType name="ace_argument">
+      <RegionType ref="ace_argument_region" />
+      <ContentType ref="ace_argument_content" />
+    </AnnotationType>
+
+    <RegionType name="ace_argument_region">
+      <!-- one (and only 1) should be specified! -->
+      <AnnotationType ref="ace_entity"   role="entity-value" />
+      <AnnotationType ref="ace_quantity" role="quantity-value" />
+      <AnnotationType ref="timex2"       role="timex2-value" />
+      <AnnotationType ref="ace_argument-mention" hasIndefiniteCardinality="true" />
+    </RegionType>
+
+    <ContentType name="ace_argument_content">
+      <!-- for mention-id and entity-id, see ace_event-argument_region -->
+      <ParameterType ref="string" role="role" />
+    </ContentType>
+
+    <AnnotationType name="ace_argument-mention">
+      <RegionType ref="ace_argument-mention_region" />
+      <ContentType ref="ace_argument-mention_content" />
+    </AnnotationType>
+
+    <!-- RK 2/15/07 added "unmentioned-entity-value" -->
+    <RegionType name="ace_argument-mention_region">
+      <!-- one (and only 1) should be specified! 
+           The other will have to reference a dummy :( 
+      (Dummies are no longer needed due to a fix Chad made a while back) -->
+      <AnnotationType ref="ace_entity-mention"   role="entity-value" />
+      <AnnotationType ref="ace_entity"       role="unmentioned-entity-value" />
+      <AnnotationType ref="ace_quantity-mention" role="quantity-value" />
+      <AnnotationType ref="timex2"               role="timex2-value" />
+    </RegionType>
+
+    <ContentType name="ace_argument-mention_content">
+      <ParameterType ref="string" role="role" />
+    </ContentType>
+
+
+    <!-- Collections for maia -->
+
+    <AnalysisType name="ace_annotation-set">
+      <AnnotationType ref="ace_entity" hasIndefiniteCardinality="true" />
+      <AnnotationType ref="ace_entity-mention" hasIndefiniteCardinality="true" />
+
+      <AnnotationType ref="ace_relation" hasIndefiniteCardinality="true" />
+      <AnnotationType ref="ace_relation-mention-extent" hasIndefiniteCardinality="true" />
+      <AnnotationType ref="ace_relation-mention" hasIndefiniteCardinality="true" />
+
+      <AnnotationType ref="timex2" hasIndefiniteCardinality="true" />
+
+      <AnnotationType ref="ace_quantity" hasIndefiniteCardinality="true" />
+      <AnnotationType ref="ace_quantity-mention" hasIndefiniteCardinality="true" />
+
+      <AnnotationType ref="ace_event" hasIndefiniteCardinality="true" />
+      <!-- Undocumented feature: putting the extent prior to mention displays mentions /on top/ of the extent :) -->
+      <AnnotationType ref="ace_event-mention-extent" hasIndefiniteCardinality="true" />
+      <AnnotationType ref="ace_event-mention" hasIndefiniteCardinality="true" />
+
+      <AnnotationType ref="ace_argument" hasIndefiniteCardinality="true" />
+      <AnnotationType ref="ace_argument-mention" hasIndefiniteCardinality="true" />
+    </AnalysisType>
+
+    <CorpusType name="ace_corpus">
+      <SignalType ref="text" />
+      <AnchorType ref="text-point" hasIndefiniteCardinality="true" />
+
+      <RegionType ref="text-extent" hasIndefiniteCardinality="true" />
+      <RegionType ref="head-full" hasIndefiniteCardinality="true" />
+      <RegionType ref="ace_entity_region" hasIndefiniteCardinality="true" />
+      <RegionType ref="ace_relation_region" hasIndefiniteCardinality="true" />
+      <RegionType ref="ace_relation-mention_region" hasIndefiniteCardinality="true" />
+      <RegionType ref="ace_quantity_region" hasIndefiniteCardinality="true" />
+      <RegionType ref="ace_quantity-mention_region" hasIndefiniteCardinality="true" />
+      <RegionType ref="ace_event_region" hasIndefiniteCardinality="true" />
+      <RegionType ref="ace_event-mention_region" hasIndefiniteCardinality="true" />
+      <RegionType ref="ace_argument_region" hasIndefiniteCardinality="true" />
+      <RegionType ref="ace_argument-mention_region" hasIndefiniteCardinality="true" />
+
+      <AnalysisType ref="ace_annotation-set" role="ace_annotation-set" />
+    </CorpusType>
+  </TypeDefinitions>
+</Scheme>

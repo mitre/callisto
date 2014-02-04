@@ -1,0 +1,135 @@
+#!/bin/bash
+
+#   Heavily modified from ant script
+#   May need additional licence info
+
+# allow command line pre-set opts
+if [ -z "$CALLISTO_OPTS" ] ; then 
+  CALLISTO_OPTS=""
+fi
+
+# load user callisto configuration (may specify CALLISTO_HOME
+if [ -f "$HOME/.callistorc" ] ; then
+  . $HOME/.callistorc
+fi
+
+# OS specific support.  $var _must_ be set to either true or false.
+cygwin=false;
+darwin=false;
+case "`uname`" in
+  CYGWIN*) cygwin=true ;;
+  Darwin*) darwin=true
+           if [ -z "$JAVA_VERSION" ] ; then
+             JAVA_VERSION="CurrerntJDK"
+           else
+             echo "Using Java version: $JAVA_VERSION"
+           fi
+           if [ -z "$JAVA_HOME" ] ; then
+             JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/${JAVA_VERSION}/Home
+           fi
+           ;;
+esac
+
+if [ -z "$CALLISTO_HOME" ] ; then
+  # try to find CALLISTO
+  if [ -d /opt/callisto ] ; then 
+    CALLISTO_HOME=/opt/callisto
+  fi
+
+  if [ -d "${HOME}/callisto" ] ; then 
+    CALLISTO_HOME="${HOME}/callisto"
+  fi
+
+  ## resolve links - $0 may be a link to callisto's home
+  PRG="$0"
+  progname=`basename "$0"`
+  saveddir=`pwd`
+
+  # need this for relative symlinks
+  dirname_prg=`dirname "$PRG"`
+  cd "$dirname_prg"
+
+  while [ -h "$PRG" ] ; do
+    ls=`ls -ld "$PRG"`
+    link=`expr "$ls" : '.*-> \(.*\)$'`
+    if expr "$link" : '/.*' > /dev/null; then
+	PRG="$link"
+    else
+	PRG=`dirname "$PRG"`"/$link"
+    fi
+  done
+
+  CALLISTO_HOME=`dirname "$PRG"`/..
+
+  cd "$saveddir"
+
+  # make it fully qualified
+  CALLISTO_HOME=`cd "$CALLISTO_HOME" && pwd`
+fi
+
+# For Cygwin, ensure paths are in UNIX format before anything is touched
+if $cygwin ; then
+  [ -n "$CALLISTO_HOME" ] &&
+    CALLISTO_HOME=`cygpath --unix "$CALLISTO_HOME"`
+  [ -n "$JAVA_HOME" ] &&
+    JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
+  [ -n "$CLASSPATH" ] &&
+    CLASSPATH=`cygpath --path --unix "$CLASSPATH"`
+fi
+
+if [ -z "$JAVACMD" ] ; then 
+  if [ -n "$JAVA_HOME"  ] ; then
+    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then 
+      # IBM's JDK on AIX uses strange locations for the executables
+      JAVACMD="$JAVA_HOME/jre/sh/java"
+    else
+      JAVACMD="$JAVA_HOME/bin/java"
+    fi
+  else
+    JAVACMD=`which java 2> /dev/null `
+    if [ -z "$JAVACMD" ] ; then 
+        JAVACMD=java
+    fi
+  fi
+fi
+ 
+if [ ! -x "$JAVACMD" ] ; then
+  echo "Error: JAVA_HOME is not defined correctly."
+  echo "  We cannot execute $JAVACMD"
+  exit 1
+fi
+
+if [ -z "$JAVA_HOME" ] ; then
+  echo "Warning: JAVA_HOME environment variable is not set."
+  echo "  If build fails because sun.* classes could not be found"
+  echo "  you will need to set the JAVA_HOME environment variable"
+  echo "  to the installation directory of java."
+fi
+
+# For Cygwin, switch paths to Windows format before running java
+if $cygwin; then
+  [ -n "$CALLISTO_HOME" ] &&
+    CALLISTO_HOME=`cygpath --windows "$CALLISTO_HOME"`
+  [ -n "$JAVA_HOME" ] &&
+    JAVA_HOME=`cygpath --windows "$JAVA_HOME"`
+  [ -n "$CLASSPATH" ] &&
+    CLASSPATH=`cygpath --path --windows "$CLASSPATH"`
+fi
+
+# For Darwin, use classes.jar for TOOLS_JAR
+TOOLS_JAR="${JAVA_HOME}/lib/tools.jar"
+if $darwin; then
+  TOOLS_JAR="/System/Library/Frameworks/JavaVM.framework/Versions/${JAVA_VERSION}/Classes/classes.jar"
+fi
+
+MAIN_CLASS=org.mitre.jawb.tasks.BatchExport
+
+echo $CALLISTO_HOME
+
+"$JAVACMD" \
+  $CALLISTO_OPTS \
+  -classpath "${CALLISTO_HOME}/Callisto.jar" \
+  "-Djava.awt.headless=true" \
+  "-Dtools.jar=$TOOLS_JAR" \
+  "-Dcallisto.home=${CALLISTO_HOME}" \
+  $MAIN_CLASS "$@"

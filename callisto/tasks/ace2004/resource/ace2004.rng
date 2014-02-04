@@ -1,0 +1,1115 @@
+<!-- -*- mode:sgml -*- -->
+
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:aif="http://callisto.mitre.org/ns/aif/1.0"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+  <!-- This is a RELAX NG[1] schema document. RELAX NG is a schema
+       language used to specify structure and content of an XML
+       document.  This file, however, is only used to constrain
+       attribute values of annotations in the Callisto GUI. Our hope
+       is to design enhancements that can be added to a RELAX NG
+       document to allow it to define the structure of standoff
+       annotation as well. -->
+  <!-- RELAX NG is not intended to deal with complex constraints
+       involving references (e.g. in mention-relations, the parent
+       entity type, of both arg1 and arg2, influence the constraints
+       on the relation's type and subtype). For this, a rule based
+       schema language like Schematron[2] (which would also need
+       enhancement for standoff) may be more appropriate. -->
+  <!-- We use multiple "define" elements and nothing in "start" since
+       we are specifying ATLAS data structure, not XML
+       infosets. "define" element names are strictly internal, and may
+       change without notice. -->
+  <!-- This duplicates the attribute structure defined in the MAIA but
+       adds value constraints (including unrestricted attributes). -->
+  <!-- Currently, no dataTypeLibraries are used, though may be later. -->
+  <!-- ATLAS element children can not be completely specified, using
+       RELAX NG. ATLAS children are defined in logical regions, and
+       may overlap fully or only partially, and may anchor into multi
+       dimensional signals.  The XML infoset model (a tree), and XML
+       schema can not describe this).
+         * Children (e.g. mention-relation."ace_rdc-argeument1") are
+           not defined here at this time.
+         * RELAX NG can not be used as a replacement for MAIA without
+           enhancement
+         * Attribute values can not be restricted based on
+           child/parent attribute values (e.g. relation types). Even
+           with enhancements, it may not be easily possible using
+           RELAX NG's set theory style.
+         * Schematron, a rulebased validation language may be a
+           solution. -->
+  <!-- A /temporary/ solution to constraining relation types of
+       "ace_rdc-mention-relation" based on the entites involved, has
+       been included. It is a very RDC specific scheme which WILL
+       change. -->
+  <!-- Numerous GUI issues are not addressed and don't fit in the
+       RELAX NG model:
+         * default values aren't specified. Possible enhancement:
+             <attribute name="subtype" aif:default="foo">...
+             <attribute name="subtype"><aif:default="foo">...
+         * attribute dependency: when is one attribute list w/in a
+           choice restricted and another's not? Possible enhancements:
+             <attribute name="subtype" aif:depends="type">...
+             <attribute name="subtype"><aif:depends name="type" /> ...
+       Using sub-elements in either case allows use of 'ref' elements,
+       and multiple values -->
+  <!-- [1] RELAX NG: http://relaxng.org
+       [2] Schematron: http://www.ascc.net/xml/resource/schematron/schematron.html
+    -->
+
+  <define name="entity-mention">
+    <element name="ace_entity-mention">
+      <!-- ace_id is unrestricted at this time -->
+      <attribute name="ace_id" />
+
+      <attribute name="type">
+        <choice>
+          <value>NAM</value>
+          <value>NOM</value>
+          <value>PRO</value>
+	  <!-- Removed to support v5.1.0 of DTD (value)PRE(/value) -->
+        </choice>
+      </attribute>
+      <attribute name="ldctype">
+        <choice>
+          <value>NAM</value>
+          <value>NOM</value>
+          <value>BAR</value>
+          <value>PRO</value>
+          <value>WHQ</value>
+          <value>PRE</value>
+          <value>HLS</value>
+          <value>PTV</value>
+	  <!-- Removed to support v5.1.0 of DTD (value)CMC(/value) -->
+	  <!-- Removed to support v5.1.0 of DTD (value)MWH(/value) -->
+	  <!-- Removed to support v5.1.0 of DTD (value)MSC(/value) -->
+          <value>APP</value>
+          <value>ARC</value>
+          <value>DE</value>
+          <value>PCN</value>
+          <value>PMM</value>
+          <value>EPM</value>
+          <value>EAPGPE</value>
+        </choice>
+      </attribute>
+      <attribute name="role">
+        <choice>
+          <value>GPE</value>
+          <value>PER</value>
+          <value>ORG</value>
+          <value>LOC</value>
+          <value>FAC</value>
+        </choice>
+      </attribute>
+      <attribute name="reference">
+        <choice>
+          <value>INTENDED</value>
+          <value>LITERAL</value>
+        </choice>
+      </attribute>
+      <attribute name="metonymy">
+        <choice>
+          <value>TRUE</value>
+          <value>FALSE</value>
+        </choice>
+      </attribute>
+      <attribute name="ldcatr">
+        <choice>
+          <value>TRUE</value>
+          <value>FALSE</value>
+        </choice>
+      </attribute>
+    </element>
+  </define>
+
+  <define name="entity">
+    <element name="ace_entity">
+      <!-- ace_id is unrestricted at this time -->
+      <attribute name="ace_id" />
+
+      <choice aif:key-attribute="type">
+        <group>
+          <attribute name="type">
+            <value>PER</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Group</value>
+              <value>Individual</value>
+		<value>Indeterminate</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>ORG</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Government</value>
+              <value>Commercial</value>
+              <value>Educational</value>
+              <value>Media</value>
+              <value>Religious</value>
+              <value>Sports</value>
+              <value>Non-Governmental</value>
+              <value>Medical-Science</value>
+              <value>Entertainment</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>LOC</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Address</value>
+              <value>Boundary</value>
+              <value>Water-Body</value>
+              <value>Celestial</value>
+              <value>Land-Region-Natural</value>
+              <value>Region-General</value>
+              <value>Region-International</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>GPE</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Continent</value>
+              <value>Nation</value>
+              <value>State-or-Province</value>
+              <value>County-or-District</value>
+              <value>Population-Center</value>
+              <value>GPE-Cluster</value>
+              <value>Special</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>FAC</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Building-Grounds</value>
+              <value>Subarea-Facility</value>
+              <value>Path</value>
+              <value>Airport</value>
+              <value>Plant</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>VEH</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Land</value>
+              <value>Air</value>
+              <value>Water</value>
+              <value>Subarea-Vehicle</value>
+              <value>Underspecified</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>WEA</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Blunt</value>
+              <value>Exploding</value>
+              <value>Sharp</value>
+              <value>Chemical</value>
+              <value>Biological</value>
+              <value>Shooting</value>
+              <value>Projectile</value>
+              <value>Nuclear</value>
+              <value>Underspecified</value>
+            </choice>
+          </attribute>
+        </group>
+
+      </choice>
+
+      <attribute name="class">
+        <choice>
+          <value>SPC</value>
+          <value>NEG</value>
+          <value>GEN</value>
+          <value>USP</value>
+        </choice>
+      </attribute>
+    </element>
+  </define>
+
+  <define name="relation">
+    <element name="ace_relation">
+      <!-- ace_id is unrestricted at this time -->
+      <attribute name="ace_id" />
+
+      <!-- See RDC hack after choice -->
+      <!-- Need to indicate that subtype is dependant on type -->
+      <choice aif:key-attribute="type">
+        <group>
+          <attribute name="type">
+            <value>PHYS</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Located</value>
+              <value>Near</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>PART-WHOLE</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Geographical</value>
+              <value>Subsidiary</value>
+              <value>Artifact</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>PER-SOC</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Business</value>
+              <value>Family</value>
+              <value>Lasting-Personal</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>ORG-AFF</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Employment</value>
+              <value>Ownership</value>
+              <value>Founder</value>
+              <value>Student-Alum</value>
+              <value>Sports-Affiliation</value>
+              <value>Investor-Shareholder</value>
+              <value>Membership</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>ART</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>User-Owner-Inventor-Manufacturer</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>GEN-AFF</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Citizen-Resident-Religion-Ethnicity</value>
+              <value>Org-Location</value>
+            </choice>
+          </attribute>
+        </group>
+
+      </choice>
+
+      <attribute name="modality">
+        <choice>
+          <value>Asserted</value>
+          <value>Other</value>
+        </choice>
+      </attribute>
+
+      <attribute name="tense">
+        <choice>
+          <value>Unspecified</value>
+          <value>Past</value>
+          <value>Present</value>
+          <value>Future</value>
+        </choice>
+      </attribute>
+
+      <!-- The following format is a quick (ugly) solution to RDC validation
+           needs. It will be changing when a better solution can be implemented. 
+           Future versions will not be made back compatable -->
+      <!-- for now please don't re-order the <definitions> -->
+
+      <!-- Each type gets 4 args: e1Type, e2Type, relType, and relSubtype -->
+      <!--    e1Type: entity type of the arg1 mention
+              e2Type: entity type of the arg2 mention
+              relType: an allowed relation between the entities
+              relSubtype: an allowed subtype for the relType -->
+      <!-- error checking:
+           * both e1Type and e2Type must be valid as defined in an "ace_edt-entity"
+           * the relSubtype must be valid for relType as defined above.
+           * invalid entries are reported on stderr and ignored  -->
+      <constraints xmlns="http://callisto.mitre.org/ns/aif/1.0">
+        <!-- NOTE: if one is '*', both must be '*' to get desired effect -->
+
+        <!-- NOTE: the wildcard functionality doesn't seem to be working.
+             I modified this file to indicate every constriant manually.
+             Constraints are current to version 5.4 of the guidelines.
+             (Liz Boschee, BBN) -->
+
+        <type relType="PHYS" relSubtype="Located"  e1Type="PER" e2Type="FAC" />
+        <type relType="PHYS" relSubtype="Located"  e1Type="PER" e2Type="LOC" />
+        <type relType="PHYS" relSubtype="Located"  e1Type="PER" e2Type="GPE" />
+
+        <type relType="PHYS" relSubtype="Near"  e1Type="PER" e2Type="LOC" />
+        <type relType="PHYS" relSubtype="Near"  e1Type="PER" e2Type="FAC" />
+        <type relType="PHYS" relSubtype="Near"  e1Type="PER" e2Type="GPE" />
+        <type relType="PHYS" relSubtype="Near"  e1Type="LOC" e2Type="LOC" />
+        <type relType="PHYS" relSubtype="Near"  e1Type="LOC" e2Type="FAC" />
+        <type relType="PHYS" relSubtype="Near"  e1Type="LOC" e2Type="GPE" />
+        <type relType="PHYS" relSubtype="Near"  e1Type="FAC" e2Type="LOC" />
+        <type relType="PHYS" relSubtype="Near"  e1Type="FAC" e2Type="FAC" />
+        <type relType="PHYS" relSubtype="Near"  e1Type="FAC" e2Type="GPE" />
+        <type relType="PHYS" relSubtype="Near"  e1Type="GPE" e2Type="LOC" />
+        <type relType="PHYS" relSubtype="Near"  e1Type="GPE" e2Type="FAC" />
+        <type relType="PHYS" relSubtype="Near"  e1Type="GPE" e2Type="GPE" />
+
+        <type relType="PART-WHOLE" relSubtype="Geographical"  e1Type="FAC" e2Type="FAC" />
+        <type relType="PART-WHOLE" relSubtype="Geographical"  e1Type="FAC" e2Type="LOC" />
+        <type relType="PART-WHOLE" relSubtype="Geographical"  e1Type="FAC" e2Type="GPE" />
+        <type relType="PART-WHOLE" relSubtype="Geographical"  e1Type="LOC" e2Type="FAC" />
+        <type relType="PART-WHOLE" relSubtype="Geographical"  e1Type="LOC" e2Type="LOC" />
+        <type relType="PART-WHOLE" relSubtype="Geographical"  e1Type="LOC" e2Type="GPE" />
+        <type relType="PART-WHOLE" relSubtype="Geographical"  e1Type="GPE" e2Type="FAC" />
+        <type relType="PART-WHOLE" relSubtype="Geographical"  e1Type="GPE" e2Type="LOC" />
+        <type relType="PART-WHOLE" relSubtype="Geographical"  e1Type="GPE" e2Type="GPE" />
+
+        <type relType="PART-WHOLE" relSubtype="Subsidiary"  e1Type="ORG" e2Type="ORG" />
+        <type relType="PART-WHOLE" relSubtype="Subsidiary"  e1Type="ORG" e2Type="GPE" />
+
+        <type relType="PART-WHOLE" relSubtype="Artifact"  e1Type="VEH" e2Type="VEH" />
+        <type relType="PART-WHOLE" relSubtype="Artifact"  e1Type="WEA" e2Type="WEA" />
+
+        <type relType="PER-SOC" relSubtype="Business"  e1Type="PER" e2Type="PER" />
+        <type relType="PER-SOC" relSubtype="Family"  e1Type="PER" e2Type="PER" />
+        <type relType="PER-SOC" relSubtype="Lasting-Personal"  e1Type="PER" e2Type="PER" />
+
+        <type relType="ORG-AFF" relSubtype="Employment"  e1Type="PER" e2Type="ORG" />
+        <type relType="ORG-AFF" relSubtype="Employment"  e1Type="PER" e2Type="GPE" />
+        <type relType="ORG-AFF" relSubtype="Ownership"  e1Type="PER" e2Type="ORG" />
+        <type relType="ORG-AFF" relSubtype="Founder"  e1Type="PER" e2Type="ORG" />
+        <type relType="ORG-AFF" relSubtype="Founder"  e1Type="PER" e2Type="GPE" />
+        <type relType="ORG-AFF" relSubtype="Founder"  e1Type="ORG" e2Type="ORG" />
+        <type relType="ORG-AFF" relSubtype="Founder"  e1Type="ORG" e2Type="GPE" />
+        <type relType="ORG-AFF" relSubtype="Student-Alum"  e1Type="PER" e2Type="ORG" />
+        <type relType="ORG-AFF" relSubtype="Sports-Affiliation"  e1Type="PER" e2Type="ORG" />
+        <type relType="ORG-AFF" relSubtype="Investor-Shareholder"  e1Type="PER" e2Type="ORG" />
+        <type relType="ORG-AFF" relSubtype="Investor-Shareholder"  e1Type="PER" e2Type="GPE" />
+        <type relType="ORG-AFF" relSubtype="Investor-Shareholder"  e1Type="ORG" e2Type="ORG" />
+        <type relType="ORG-AFF" relSubtype="Investor-Shareholder"  e1Type="ORG" e2Type="GPE" />
+        <type relType="ORG-AFF" relSubtype="Investor-Shareholder"  e1Type="GPE" e2Type="ORG" />
+        <type relType="ORG-AFF" relSubtype="Investor-Shareholder"  e1Type="GPE" e2Type="GPE" />
+        <type relType="ORG-AFF" relSubtype="Membership"  e1Type="PER" e2Type="ORG" />
+        <type relType="ORG-AFF" relSubtype="Membership"  e1Type="ORG" e2Type="ORG" />
+        <type relType="ORG-AFF" relSubtype="Membership"  e1Type="GPE" e2Type="ORG" />
+
+        <type relType="ART" relSubtype="User-Owner-Inventor-Manufacturer"  e1Type="PER" e2Type="WEA" />
+        <type relType="ART" relSubtype="User-Owner-Inventor-Manufacturer"  e1Type="PER" e2Type="VEH" />
+        <type relType="ART" relSubtype="User-Owner-Inventor-Manufacturer"  e1Type="PER" e2Type="FAC" />
+        <type relType="ART" relSubtype="User-Owner-Inventor-Manufacturer"  e1Type="ORG" e2Type="WEA" />
+        <type relType="ART" relSubtype="User-Owner-Inventor-Manufacturer"  e1Type="ORG" e2Type="VEH" />
+        <type relType="ART" relSubtype="User-Owner-Inventor-Manufacturer"  e1Type="ORG" e2Type="FAC" />
+        <type relType="ART" relSubtype="User-Owner-Inventor-Manufacturer"  e1Type="GPE" e2Type="WEA" />
+        <type relType="ART" relSubtype="User-Owner-Inventor-Manufacturer"  e1Type="GPE" e2Type="VEH" />
+        <type relType="ART" relSubtype="User-Owner-Inventor-Manufacturer"  e1Type="GPE" e2Type="FAC" />
+
+        <type relType="GEN-AFF" relSubtype="Citizen-Resident-Religion-Ethnicity"  e1Type="PER" e2Type="GPE" />
+        <type relType="GEN-AFF" relSubtype="Citizen-Resident-Religion-Ethnicity"  e1Type="PER" e2Type="LOC" />
+        <type relType="GEN-AFF" relSubtype="Citizen-Resident-Religion-Ethnicity"  e1Type="PER" e2Type="PER" />
+        <type relType="GEN-AFF" relSubtype="Citizen-Resident-Religion-Ethnicity"  e1Type="PER" e2Type="ORG" />
+        <type relType="GEN-AFF" relSubtype="Org-Location"  e1Type="ORG" e2Type="GPE" />
+        <type relType="GEN-AFF" relSubtype="Org-Location"  e1Type="ORG" e2Type="LOC" />
+
+      </constraints>
+    </element>
+  </define>
+
+  <!-- unmentioned_ace_relation is not really an element in the AIF -->
+  <!-- it is a name for ace_relations that have no mention subordinates -->
+  <define name="unmentioned_relation">
+    <element name="unmentioned_ace_relation">
+      <!-- ace_id is unrestricted at this time -->
+      <attribute name="ace_id" />
+
+      <!-- See RDC hack after choice -->
+      <!-- Need to indicate that subtype is dependant on type -->
+      <choice aif:key-attribute="type">
+        <group>
+          <attribute name="type">
+            <value>MEMBER-OF-SET</value>
+          </attribute>
+          <!-- no subtypes possible for MEMBER-OF-SET -->
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>METONYMY</value>
+          </attribute>
+          <!-- no subtype -->
+        </group>
+      </choice>
+
+      <constraints xmlns="http://callisto.mitre.org/ns/aif/1.0">
+        <!-- NOTE: the wildcard functionality doesn't seem to be working.
+             So we must indicate every constriant manually.
+             There are no actual constraints here, so we list 
+             all combinations. -->
+
+        <type relType="METONYMY" relSubtype=""  e1Type="PER" e2Type="PER" />
+        <type relType="METONYMY" relSubtype=""  e1Type="PER" e2Type="LOC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="PER" e2Type="FAC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="PER" e2Type="GPE" />
+        <type relType="METONYMY" relSubtype=""  e1Type="PER" e2Type="ORG" />
+        <type relType="METONYMY" relSubtype=""  e1Type="PER" e2Type="VEH" />
+        <type relType="METONYMY" relSubtype=""  e1Type="PER" e2Type="WEA" />
+        <type relType="METONYMY" relSubtype=""  e1Type="LOC" e2Type="PER" />
+        <type relType="METONYMY" relSubtype=""  e1Type="LOC" e2Type="LOC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="LOC" e2Type="FAC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="LOC" e2Type="GPE" />
+        <type relType="METONYMY" relSubtype=""  e1Type="LOC" e2Type="ORG" />
+        <type relType="METONYMY" relSubtype=""  e1Type="LOC" e2Type="VEH" />
+        <type relType="METONYMY" relSubtype=""  e1Type="LOC" e2Type="WEA" />
+        <type relType="METONYMY" relSubtype=""  e1Type="FAC" e2Type="PER" />
+        <type relType="METONYMY" relSubtype=""  e1Type="FAC" e2Type="LOC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="FAC" e2Type="FAC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="FAC" e2Type="GPE" />
+        <type relType="METONYMY" relSubtype=""  e1Type="FAC" e2Type="ORG" />
+        <type relType="METONYMY" relSubtype=""  e1Type="FAC" e2Type="VEH" />
+        <type relType="METONYMY" relSubtype=""  e1Type="FAC" e2Type="WEA" />
+        <type relType="METONYMY" relSubtype=""  e1Type="GPE" e2Type="PER" />
+        <type relType="METONYMY" relSubtype=""  e1Type="GPE" e2Type="LOC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="GPE" e2Type="FAC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="GPE" e2Type="GPE" />
+        <type relType="METONYMY" relSubtype=""  e1Type="GPE" e2Type="ORG" />
+        <type relType="METONYMY" relSubtype=""  e1Type="GPE" e2Type="VEH" />
+        <type relType="METONYMY" relSubtype=""  e1Type="GPE" e2Type="WEA" />
+        <type relType="METONYMY" relSubtype=""  e1Type="ORG" e2Type="PER" />
+        <type relType="METONYMY" relSubtype=""  e1Type="ORG" e2Type="LOC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="ORG" e2Type="FAC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="ORG" e2Type="GPE" />
+        <type relType="METONYMY" relSubtype=""  e1Type="ORG" e2Type="ORG" />
+        <type relType="METONYMY" relSubtype=""  e1Type="ORG" e2Type="VEH" />
+        <type relType="METONYMY" relSubtype=""  e1Type="ORG" e2Type="WEA" />
+        <type relType="METONYMY" relSubtype=""  e1Type="VEH" e2Type="PER" />
+        <type relType="METONYMY" relSubtype=""  e1Type="VEH" e2Type="LOC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="VEH" e2Type="FAC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="VEH" e2Type="GPE" />
+        <type relType="METONYMY" relSubtype=""  e1Type="VEH" e2Type="ORG" />
+        <type relType="METONYMY" relSubtype=""  e1Type="VEH" e2Type="VEH" />
+        <type relType="METONYMY" relSubtype=""  e1Type="VEH" e2Type="WEA" />
+        <type relType="METONYMY" relSubtype=""  e1Type="WEA" e2Type="PER" />
+        <type relType="METONYMY" relSubtype=""  e1Type="WEA" e2Type="LOC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="WEA" e2Type="FAC" />
+        <type relType="METONYMY" relSubtype=""  e1Type="WEA" e2Type="GPE" />
+        <type relType="METONYMY" relSubtype=""  e1Type="WEA" e2Type="ORG" />
+        <type relType="METONYMY" relSubtype=""  e1Type="WEA" e2Type="VEH" />
+        <type relType="METONYMY" relSubtype=""  e1Type="WEA" e2Type="WEA" />
+
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="PER" e2Type="PER" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="PER" e2Type="LOC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="PER" e2Type="FAC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="PER" e2Type="GPE" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="PER" e2Type="ORG" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="PER" e2Type="VEH" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="PER" e2Type="WEA" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="LOC" e2Type="PER" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="LOC" e2Type="LOC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="LOC" e2Type="FAC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="LOC" e2Type="GPE" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="LOC" e2Type="ORG" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="LOC" e2Type="VEH" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="LOC" e2Type="WEA" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="FAC" e2Type="PER" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="FAC" e2Type="LOC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="FAC" e2Type="FAC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="FAC" e2Type="GPE" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="FAC" e2Type="ORG" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="FAC" e2Type="VEH" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="FAC" e2Type="WEA" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="GPE" e2Type="PER" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="GPE" e2Type="LOC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="GPE" e2Type="FAC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="GPE" e2Type="GPE" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="GPE" e2Type="ORG" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="GPE" e2Type="VEH" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="GPE" e2Type="WEA" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="ORG" e2Type="PER" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="ORG" e2Type="LOC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="ORG" e2Type="FAC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="ORG" e2Type="GPE" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="ORG" e2Type="ORG" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="ORG" e2Type="VEH" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="ORG" e2Type="WEA" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="VEH" e2Type="PER" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="VEH" e2Type="LOC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="VEH" e2Type="FAC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="VEH" e2Type="GPE" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="VEH" e2Type="ORG" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="VEH" e2Type="VEH" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="VEH" e2Type="WEA" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="WEA" e2Type="PER" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="WEA" e2Type="LOC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="WEA" e2Type="FAC" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="WEA" e2Type="GPE" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="WEA" e2Type="ORG" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="WEA" e2Type="VEH" />
+        <type relType="MEMBER-OF-SET" relSubtype=""  e1Type="WEA" e2Type="WEA" />
+
+
+      </constraints>
+    </element>
+  </define>
+
+
+  <define name="relation-mention">
+    <element name="ace_relation-mention">
+      <!-- ace_id is unrestricted at this time -->
+      <attribute name="ace_id" />
+
+      <attribute name="lexicalcondition">
+        <choice>
+          <value>Possessive</value>
+          <value>Preposition</value>
+          <value>PreMod</value>
+          <value>Coordination</value>
+          <value>Formulaic</value>
+          <value>Verbal</value>
+          <value>Participial</value>
+	  <value>Other</value>
+        </choice>
+      </attribute>
+    </element>
+  </define>
+
+  <define name="quantity">
+    <element name="ace_quantity">
+      <!-- ace_id is unrestricted at this time -->
+      <attribute name="ace_id" />
+
+      <choice aif:key-attribute="type">
+        <group>
+          <attribute name="type">
+            <value>Numeric</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Money</value>
+              <value>Percent</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Contact-Info</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Phone-Number</value>
+              <value>E-Mail</value>
+              <value>URL</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Crime</value>
+          </attribute>
+          <!-- no subtype -->
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Job-Title</value>
+          </attribute>
+          <!-- no subtype -->
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Time</value>
+          </attribute>
+          <!-- no subtype -->
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Sentence</value>
+          </attribute>
+          <!-- no subtype -->
+        </group>
+
+      </choice>
+
+    </element>
+  </define>
+
+  <define name="quantity-mention">
+    <element name="ace_quantity-mention">
+      <!-- ace_id is unrestricted at this time -->
+      <attribute name="ace_id" />
+    </element>
+  </define>
+
+
+  <define name="event">
+    <element name="ace_event">
+      <!-- ace_id is unrestricted at this time -->
+      <attribute name="ace_id" />
+
+      <choice aif:key-attribute="type">
+        <group>
+          <attribute name="type">
+            <value>Communication</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>E-mail</value>
+              <value>Text</value>
+              <value>IM</value>
+              <value>Chat</value>
+              <value>Snail-Mail</value>
+              <value>Phone</value>
+              <value>In-Person</value>
+              <value>E-Announcement</value>
+              <value>M-Announcement</value>
+              <value>Other</value>
+              <value>Unknown</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Get-Together</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value></value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Travel</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Foot</value>
+              <value>Cycle</value>
+              <value>Motor-Vehicle</value>
+              <value>Train</value>
+              <value>Air</value>
+              <value>Water</value>
+              <value>Space</value>
+              <value>Other</value>
+              <value>Unknown</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Life</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Be-Born</value>
+              <value>Die</value>
+              <value>Injure</value>
+              <value>Marry</value>
+              <value>Divorce</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Transaction</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Transfer-Ownership</value>
+              <value>Transfer-Money</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Movement</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Transport</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Business</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Start-Org</value>
+              <value>End-Org</value>
+              <value>Declare-Bankruptcy</value>
+              <value>Merge-Org</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Conflict</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Attack</value>
+              <value>Demonstrate</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Contact</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Meet</value>
+              <value>Phone-Write</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Personnel</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Start-Position</value>
+              <value>End-Position</value>
+              <value>Nominate</value>
+              <value>Elect</value>
+            </choice>
+          </attribute>
+        </group>
+
+        <group>
+          <attribute name="type">
+            <value>Justice</value>
+          </attribute>
+          <attribute name="subtype">
+            <choice>
+              <value>Arrest-Jail</value>
+              <value>Release-Parole</value>
+              <value>Trial-Hearing</value>
+              <value>Charge-Indict</value>
+              <value>Sue</value>
+              <value>Convict</value>
+              <value>Sentence</value>
+              <value>Fine</value>
+              <value>Execute</value>
+              <value>Extradite</value>
+              <value>Acquit</value>
+              <value>Appeal</value>
+              <value>Pardon</value>
+            </choice>
+          </attribute>
+        </group>
+
+
+      </choice>
+
+      <attribute name="modality">
+        <choice>
+          <value>Asserted</value>
+          <value>Other</value>
+        </choice>
+      </attribute>
+
+      <attribute name="polarity">
+        <choice>
+          <value>Positive</value>
+          <value>Negative</value>
+        </choice>
+      </attribute>
+
+      <attribute name="genericity">
+        <choice>
+          <value>Specific</value>
+          <value>Generic</value>
+        </choice>
+      </attribute>
+
+      <attribute name="tense">
+        <choice>
+          <value>Past</value>
+          <value>Present</value>
+          <value>Future</value>
+          <value>Unspecified</value>
+        </choice>
+      </attribute>
+
+    </element>
+  </define>
+
+  <define name="event-mention">
+    <element name="ace_event-mention">
+      <!-- ace_id is unrestricted at this time -->
+      <attribute name="ace_id" />
+
+      <attribute name="level">
+        <choice>
+          <value>SEN</value>
+        </choice>
+      </attribute>
+    </element>
+  </define>
+
+
+  <define name="argument">
+    <element name="ace_argument">
+      <attribute name="role">
+        <choice>
+          <!-- these are for both event and relation args referencing values-->
+          <value>Time-Within</value>
+          <value>Time-Starting</value>
+          <value>Time-Ending</value>
+          <value>Time-Before</value>
+          <value>Time-After</value>
+          <value>Time-Holds</value>
+          <value>Time-At-Beginning</value>
+          <value>Time-At-End</value>
+          <!-- only for use in event, referencing entities -->
+          <value>Person</value>
+          <value>Time</value>
+          <value>Place</value>
+          <value>Buyer</value>
+          <value>Seller</value>
+          <value>Beneficiary</value>
+          <value>Price</value>
+          <value>Transporter</value>
+          <value>Artifact</value>
+          <value>Origin</value>
+          <value>Destination</value>
+          <value>Giver</value>
+          <value>Recipient</value>
+          <value>Money</value>
+          <value>Org</value>
+          <value>Agent</value>
+          <value>Victim</value>
+          <value>Instrument</value>
+          <value>Entity</value>
+          <value>Attacker</value>
+          <value>Target</value>
+          <value>Defendant</value>
+          <value>Adjudicator</value>
+          <value>Prosecutor</value>
+          <value>Plaintiff</value>
+          <value>Crime</value>
+          <value>Position</value>
+          <value>Sentence</value>
+          <value>Vehicle</value>
+          <value>Duration</value>
+          <value>Sender</value>
+          <value>Receiver</value>
+          <value>Participant</value>
+          <value>Location</value>
+          <value>Attendee</value>
+          <value>Traveler</value>
+          <value>Origin</value>
+          <value>Destination</value>
+        </choice>
+      </attribute>
+    </element>
+  </define>
+
+  <define name="argument-mention">
+    <element name="ace_argument-mention">
+      <attribute name="role">
+        <choice>
+          <!-- both event-mentions and relation-mentions args -->
+          <value>Time-Within</value>
+          <value>Time-Starting</value>
+          <value>Time-Ending</value>
+          <value>Time-As-Of</value>
+          <value>Time-Before</value>
+          <value>Time-After</value>
+          <value>Time-Holds</value>
+          <value>Time-At-Beginning</value>
+          <value>Time-At-End</value>
+          <!-- only for use in event-mentions, referencing entity-mentions -->
+          <value>Time</value>
+          <value>Person</value>
+          <value>Place</value>
+          <value>Buyer</value>
+          <value>Seller</value>
+          <value>Beneficiary</value>
+          <value>Price</value>
+          <value>Transporter</value>
+          <value>Artifact</value>
+          <value>Origin</value>
+          <value>Destination</value>
+          <value>Giver</value>
+          <value>Recipient</value>
+          <value>Money</value>
+          <value>Org</value>
+          <value>Agent</value>
+          <value>Victim</value>
+          <value>Instrument</value>
+          <value>Entity</value>
+          <value>Attacker</value>
+          <value>Target</value>
+          <value>Defendant</value>
+          <value>Adjudicator</value>
+          <value>Prosecutor</value>
+          <value>Plaintiff</value>
+          <value>Crime</value>
+          <value>Position</value>
+          <value>Sentence</value>
+          <value>Vehicle</value>
+          <value>Duration</value>
+          <value>Sender</value>
+          <value>Receiver</value>
+          <value>Participant</value>
+          <value>Location</value>
+          <value>Attendee</value>
+          <value>Traveler</value>
+          <value>Origin</value>
+          <value>Destination</value>
+        </choice>
+      </attribute>
+
+      <!-- The following format is yet another quick (ugly) solution
+           to validation needs. It will be changing when a better
+           solution can be implemented.  Future versions will not be
+           made back compatable -->
+
+      <!-- '*' implies any value. -->
+      <!-- If '*' is used in type, it must be used in subtype as well -->
+      <!-- '*' cannot be used for grandparent -->
+
+      <!-- for now please don't re-order the <definitions> -->
+
+      <!-- Each type gets 4 args: grandparent, type, subtype, role -->
+      <!--    grandparent:  The annotation type of the argument's parent's parent
+              type:         The grandparent's type attribute
+              subtype:      The grandparent's subtype attribute
+              role:         A role allowed for the Argument -->
+      <!-- error checking:
+           * grandparent will be 'ace_relation-mention' or 'ace_event-mention'
+           * type must be a valid type for the specified grandparent
+           * subtype must be a valid type for the specified grandparent
+           * invalid entries are reported on stderr and ignored  -->
+
+      <constraints xmlns="http://callisto.mitre.org/ns/aif/1.0">
+
+        <!-- NOTE: current to ACE Event Descriptions Guidelines (v5.3) -->
+
+        <!-- more generic argument roles at the bottom -->
+
+        <!-- event arguments -->
+        <type grandparent="ace_event" type="Life" subtype="*"       role="Place,Time" />
+        <type grandparent="ace_event" type="Life" subtype="Be-Born" role="Person" />
+        <type grandparent="ace_event" type="Life" subtype="Marry"   role="Person" />
+        <type grandparent="ace_event" type="Life" subtype="Divorce" role="Person" />
+        <type grandparent="ace_event" type="Life" subtype="Injure"  role="Agent,Victim,Instrument" />
+        <type grandparent="ace_event" type="Life" subtype="Die"     role="Agent,Victim,Instrument" />
+
+        <type grandparent="ace_event" type="Movement" subtype="*"           role="Origin,Destination" />
+        <type grandparent="ace_event" type="Movement" subtype="Transport"   role="Agent,Vehicle,Artifact,Price,Time" />
+
+        <type grandparent="ace_event" type="Transaction" subtype="*"                  role="Place,Time" />
+        <type grandparent="ace_event" type="Transaction" subtype="Transfer-Ownership" role="Buyer,Seller,Beneficiary,Artifact,Price," />
+        <type grandparent="ace_event" type="Transaction" subtype="Transfer-Money"     role="Giver,Recipient,Beneficiary,Money" />
+
+        <type grandparent="ace_event" type="Business" subtype="*"         		role="Place,Org" />
+        <type grandparent="ace_event" type="Business" subtype="Start-Org" 		role="Agent,Time" />
+        <type grandparent="ace_event" type="Business" subtype="Merge-Org" 		role="Time" />
+	<type grandparent="ace_event" type="Business" subtype="Declare-Bankruptcy" 	role="Time" />
+	<type grandparent="ace_event" type="Business" subtype="End-Org" 		role="Time" />
+
+        <type grandparent="ace_event" type="Conflict" subtype="*"           role="Place,Time" />
+        <type grandparent="ace_event" type="Conflict" subtype="Attack"      role="Attacker,Target,Instrument" />
+        <type grandparent="ace_event" type="Conflict" subtype="Demonstrate" role="Entity" />
+
+        <type grandparent="ace_event" type="Contact" subtype="*"           role="Time" />
+        <type grandparent="ace_event" type="Contact" subtype="Meet"        role="Entity,Place" />
+        <type grandparent="ace_event" type="Contact" subtype="Phone-Write" role="Entity" />
+
+        <type grandparent="ace_event" type="Personnel" subtype="*"              role="Person,Position,Place,Time" />
+        <type grandparent="ace_event" type="Personnel" subtype="Start-Position" role="Entity" />
+        <type grandparent="ace_event" type="Personnel" subtype="End-Position"   role="Entity" />
+        <type grandparent="ace_event" type="Personnel" subtype="Nominate"       role="Agent" />
+        <type grandparent="ace_event" type="Personnel" subtype="Elect"          role="Entity" />
+
+        <type grandparent="ace_event" type="Justice" subtype="*"              role="Crime,Time" />
+        <type grandparent="ace_event" type="Justice" subtype="Arrest-Jail"    role="Person,Agent,Place" />
+        <type grandparent="ace_event" type="Justice" subtype="Release-Parole" role="Person,Entity,Place" />
+        <type grandparent="ace_event" type="Justice" subtype="Trial-Hearing"  role="Defendant,Prosecutor,Adjudicator,Place" />
+        <type grandparent="ace_event" type="Justice" subtype="Charge-Indict"  role="Defendant,Prosecutor,Adjudicator,Place" />
+        <type grandparent="ace_event" type="Justice" subtype="Sue"            role="Plaintiff,Defendant,Adjudicator,Place" />
+        <type grandparent="ace_event" type="Justice" subtype="Convict"        role="Defendant,Adjudicator,Place" />
+        <type grandparent="ace_event" type="Justice" subtype="Sentence"       role="Defendant,Adjudicator,Sentence,Place" />
+        <type grandparent="ace_event" type="Justice" subtype="Fine"           role="Entity,Adjudicator,Money,Place" />
+        <type grandparent="ace_event" type="Justice" subtype="Execute"        role="Person,Agent,Place" />
+        <type grandparent="ace_event" type="Justice" subtype="Extradite"      role="Person,Agent,Destination,Origin" />
+        <type grandparent="ace_event" type="Justice" subtype="Pardon"         role="Defendant,Adjudicator,Place" />
+        <type grandparent="ace_event" type="Justice" subtype="Acquit"         role="Defendant,Adjudicator,Place" />
+        <type grandparent="ace_event" type="Communication" subtype="*"         role="Sender,Receiver,Participant,Location" />
+        <type grandparent="ace_event" type="Get-Together" subtype="*"         role="Attendee,Location" />
+        <type grandparent="ace_event" type="Travel" subtype="*"               role="Traveler,Origin,Destination" />
+
+        <!-- relation arguments -->
+        <type grandparent="ace_relation" type="*" subtype="*" role="Duration" />
+
+        <!-- generic event & relation attributes -->
+        <type grandparent="ace_event,ace_relation" type="*" subtype="*" 
+              role="Time-Within,Time-Starting,Time-Ending,Time-Before,Time-After,Time-Holds,Time-At-Beginning,Time-At-End" />
+      </constraints>
+    </element>
+  </define>
+
+</grammar>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE Scheme SYSTEM 'maia.dtd'>
+
+<Scheme name='simple-phrase-tagging'>
+  <TypeDefinitions>
+    <SignalType name='text' mimeClass='text'/>
+
+    <AnalysisType name='all-tags'>
+      <AnnotationType ref='phrase-tag' hasIndefiniteCardinality='true'/>
+    </AnalysisType>
+
+    <AnchorType name='text-point'>
+      <SignalType ref='text' role='text'/>
+      <ParameterType ref='char' role='char'/>
+    </AnchorType>
+
+    <RegionType name='text-extent'>
+      <AnchorType ref='text-point' role='start'/>
+      <AnchorType ref='text-point' role='end'/>
+    </RegionType>
+
+    <AnnotationType name='phrase-tag'>
+      <RegionType ref='text-extent' role='text-extent'/>
+	<ContentType ref='two-parameter-content' role='attr-val-content'/>
+    </AnnotationType>
+
+    <ContentType name='two-parameter-content'>
+	<ParameterType ref='string' role='type'/>
+    </ContentType>
+
+    <ParameterType name='char'/>    
+    <ParameterType name='string'/>
+
+    <CorpusType name='simple'>
+      <SignalType ref='text' hasIndefiniteCardinality='true'/>
+      <AnchorType ref='text-point' hasIndefiniteCardinality='true'/>
+      <RegionType ref='text-extent' hasIndefiniteCardinality='true'/>
+      <AnalysisType ref='all-tags' role='all-tags'/>
+    </CorpusType>
+  </TypeDefinitions>
+</Scheme>

@@ -1,0 +1,649 @@
+<?xml version="1.0"?>
+<!DOCTYPE source_file SYSTEM "ace-rdc.dtd">
+<source_file TYPE="text" VERSION="2.0" SOURCE="broadcast news" URI="VOA19980414.1700.3225.sgm">
+  <document DOCID="VOA19980414.1700.3225.sgm">
+
+    <entity ID="VOA19980414.1700.3225.sgm-12">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-12-1" ROLE="GPE">
+          <extent>
+            <charseq>
+            <!-- string = "Brazilian" -->
+               <start>504</start><end>512</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Brazilian" -->
+               <start>504</start><end>512</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Brazilian" -->
+               <start>504</start><end>512</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1700.3225.sgm-13">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-13-2" ROLE="LOC">
+          <extent>
+            <charseq>
+            <!-- string = "Milan" -->
+               <start>788</start><end>792</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Milan" -->
+               <start>788</start><end>792</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Milan" -->
+               <start>788</start><end>792</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1700.3225.sgm-1">
+      <entity_type GENERIC="FALSE">ORGANIZATION</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-1-3">
+          <extent>
+            <charseq>
+            <!-- string = "inter Milan" -->
+               <start>44</start><end>54</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "inter Milan" -->
+               <start>44</start><end>54</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-1-4">
+          <extent>
+            <charseq>
+            <!-- string = "inter Milan" -->
+               <start>558</start><end>568</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "inter Milan" -->
+               <start>558</start><end>568</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-1-5">
+          <extent>
+            <charseq>
+            <!-- string = "Inter" -->
+               <start>701</start><end>705</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Inter" -->
+               <start>701</start><end>705</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1700.3225.sgm-1-6">
+          <extent>
+            <charseq>
+            <!-- string = "the team" -->
+               <start>620</start><end>627</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "team" -->
+               <start>624</start><end>627</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "inter Milan" -->
+               <start>44</start><end>54</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "inter Milan" -->
+               <start>558</start><end>568</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Inter" -->
+               <start>701</start><end>705</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1700.3225.sgm-2">
+      <entity_type GENERIC="FALSE">ORGANIZATION</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-2-7">
+          <extent>
+            <charseq>
+            <!-- string = "Lazio of  Rome" -->
+               <start>105</start><end>118</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Lazio" -->
+               <start>105</start><end>109</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-2-8">
+          <extent>
+            <charseq>
+            <!-- string = "Lazio" -->
+               <start>236</start><end>240</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Lazio" -->
+               <start>236</start><end>240</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-2-9">
+          <extent>
+            <charseq>
+            <!-- string = "the Romans" -->
+               <start>407</start><end>416</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Romans" -->
+               <start>411</start><end>416</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="PRONOUN" ID="VOA19980414.1700.3225.sgm-2-10">
+          <extent>
+            <charseq>
+            <!-- string = "their" -->
+               <start>279</start><end>283</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "their" -->
+               <start>279</start><end>283</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="PRONOUN" ID="VOA19980414.1700.3225.sgm-2-11">
+          <extent>
+            <charseq>
+            <!-- string = "its" -->
+               <start>457</start><end>459</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "its" -->
+               <start>457</start><end>459</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Lazio" -->
+               <start>105</start><end>109</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Lazio" -->
+               <start>236</start><end>240</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Romans" -->
+               <start>411</start><end>416</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1700.3225.sgm-3">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-3-12" ROLE="GPE">
+          <extent>
+            <charseq>
+            <!-- string = "Rome" -->
+               <start>115</start><end>118</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Rome" -->
+               <start>115</start><end>118</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-3-13" ROLE="LOC">
+          <extent>
+            <charseq>
+            <!-- string = "Rome" -->
+               <start>369</start><end>372</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Rome" -->
+               <start>369</start><end>372</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Rome" -->
+               <start>115</start><end>118</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Rome" -->
+               <start>369</start><end>372</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1700.3225.sgm-4">
+      <entity_type GENERIC="FALSE">ORGANIZATION</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-4-14">
+          <extent>
+            <charseq>
+            <!-- string = "Spartak Moscow of Russia" -->
+               <start>65</start><end>88</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Spartak Moscow" -->
+               <start>65</start><end>78</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-4-15">
+          <extent>
+            <charseq>
+            <!-- string = "Spartak Moscow" -->
+               <start>596</start><end>609</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Spartak Moscow" -->
+               <start>596</start><end>609</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Spartak Moscow" -->
+               <start>65</start><end>78</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Spartak Moscow" -->
+               <start>596</start><end>609</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1700.3225.sgm-5">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-5-16" ROLE="GPE">
+          <extent>
+            <charseq>
+            <!-- string = "Russia" -->
+               <start>83</start><end>88</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Russia" -->
+               <start>83</start><end>88</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Russia" -->
+               <start>83</start><end>88</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1700.3225.sgm-6">
+      <entity_type GENERIC="FALSE">PERSON</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-6-17">
+          <extent>
+            <charseq>
+            <!-- string = "Brazilian football star  Renaldo" -->
+               <start>504</start><end>535</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Renaldo" -->
+               <start>529</start><end>535</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Renaldo" -->
+               <start>529</start><end>535</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1700.3225.sgm-7">
+      <entity_type GENERIC="FALSE">ORGANIZATION</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-7-18">
+          <extent>
+            <charseq>
+            <!-- string = "Athletico Madrid of Spain" -->
+               <start>131</start><end>155</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Athletico Madrid" -->
+               <start>131</start><end>146</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Athletico Madrid" -->
+               <start>131</start><end>146</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1700.3225.sgm-8">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-8-19" ROLE="GPE">
+          <extent>
+            <charseq>
+            <!-- string = "Spain" -->
+               <start>151</start><end>155</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Spain" -->
+               <start>151</start><end>155</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Spain" -->
+               <start>151</start><end>155</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1700.3225.sgm-9">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-9-20" ROLE="GPE">
+          <extent>
+            <charseq>
+            <!-- string = "Italian" -->
+               <start>200</start><end>206</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Italian" -->
+               <start>200</start><end>206</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Italian" -->
+               <start>200</start><end>206</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1700.3225.sgm-10">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-10-21" ROLE="GPE">
+          <extent>
+            <charseq>
+            <!-- string = "European" -->
+               <start>296</start><end>303</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "European" -->
+               <start>296</start><end>303</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "European" -->
+               <start>296</start><end>303</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1700.3225.sgm-11">
+      <entity_type GENERIC="FALSE">FACILITY</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1700.3225.sgm-11-22">
+          <extent>
+            <charseq>
+            <!-- string = "Rome's Olympic stadium" -->
+               <start>369</start><end>390</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Olympic stadium" -->
+               <start>376</start><end>390</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Olympic stadium" -->
+               <start>376</start><end>390</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+    <relation ID="VOA19980414.1700.3225.sgm-RDCID-1" TYPE="AT" SUBTYPE="BASED-IN" CLASS="EXPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-4" ARGNUM="1">
+        <!-- String = "Spartak Moscow of Russia" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-5" ARGNUM="2">
+        <!-- String = "Russia" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1700.3225.sgm-RDCID-1-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-4-14" ARGNUM="1">
+            <!-- string = "Spartak Moscow of Russia" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-5-16" ARGNUM="2">
+            <!-- string = "Russia" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1700.3225.sgm-RDCID-2" TYPE="AT" SUBTYPE="BASED-IN" CLASS="EXPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-2" ARGNUM="1">
+        <!-- String = "Lazio of  Rome" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-3" ARGNUM="2">
+        <!-- String = "Rome" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1700.3225.sgm-RDCID-2-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-2-7" ARGNUM="1">
+            <!-- string = "Lazio of  Rome" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-3-12" ARGNUM="2">
+            <!-- string = "Rome" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1700.3225.sgm-RDCID-3" TYPE="AT" SUBTYPE="BASED-IN" CLASS="EXPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-7" ARGNUM="1">
+        <!-- String = "Athletico Madrid of Spain" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-8" ARGNUM="2">
+        <!-- String = "Spain" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1700.3225.sgm-RDCID-3-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-7-18" ARGNUM="1">
+            <!-- string = "Athletico Madrid of Spain" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-8-19" ARGNUM="2">
+            <!-- string = "Spain" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1700.3225.sgm-RDCID-4" TYPE="AT" SUBTYPE="LOCATED" CLASS="EXPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-11" ARGNUM="1">
+        <!-- String = "Rome's Olympic stadium" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-3" ARGNUM="2">
+        <!-- String = "Rome" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1700.3225.sgm-RDCID-4-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-11-22" ARGNUM="1">
+            <!-- string = "Rome's Olympic stadium" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-3-13" ARGNUM="2">
+            <!-- string = "Rome" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1700.3225.sgm-RDCID-5" TYPE="ROLE" SUBTYPE="CITIZEN-OF" CLASS="EXPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-6" ARGNUM="1">
+        <!-- String = "Brazilian football star  Renaldo" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-12" ARGNUM="2">
+        <!-- String = "Brazilian" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1700.3225.sgm-RDCID-5-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-6-17" ARGNUM="1">
+            <!-- string = "Brazilian football star  Renaldo" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-12-1" ARGNUM="2">
+            <!-- string = "Brazilian" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1700.3225.sgm-RDCID-6" TYPE="ROLE" SUBTYPE="MEMBER" CLASS="IMPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-6" ARGNUM="1">
+        <!-- String = "Brazilian football star  Renaldo" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-1" ARGNUM="2">
+        <!-- String = "inter Milan" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1700.3225.sgm-RDCID-6-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-6-17" ARGNUM="1">
+            <!-- string = "Brazilian football star  Renaldo" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-1-4" ARGNUM="2">
+            <!-- string = "inter Milan" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1700.3225.sgm-RDCID-7" TYPE="AT" SUBTYPE="LOCATED" CLASS="EXPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-1" ARGNUM="1">
+        <!-- String = "Inter" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-13" ARGNUM="2">
+        <!-- String = "Milan" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1700.3225.sgm-RDCID-7-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-1-5" ARGNUM="1">
+            <!-- string = "Inter" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-13-2" ARGNUM="2">
+            <!-- string = "Milan" -->
+            </rel_mention_arg>
+          <rel_mention_time TYPE="VALUE" VAL="1998-W14" MOD="" DIR="">
+            <!-- string = "two weeks ago" -->
+            </rel_mention_time>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1700.3225.sgm-RDCID-8" TYPE="AT" SUBTYPE="LOCATED" CLASS="IMPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-2" ARGNUM="1">
+        <!-- String = "Lazio" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-11" ARGNUM="2">
+        <!-- String = "Rome's Olympic stadium" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1700.3225.sgm-RDCID-8-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-2-8" ARGNUM="1">
+            <!-- string = "Lazio" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-11-22" ARGNUM="2">
+            <!-- string = "Rome's Olympic stadium" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1700.3225.sgm-RDCID-9" TYPE="AT" SUBTYPE="LOCATED" CLASS="IMPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-7" ARGNUM="1">
+        <!-- String = "Athletico Madrid of Spain" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-11" ARGNUM="2">
+        <!-- String = "Rome's Olympic stadium" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1700.3225.sgm-RDCID-9-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-7-18" ARGNUM="1">
+            <!-- string = "Athletico Madrid of Spain" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-11-22" ARGNUM="2">
+            <!-- string = "Rome's Olympic stadium" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+    <relation ID="VOA19980414.1700.3225.sgm-RDCID-10" TYPE="AT" SUBTYPE="LOCATED" CLASS="IMPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-4" ARGNUM="1">
+        <!-- String = "Spartak Moscow" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1700.3225.sgm-13" ARGNUM="2">
+        <!-- String = "Milan" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1700.3225.sgm-RDCID-10-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-4-15" ARGNUM="1">
+            <!-- string = "Spartak Moscow" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1700.3225.sgm-13-2" ARGNUM="2">
+            <!-- string = "Milan" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+  </document>
+</source_file>

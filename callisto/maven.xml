@@ -1,0 +1,168 @@
+<project
+  xmlns:j="jelly:core"
+  xmlns:util="jelly:util"
+  xmlns:x="jelly:xml"
+  xmlns:ant="jelly:ant"
+  xmlns:define="jelly:define"
+  xmlns:doc="doc"
+  xmlns:dl="downloadPage">
+
+  <!-- we generate our own download page -->
+
+  <define:taglib uri="downloadPage">
+
+    <!-- 
+      Transforms *.dml files into *.xml xdoc files.
+        parameters:
+           srcdir:  directory where to find *.dml files under
+           destdir: directory where to produce output xdoc xml files
+      Probably ought to be a plugin, but creating one is too much
+      work. and i already had a velocity template ready to retool
+      -->
+    <define:tag name="performTransformation">
+      <!-- I'll have to learn more about jelly to get this to work :( -->
+      <!-- for now moved it to a simple goal -->
+    </define:tag>
+
+  </define:taglib>
+
+  <goal name="downloadPage" description="Generates dowload xdoc files from dnl XML documents">
+      <j:set var="srcdir" value="${maven.downloadPage.src}" />
+      <j:set var="destdir" value="${maven.downloadPage.dest}" />
+
+      <ant:echo message="srcdir=${srcdir}"/>
+      <ant:echo message="destdir=${destdir}"/>
+
+      <!-- NOTE: most of this is copy-pasted from faq plugin -->
+      <util:available file="${srcdir}">
+        <util:file var="srcdirFile" name="${srcdir}"/>
+        <j:set var="srcdir" value="${srcdirFile.getCanonicalPath()}"/>
+        <util:file var="destdirFile" name="${destdir}"/>
+        <j:set var="destdir" value="${destdirFile.getCanonicalPath()}"/>
+
+        <!-- construct a mapper, which is to help map input files to output path -->
+        <util:replace var="fromPattern" oldChar="\" newChar="/" value="${srcdir}/*.dml"/>
+        <util:replace var="toPattern" oldChar="\" newChar="/" value="${destdir}/*.xml"/>
+        <j:if test="${mapper == null}">
+          <j:new var="mapper" className="org.apache.maven.util.CaseInsensitiveGlobPatternMapper"/>
+        </j:if>
+        <j:setProperties object="${mapper}" from="${fromPattern}" to="${toPattern}"/>
+
+        <!-- construct a mapper, which is to help map input dirs to output dirs (so we can create output paths) -->
+        <util:replace var="fromDirPattern" oldChar="\" newChar="/" value="${srcdir}*"/>
+        <util:replace var="toDirPattern" oldChar="\" newChar="/" value="${destdir}*"/>
+        <j:new var="dirMapper" className="org.apache.maven.util.CaseInsensitiveGlobPatternMapper"/>
+        <j:setProperties object="${dirMapper}" from="${fromDirPattern}" to="${toDirPattern}"/>
+
+        <!-- scan for all .fml faq source files -->
+        <ant:fileScanner var="dlFilenames">
+          <ant:fileset dir="${srcdir}">
+            <ant:patternset>
+              <ant:include name="**/*.dml"/>
+            </ant:patternset>
+          </ant:fileset>
+        </ant:fileScanner>
+
+        <j:set var="outputencoding" value="${maven.docs.outputencoding}"/>
+
+        <!-- loop each found .fml file and produce output .xml xdocs file -->
+        <j:forEach var="dlFile" items="${dlFilenames.iterator()}">
+          <!-- first, create the relative output-dir into the destdir -->
+          <!-- eg. if source is 'xdocs/dls/foodl.fml' we need to create 'target/generated-xdocs/dl' -->
+          <util:replace var="inDirForward" oldChar="\" newChar="/" value="${dlFile.parent}"/>
+          <j:set var="outDir" value="${dirMapper.mapFileName(inDirForward).0}"/>
+          <mkdir dir="${outDir}"/>
+
+          <!-- generate output file name -->
+          <util:replace var="outFileForward" oldChar="\" newChar="/" value="${dlFile.toString()}"/>
+          <j:set var="outFile" value="${mapper.mapFileName(outFileForward).0}"/>
+
+          <echo>Generating ${outFile} from ${dlFile}</echo>
+
+          <!-- xml-parse .dml dl file -->
+          <x:parse var="doc" xml="${dlFile}"/>
+          <x:set var="root" select="$doc/*"/>
+          
+          <!-- produce a output xdoc xml file from parsed .fml source -->
+          <j:file name="${outFile}" encoding="${outputencoding}" outputMode="xml" escapeText="true">
+  <document>
+
+    <properties>
+      <x:element name="title"><x:expr select="$root/@title"/></x:element>
+    </properties>
+    <body>
+      <x:element name="section">
+        <x:attribute name="name"><x:expr select="$root/@title"/></x:attribute>
+      <p>
+        Below is a list of all files released by this project. Before
+        downloading, you may want to read Release Notes and ChangeLog.
+      </p>
+      
+      <table>
+        <tr><th rowspan="2">Package</th>
+            <th rowspan="2">Release &#38; Notes</th>
+            <th rowspan="2">File Name</th>
+            <th colspan="2" align="center">Date</th></tr>
+        <tr><th>Size</th>
+            <th>Arch</th></tr>
+        <j:set var="rowMode" value="a"/>
+        <x:forEach select="$root/package">
+          <tr class="${rowMode}"><td colspan="5"><strong><x:expr select="@name"/></strong></td></tr>
+          <x:forEach select="release">
+            <tr class="${rowMode}"><td colspan="3">&#160;&#160;&#160;<strong><x:expr select="@name"/>&#160;<span class="date">[<x:element name="a"><x:attribute name="href"><x:expr select="@notes"/></x:attribute>Release Notes</x:element>]</span>
+                </strong></td>
+              <td colspan="2" align="center"><strong><x:expr select="@date"/></strong></td>
+            </tr>
+            <x:forEach select="file">
+              <tr class="${rowMode}">
+                <td colspan="3">&#160;&#160;&#160;&#160;&#160;&#160;<x:element name="a">
+                    <x:attribute name="href"><x:expr select="@href"/></x:attribute>
+                    <x:expr select="@name"/>
+                  </x:element></td>
+                <td align="right"><x:expr select="@size"/></td>
+                <td><x:expr select="@arch"/></td>
+              </tr>
+            </x:forEach>
+          </x:forEach>
+          <j:choose trim="true">
+            <j:when test="${rowMode == 'a'}">
+              <j:set var="rowMode" value="b"/>
+            </j:when>
+            <j:otherwise>
+              <j:set var="rowMode" value="a"/>
+            </j:otherwise>
+          </j:choose>
+        </x:forEach>
+      </table>
+      </x:element>
+    </body>
+  </document>
+
+          </j:file>
+        </j:forEach>
+      </util:available>        
+  </goal>
+
+  <preGoal name="xdoc:jelly-transform">
+    <attainGoal name="faq"/>
+    <attainGoal name="downloadPage"/>
+  </preGoal>
+
+  <!-- Copies navigation files to gen.docs so subdirs can have special nav files -->
+  <!-- In a later version of maven, this is achieved by property maven.xdoc.xml.copy -->
+  <!--    Which is already in the project.properties. Delete this after upgrade -->
+  <preGoal name="xdoc:copy-user-resources">
+    <j:if test="${maven.docs.src.available}">
+
+      <!-- Copy navigation files to generated docs: thus generated files -->
+      <!-- (in subdirs) can use different nav files. -->
+      <copy todir="${maven.gen.docs}" overwrite="yes" filtering="no">
+        <fileset dir="${maven.docs.src}">
+          <include name="**/navigation.xml"/>
+        </fileset>
+      </copy>
+
+    </j:if>
+  </preGoal>
+
+</project>

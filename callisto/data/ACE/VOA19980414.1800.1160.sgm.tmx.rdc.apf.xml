@@ -1,0 +1,244 @@
+<?xml version="1.0"?>
+<!DOCTYPE source_file SYSTEM "ace-rdc.dtd">
+<source_file TYPE="text" VERSION="2.0" SOURCE="broadcast news" URI="VOA19980414.1800.1160.sgm">
+  <document DOCID="VOA19980414.1800.1160.sgm">
+
+    <entity ID="VOA19980414.1800.1160.sgm-5">
+      <entity_type GENERIC="FALSE">PERSON</entity_type>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.1160.sgm-5-1">
+          <extent>
+            <charseq>
+            <!-- string = "Analysts" -->
+               <start>253</start><end>260</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Analysts" -->
+               <start>253</start><end>260</end></charseq>
+          </head>
+        </entity_mention>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.1160.sgm-4">
+      <entity_type GENERIC="FALSE">GPE</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.1160.sgm-4-2" ROLE="LOC">
+          <extent>
+            <charseq>
+            <!-- string = "US" -->
+               <start>73</start><end>74</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "US" -->
+               <start>73</start><end>74</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "US" -->
+               <start>73</start><end>74</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.1160.sgm-3">
+      <entity_type GENERIC="FALSE">LOCATION</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.1160.sgm-3-3">
+          <extent>
+            <charseq>
+            <!-- string = "Asia Pacific" -->
+               <start>376</start><end>387</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Asia Pacific" -->
+               <start>376</start><end>387</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.1160.sgm-3-4">
+          <extent>
+            <charseq>
+            <!-- string = "the Asia Pacific Region" -->
+               <start>372</start><end>394</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Region" -->
+               <start>389</start><end>394</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Asia Pacific" -->
+               <start>376</start><end>387</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.1160.sgm-2">
+      <entity_type GENERIC="FALSE">ORGANIZATION</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.1160.sgm-2-5">
+          <extent>
+            <charseq>
+            <!-- string = "Boeing Company" -->
+               <start>131</start><end>144</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Boeing Company" -->
+               <start>131</start><end>144</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.1160.sgm-2-6">
+          <extent>
+            <charseq>
+            <!-- string = "Boeing" -->
+               <start>223</start><end>228</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "Boeing" -->
+               <start>223</start><end>228</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "Boeing Company" -->
+               <start>131</start><end>144</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "Boeing" -->
+               <start>223</start><end>228</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+
+    <entity ID="VOA19980414.1800.1160.sgm-1">
+      <entity_type GENERIC="FALSE">ORGANIZATION</entity_type>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.1160.sgm-1-7">
+          <extent>
+            <charseq>
+            <!-- string = "United Airlines, the largest US air carrier" -->
+               <start>44</start><end>86</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "United Airlines" -->
+               <start>44</start><end>58</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NAME" ID="VOA19980414.1800.1160.sgm-1-8">
+          <extent>
+            <charseq>
+            <!-- string = "United" -->
+               <start>398</start><end>403</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "United" -->
+               <start>398</start><end>403</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.1160.sgm-1-9">
+          <extent>
+            <charseq>
+            <!-- string = "the largest US air carrier" -->
+               <start>61</start><end>86</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "carrier" -->
+               <start>80</start><end>86</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="NOMINAL" ID="VOA19980414.1800.1160.sgm-1-10">
+          <extent>
+            <charseq>
+            <!-- string = "the airline" -->
+               <start>282</start><end>292</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "airline" -->
+               <start>286</start><end>292</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="PRONOUN" ID="VOA19980414.1800.1160.sgm-1-11">
+          <extent>
+            <charseq>
+            <!-- string = "its" -->
+               <start>311</start><end>313</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "its" -->
+               <start>311</start><end>313</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="PRONOUN" ID="VOA19980414.1800.1160.sgm-1-12">
+          <extent>
+            <charseq>
+            <!-- string = "its" -->
+               <start>431</start><end>433</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "its" -->
+               <start>431</start><end>433</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_mention TYPE="PRONOUN" ID="VOA19980414.1800.1160.sgm-1-13">
+          <extent>
+            <charseq>
+            <!-- string = "its" -->
+               <start>489</start><end>491</end></charseq>
+          </extent>
+          <head>
+            <charseq>
+            <!-- string = "its" -->
+               <start>489</start><end>491</end></charseq>
+          </head>
+        </entity_mention>
+        <entity_attributes>
+          <name>
+            <charseq>
+            <!-- string = "United Airlines" -->
+               <start>44</start><end>58</end></charseq>
+          </name>
+          <name>
+            <charseq>
+            <!-- string = "United" -->
+               <start>398</start><end>403</end></charseq>
+          </name>
+        </entity_attributes>
+      </entity>
+
+    <relation ID="VOA19980414.1800.1160.sgm-RDCID-1" TYPE="AT" SUBTYPE="BASED-IN" CLASS="EXPLICIT">
+      <rel_entity_arg ENTITYID="VOA19980414.1800.1160.sgm-1" ARGNUM="1">
+        <!-- String = "the largest US air carrier" -->
+        </rel_entity_arg>
+      <rel_entity_arg ENTITYID="VOA19980414.1800.1160.sgm-4" ARGNUM="2">
+        <!-- String = "US" -->
+        </rel_entity_arg>
+      <relation_mentions>
+        <relation_mention ID="VOA19980414.1800.1160.sgm-RDCID-1-1">
+          <rel_mention_arg MENTIONID="VOA19980414.1800.1160.sgm-1-9" ARGNUM="1">
+            <!-- string = "the largest US air carrier" -->
+            </rel_mention_arg>
+          <rel_mention_arg MENTIONID="VOA19980414.1800.1160.sgm-4-2" ARGNUM="2">
+            <!-- string = "US" -->
+            </rel_mention_arg>
+          </relation_mention>
+      </relation_mentions>
+    </relation>
+
+  </document>
+</source_file>

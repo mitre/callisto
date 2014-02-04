@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE Scheme SYSTEM 'maia.dtd'>
+
+<!-- The Scheme name here is the same as the task name. which needn't
+     correspond exactly to the class name, it need only be unambiguous
+     amongst Callisto Tasks.
+  -->
+<Scheme name="org.mitre.muc.other">
+  <TypeDefinitions>
+    <SignalType name="text" mimeClass="text"/>
+
+    <ParameterType name="char"/>    
+    <ParameterType name="string"/>
+
+    <AnchorType name="text-point">
+      <SignalType ref="text" role="text"/>
+      <ParameterType ref="char" role="char"/>
+    </AnchorType>
+
+    <RegionType name="text-extent">
+      <AnchorType ref="text-point" role="start"/>
+      <AnchorType ref="text-point" role="end"/>
+    </RegionType>
+
+
+    <!-- Contents -->
+    <ContentType name="type-content">
+      <ParameterType ref="string" role="type"/>
+    </ContentType>
+
+    <ContentType name="null-content"></ContentType>
+
+    <!-- Annotations -->
+    <AnnotationType name="ENAMEX">
+      <RegionType ref="text-extent" role="text-extent"/>
+      <ContentType ref="type-content" role="content"/>
+    </AnnotationType>
+
+    <AnnotationType name="TIMEX">
+      <RegionType ref="text-extent" role="text-extent"/>
+      <ContentType ref="type-content" role="content"/>
+    </AnnotationType>
+
+    <AnnotationType name="NUMEX">
+      <RegionType ref="text-extent" role="text-extent"/>
+      <ContentType ref="type-content" role="content"/>
+    </AnnotationType>
+
+    <AnnotationType name="OTHER">
+      <RegionType ref="text-extent" role="text-extent"/>
+      <ContentType ref="null-content" role="content"/>
+    </AnnotationType>
+
+
+    <AnalysisType name="enamex-set">
+      <AnnotationType ref="ENAMEX" hasIndefiniteCardinality="true"/>
+    </AnalysisType>
+
+    <AnalysisType name="timex-set">
+      <AnnotationType ref="TIMEX" hasIndefiniteCardinality="true"/>
+    </AnalysisType>
+
+    <AnalysisType name="numex-set">
+      <AnnotationType ref="NUMEX" hasIndefiniteCardinality="true"/>
+    </AnalysisType>
+
+    <AnalysisType name="other-set">
+      <AnnotationType ref="OTHER" hasIndefiniteCardinality="true"/>
+    </AnalysisType>
+
+    <CorpusType name="muc">
+      <SignalType ref="text" hasIndefiniteCardinality="true"/>
+      <AnchorType ref="text-point" hasIndefiniteCardinality="true"/>
+      <RegionType ref="text-extent" hasIndefiniteCardinality="true"/>
+
+      <AnalysisType ref="enamex-set" role="enamex-set" />
+      <AnalysisType ref="timex-set" role="timex-set" />      
+      <AnalysisType ref="numex-set" role="numex-set" />
+      <AnalysisType ref="other-set" role="other-set" />
+    </CorpusType>
+
+  </TypeDefinitions>
+</Scheme>

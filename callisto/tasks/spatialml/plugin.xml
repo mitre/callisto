@@ -1,0 +1,6 @@
+<plugin>
+  <task name="org.mitre.spatialml"
+        classname="org.mitre.spatialml.callisto.SpatialMLTask"
+        classpath="SpatialMLTask.jar">
+  </task>
+</plugin>

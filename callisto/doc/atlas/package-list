@@ -1,0 +1,12 @@
+gov.nist.atlas
+gov.nist.atlas.event
+gov.nist.atlas.impl
+gov.nist.atlas.impl.bundled
+gov.nist.atlas.impl.inmem
+gov.nist.atlas.io
+gov.nist.atlas.io.xml
+gov.nist.atlas.ref
+gov.nist.atlas.ref.xml
+gov.nist.atlas.spi
+gov.nist.atlas.type
+gov.nist.atlas.util

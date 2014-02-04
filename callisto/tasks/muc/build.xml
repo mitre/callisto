@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="MUC Tasks" default="build">
+
+  <!-- This ant file makes use of build.common.xml, which defines
+       generic targets for Callisto tasks. This file merely defines
+       properties and filesets used by those targets.
+
+       For more information, see comments in
+       ${CALLISTO_HOME}/tasks/build.common.xml
+    -->
+
+  <property file="build.properties"/>
+  <property file="${user.home}/build.properties" />
+
+  <!-- REQUIRED -->
+
+  <!-- Properties and filesets reqired by build.common.xml -->
+  <!-- If copying this file, see the comments there for further help. -->
+
+  <property name="name"       value="muc" />
+  <property name="Name"       value="MUC" />
+
+  <!-- Indicate this plugin has directory strucure, or a simple jar file -->
+  <!-- Class of plugin, ignored if plugin is structured -->
+  <!-- HACKED!!  This build file overrides "compile-simple-props" target -->
+  <property name="plugin.structured" value="false" />
+  <property name="plugin.class" value="org.mitre.muc.callisto.MUCTask" />
+
+  <!-- Non .class files included in the task .jar file. -->
+  <fileset id="resource.files" dir=".">
+    <include name="resource/*.maia.xml" />
+    <include name="resource/common.ent" />
+    <include name="resource/maia.dtd" />
+    <include name="resource/*.gif" />
+  </fileset>
+
+  <!-- Files placed in task plugin dir. NO dir structure is maintained. -->
+  <fileset id="plugin.files" dir=".">
+    <include name="plugin.xml" />
+    <include name="resource/${name}.rng" /> <!-- may not be present -->
+  </fileset>
+
+  <!-- /All/ files distributed in source tarball: keeps dir structure. -->
+  <fileset id="source.files" dir=".">
+    <include name="README.txt" />
+    <include name="build.xml" />
+    <include name="build.properties" />
+
+    <include name="plugin.xml" />
+    <include name="resource/${name}.rng" />
+
+    <include name="resource/*.maia.xml" />
+    <include name="resource/common.ent" />
+    <include name="resource/maia.dtd" />
+    <include name="resource/*.gif" />
+
+    <include name="org/**/*.java" />
+    <include name="org/**/*.html" />
+  </fileset>
+
+
+  <!-- OPTIONAL -->
+  <!-- strongly consider not duplicating these legacy hacks -->
+
+  <!-- legacy override default ('src') -->
+  <property name="src.dir" value="." />
+  <!-- legacy override default (${name}-task) -->
+  <property name="task.name" value="MUCTask" />
+
+
+  <!-- Overrides the default "compile-simple-props" to specify multiple classes, instead of 1 -->
+  <target name="compile-simple-props" depends="init"
+          if="need.task.properties" >
+    <mkdir dir="${classes.dir}" />
+    <echo file="${classes.dir}/task.properties">#Callisto Task
+task.class.0=org.mitre.muc.callisto.MUCTask
+task.class.1=org.mitre.muc.callisto.MUCOtherTask
+    </echo>
+  </target>
+
+  <!-- IMPORT COMMON TARGETS -->
+
+  <!-- ${callisto.home} is defined in build.properties -->
+  <import file="${callisto.home}/tasks/build.common.xml" />
+
+</project>

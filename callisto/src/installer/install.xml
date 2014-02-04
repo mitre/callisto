@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Installation file for IzPack:  http://izforge.com/izpack
+    
+    To create the installer:
+
+        $> ant installer
+
+      An ant task has been developed and is used in the Callisto
+      build.xml file. the installer is created in the dist directory.
+                                                -red
+
+   First pass issues: 
+    * In order to create a shortcut to run the jar files
+      ("${JAVA_HOME}/bin/java -jar Callisto.jar") you must set the
+      shortcut's working directory to be "${INSTALL_PATH}", and the
+      jar file must be specified relatively, else the spaces (probably
+      from the jar files listed in the Manifest's 'Class-Path'
+      attribute) will cause a jar exception.
+    * GIF won't work as icon on win32
+
+-->
+
+<installation version="1.0">
+  <info>
+    <appname>Callisto</appname>
+    <appversion>@{app.version}</appversion>
+    <url>http://callisto.mitre.org/</url>
+    <javaversion>1.4</javaversion>
+    <!-- <webdir>http://employeeshare.mitre.org/r/red/transfer/callisto</webdir> -->
+    <!-- <webdir>http://callisto.mitre.org/download</webdir> -->
+  </info>
+  
+  <guiprefs width="640" height="480" resizable="no"/>
+  
+  <locale>
+    <langpack iso3="eng"/>
+  </locale>
+  
+  <variables>
+    <!-- <variable name="" value=""/> -->
+  </variables>
+
+  <!-- Resources needed by the various panels -->
+  <resources>
+    <res id="InfoPanel.info" src="README.txt"/>
+    <res id="LicencePanel.licence" src="LICENSE.txt"/>
+    <res id="ImgPacksPanel.img.0" src="src/org/mitre/jawb/resources/splash.gif"/>
+    <res id="shortcutSpec.xml" src="src/installer/shortcuts.xml"/>
+    <res id="useNativeLAF" src="src/installer/useNativeLAF"/>
+  </resources>
+  
+  <!-- Panels in a classic order -->
+  <panels>
+    <panel classname="HelloPanel"/>
+    <panel classname="InfoPanel"/>
+    <panel classname="LicencePanel"/>
+    <panel classname="PacksPanel"/>
+    <panel classname="TargetPanel"/> 
+    <panel classname="InstallPanel"/>
+    <panel classname="ShortcutPanel"/>  <!-- os="..."?-->
+    <panel classname="SimpleFinishPanel"/>
+  </panels>
+
+  <!-- Native libraries distributed w/ IzPack -->
+  <native type="izpack" name="ShellLink.dll"/> 
+
+  <!-- Packs section defining what is installed and where -->
+  <packs>
+    <pack name="Base" required="yes">
+      <description>The Callisto core application</description>
+      <fileset dir="." targetdir="${INSTALL_PATH}">
+        <include name="README.txt"/>
+        <include name="INSTALL.txt"/>
+        <include name="LICENSE.txt"/>
+        <!-- <include name="bin/"/> -->
+      </fileset>
+      <fileset dir="doc" targetdir="${INSTALL_PATH}/docs">
+        <include name="LICENSE*"/>
+      </fileset>
+      <fileset dir="build" targetdir="${INSTALL_PATH}">
+        <include name="Callisto.jar"/>
+        <include name="lib/*.jar"/>
+        <include name="bin/"/>
+        <!-- default task -->
+        <include name="tasks/MUCTask.jar"/>
+      </fileset>
+      <fileset dir="src/org/mitre/jawb/resources" 
+               targetdir="${INSTALL_PATH}/bin/icons">
+        <include name="awb_icon_32.gif" />
+        <include name="alembic.ico" />
+      </fileset>
+      <!-- Files parsed for substitution 
+      <parsable targetfile="${INSTALL_PATH}/script.bat"/>
+      <parsable targetfile="${INSTALL_PATH}/script.sh"/>
+            -->
+    </pack>
+    <pack name="Additional Annotation Tasks" required="no">
+      <description>Annotation tasks for ACE(RDC,EDC), EELD, and TimeML(Tango)</description>
+      <fileset dir="build" targetdir="${INSTALL_PATH}">
+        <include name="tasks/"/>
+        <exclude name="tasks/MUCTask.jar"/>
+      </fileset>
+      <updatecheck> <!-- remove old files! -->
+        <include name="tasks/TIMEX2Task.jar" />
+        <include name="tasks/RDCTask.jar" />
+      </updatecheck>
+    </pack>
+    <pack name="Documentation" required="no">
+      <description>Callisto User Manual</description>
+      <fileset dir="build" targetdir="${INSTALL_PATH}">
+        <include name="docs/"/>
+        <!-- We wrote some, and Maven generates some things not for distribution -->
+        <exclude name="docs/developer/"/>
+        <exclude name="docs/cgi-template.html"/>
+        <exclude name="docs/download*"/>
+        <exclude name="docs/navigation-pdf.html"/>
+        <exclude name="docs/*-lists.html"/>
+        <exclude name="docs/cvs-usage.html"/>
+        <exclude name="docs/dependencies.html"/>
+        <exclude name="docs/maven-reports.html"/>
+        <exclude name="docs/project-info.html"/>
+        <exclude name="docs/issue-tracking.html"/>
+      </fileset>
+    </pack>
+    <pack name="Sample Data Files" required="no">
+      <description>Raw data files and sample annotations.</description>
+      <fileset dir="." targetdir="${INSTALL_PATH}">
+        <include name="data/ACE/"/>
+        <include name="data/arabic/"/>
+        <include name="data/chinese/"/>
+        <include name="data/english/"/>
+        <include name="data/hindi/"/>
+        <include name="data/*.dtd"/>
+      </fileset>
+    </pack>
+  </packs>
+    
+</installation>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<installation version="1.0">
+  <info>
+    <appname>@{app.name}</appname>
+    <appversion>@{app.version}</appversion>
+    <appsubpath>Callisto</appsubpath>
+    <url>http://callisto.mitre.org/</url>
+    <javaversion>1.4</javaversion>
+  </info>
+    
+  <guiprefs width="640" height="480" resizable="no" />
+    
+  <locale>
+    <langpack iso3="eng" />
+  </locale>
+
+  <variables>
+    <!-- <variable name="" value="" /> -->
+  </variables>
+
+  <properties>
+    <property file="build.properties" />
+    <!-- <property name="" value="" /> -->
+  </properties>
+
+  <!--
+        The resources section.
+    -->
+  <resources>
+    <res id="InfoPanel.info" src="README.txt" />
+    <res id="LicencePanel.licence" src="LICENSE.txt" />
+  </resources>
+    
+  <!--
+        The panels section.
+    -->
+  <panels>
+    <panel classname="HelloPanel" />
+    <panel classname="InfoPanel" />
+    <panel classname="LicencePanel" />
+    <panel classname="TargetPanel" /> 
+    <panel classname="InstallPanel" />
+    <panel classname="SimpleFinishPanel" />
+  </panels>
+
+  <!--
+        The packs section.
+    -->
+  <packs>
+    <pack name="ACE2004" required="yes">
+      <description>ACE2004 Task</description>
+      <fileset dir="." targetdir="${INSTALL_PATH}/tasks/ace2004">
+        <include name="README.txt" />
+        <include name="LICENSE.txt" />
+      </fileset>
+      <fileset dir="build" targetdir="${INSTALL_PATH}/tasks">
+        <include name="ace2004/" />
+      </fileset>
+      <!-- delete the old style install artifact -->
+      <updatecheck>
+        <!-- include name="tasks/ace2004-task.jar" / -->
+      </updatecheck>
+    </pack>
+  </packs>
+    
+</installation>

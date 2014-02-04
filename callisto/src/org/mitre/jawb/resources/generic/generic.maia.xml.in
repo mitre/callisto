@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE Scheme SYSTEM 'maia.dtd'>
+
+<!-- The Scheme name here is the same as the task name. which needn't
+     correspond exactly to the class name, it need only be unambiguous
+     amongst Callisto Tasks.
+  -->
+<Scheme name="${callisto_task_name}">
+  <TypeDefinitions>
+    <SignalType name="text" mimeClass="text"/>
+
+    <ParameterType name="char"/>    
+    <ParameterType name="String"/>
+    <ParameterType name="Boolean"/>
+    <ParameterType name="Integer"/>
+
+    <AnchorType name="text-point">
+      <SignalType ref="text" role="text"/>
+      <ParameterType ref="char" role="char"/>
+    </AnchorType>
+
+    <RegionType name="text-extent">
+      <AnchorType ref="text-point" role="start"/>
+      <AnchorType ref="text-point" role="end"/>
+    </RegionType>
+
+
+    <!-- Attribute types without attributes use the same content! -->
+    <ContentType name="empty-content"></ContentType>
+
+${callisto_AnnotationTypes}
+
+    <AnalysisType name="generic-set">
+${callisto_AnalysisTypes}    </AnalysisType>
+
+    
+    <CorpusType name="${task_name}">
+      <SignalType ref="text" hasIndefiniteCardinality="true"/>
+      <AnchorType ref="text-point" hasIndefiniteCardinality="true"/>
+      <RegionType ref="text-extent" hasIndefiniteCardinality="true"/>
+      <AnalysisType ref="generic-set" role="generic-set" />
+    </CorpusType>
+
+  </TypeDefinitions>
+</Scheme>

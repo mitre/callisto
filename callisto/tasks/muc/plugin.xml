@@ -1,0 +1,6 @@
+<plugin>
+  <task name="org.mitre.muc"
+        classname="org.mitre.muc.callisto.MUCTask"
+        classpath="MUCTask.jar">
+  </task>
+</plugin>

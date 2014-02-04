@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="ACE2004 Tasks" default="build">
+
+  <!-- This ant file makes use of build.common.xml, which defines
+       generic targets for Callisto tasks. This file merely defines
+       properties and filesets used by those targets.
+
+       For more information, see comments in
+       ${CALLISTO_HOME}/tasks/build.common.xml
+    -->
+
+  <property file="build.properties"/>
+  <property file="${user.home}/build.properties" />
+
+  <!-- REQUIRED -->
+
+  <!-- Properties and filesets reqired by build.common.xml -->
+  <!-- If copying this file, see the comments there for further help. -->
+
+  <property name="name"       value="ace2004" />
+  <property name="Name"       value="ACE Event Task" />
+
+  <!-- Indicate this plugin has directory strucure, or a simple jar file -->
+  <property name="plugin.structured" value="true" />
+
+  <!-- Non .class files included in the task .jar file. -->
+  <fileset id="resource.files" dir=".">
+    <include name="resource/*.maia.xml" />
+    <include name="resource/maia.dtd" />
+  </fileset>
+
+  <!-- Files placed in task plugin dir. NO dir structure is maintained. -->
+  <fileset id="plugin.files" dir=".">
+    <include name="plugin.xml" />
+    <include name="resource/${name}.rng" /> <!-- may not be present -->
+  </fileset>
+
+  <!-- /All/ files distributed in source tarball: keeps dir structure. -->
+  <fileset id="source.files" dir=".">
+    <include name="README.txt" />
+    <include name="build.xml" />
+    <include name="build.properties" />
+
+    <include name="plugin.xml" />
+    <include name="resource/${name}.rng" />
+
+    <include name="resource/*.maia.xml" />
+    <include name="resource/maia.dtd" />
+
+    <include name="src/**" />
+  </fileset>
+
+
+  <!-- OPTIONAL -->
+
+
+  <!-- IMPORT COMMON TARGETS -->
+
+  <!-- ${callisto.home} is defined in build.properties -->
+  <import file="${callisto.home}/tasks/build.common.xml" />
+
+  <!-- override for added stuff -->
+  <target name="build">
+    <!-- copy binary scripts -->
+    <copy todir="${build.dir}/${task.dir}/bin">
+      <fileset dir="${src.dir}/bin" includes="*,*.bat" />
+    </copy>
+    <chmod dir="${build.dir}/${task.dir}/bin" perm="755" includes="*,*.bat" />
+
+    <antcall target="common.task.build" 
+             inheritAll="true" inheritRefs="true" />
+  </target>
+
+
+</project>

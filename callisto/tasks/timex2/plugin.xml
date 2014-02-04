@@ -1,0 +1,6 @@
+<plugin>
+  <task name="org.mitre.timex2"
+        classname="org.mitre.timex2.callisto.TIMEX2Task"
+        classpath="TIMEX2Task.jar">
+  </task>
+</plugin>

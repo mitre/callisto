@@ -1,0 +1,65 @@
+<!-- 1.5 from http://spacetime.mitre.org/mediawiki/index.php/SpatialMLDTD -->
+
+<!ELEMENT SpatialML ( #PCDATA | PLACE | PATH | LINK | SIGNAL )* >
+<!ATTLIST SpatialML xsi:noNamespaceSchemaLocation CDATA #IMPLIED >
+<!ATTLIST SpatialML xmlns:xsi CDATA #IMPLIED >
+<!ATTLIST SpatialML comment CDATA #IMPLIED >
+ 
+<!ELEMENT PLACE ( #PCDATA ) >
+<!ATTLIST PLACE id ID #REQUIRED >
+<!ATTLIST PLACE gazref CDATA #IMPLIED >
+<!ATTLIST PLACE comment CDATA #IMPLIED >
+<!ATTLIST PLACE type ( BODYOFWATER | CELESTIAL | CIVIL | CONTINENT | COUNTRY | FAC | GRID | 
+                       LATLONG | MTN | MTS | PPL | PPLA | PPLC | POSTALCODE | POSTBOX | RGN |
+                       ROAD | UTM | VEHICLE ) #IMPLIED >
+<!ATTLIST PLACE mod ( B | BR | C | E | ENE | ESE | L | N | NE | NEAR | NNE | R | S | SE | SSE |
+                      SSW | SW | T | W | WSW ) #IMPLIED >
+<!ATTLIST PLACE continent ( AF | AN | AI | AU | EU | GO | LA | NA | PA | SA ) #IMPLIED >
+<!-- Country codes are ISO-3166 two-letters. -->
+<!ATTLIST PLACE country ( AD | AE | AF | AG | AI | AL | AM | AN | AO | AQ | AR | AS | AT | AU |
+                          AW | AX | AZ | BA | BB | BD | BE | BF | BG | BH | BI | BJ | BM | BN |
+                          BO | BR | BS | BT | BV | BW | BY | BZ | CA | CC | CD | CF | CG | CH |
+                          CI | CK | CL | CM | CN | CO | CR | CU | CV | CX | CY | CZ | DE | DJ |
+                          DK | DM | DO | DZ | EC | EE | EG | EH | ER | ES | ET | FI | FJ | FK |
+                          FM | FO | FR | GA | GB | GD | GE | GF | GG | GH | GI | GL | GM | GN |
+                          GP | GQ | GR | GS | GT | GU | GW | GY | HK | HM | HN | HR | HT | HU |
+                          ID | IE | IL | IM | IN | IO | IQ | IR | IS | IT | JE | JM | JO | JP |
+                          KE | KG | KH | KI | KM | KN | KP | KR | KW | KY | KZ | LA | LB | LC |
+                          LI | LK | LR | LS | LT | LU | LV | LY | MA | MC | MD | ME | MG | MH |
+                          MK | ML | MM | MN | MO | MP | MQ | MR | MS | MT | MU | MV | MW | MX |
+                          MY | MZ | NA | NC | NE | NF | NG | NI | NL | NO | NP | NR | NU | NZ |
+                          OM | PA | PE | PF | PG | PH | PK | PL | PM | PN | PR | PS | PT | PW |
+                          PY | QA | RE | RO | RS | RU | RW | SA | SB | SC | SD | SE | SG | SH |
+                          SI | SJ | SK | SL | SM | SN | SO | SR | ST | SV | SY | SZ | TC | TD |
+                          TF | TG | TH | TJ | TK | TL | TM | TN | TO | TR | TT | TV | TW | TZ |
+                          UA | UG | UM | US | UY | UZ | VA | VC | VE | VG | VI | VN | VU | WF |
+                          WS | YE | YT | ZA | ZM | ZW | OTHER ) #IMPLIED >
+<!ATTLIST PLACE form ( NAM | NOM ) #IMPLIED >
+<!ATTLIST PLACE county NMTOKEN #IMPLIED >
+<!ATTLIST PLACE state NMTOKEN #IMPLIED >
+<!ATTLIST PLACE latLong CDATA #IMPLIED >
+<!ATTLIST PLACE nonLocUse ( true | false ) #IMPLIED >
+<!ATTLIST PLACE description CDATA #IMPLIED >
+<!ATTLIST PLACE CTV ( CITY | TOWN | VILLAGE ) #IMPLIED >
+ 
+<!ELEMENT PATH EMPTY >
+<!ATTLIST PATH id ID #REQUIRED >
+<!ATTLIST PATH comment CDATA #IMPLIED >
+<!ATTLIST PATH source IDREF #REQUIRED >
+<!ATTLIST PATH destination IDREF #REQUIRED >
+<!ATTLIST PATH signals IDREFS #REQUIRED >
+<!ATTLIST PATH frame ( VIEWER | INTRINSIC | EXTRINSIC ) #IMPLIED >
+<!ATTLIST PATH direction ( B | A | BL | E | F | N | S | W | NNE | NE | ENE | ESE | SE | SSE | 
+                           SSW | SW | WSW | WNW | NW ) #IMPLIED >
+<!ATTLIST PATH distance CDATA #IMPLIED >
+ 
+<!ELEMENT LINK EMPTY >
+<!ATTLIST LINK id ID #REQUIRED >
+<!ATTLIST LINK comment CDATA #IMPLIED >
+<!ATTLIST LINK source IDREF #REQUIRED >
+<!ATTLIST LINK target IDREF #REQUIRED >
+<!ATTLIST LINK linkType ( IN | EC | EQ | DC | PO ) #IMPLIED >
+ 
+<!ELEMENT SIGNAL ( #PCDATA ) >
+<!ATTLIST SIGNAL id ID #REQUIRED >
+<!ATTLIST SIGNAL comment CDATA #IMPLIED >

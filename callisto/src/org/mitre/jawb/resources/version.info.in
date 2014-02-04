@@ -1,0 +1,7 @@
+#Callisto info template
+#Copied to resources with a filter to set the proper values
+callisto.version=@VERSION@
+callisto.copyright=@COPYRIGHT@
+callisto.jre.min.major=1
+callisto.jre.min.minor=4
+callisto.jre.min.edit=2

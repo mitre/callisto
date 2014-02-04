@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<shortcuts>
+
+  <programGroup defaultName="Callisto" location="applications"/>
+
+  <shortcut
+     name="Callisto"
+     description="Callisto Annotation Tool"
+     target="${INSTALL_PATH}/Callisto.jar"
+     iconFile="${INSTALL_PATH}/bin/icons/alembic.ico"
+     initialState="minimized"
+     programGroup="yes"
+     desktop="yes"
+     applications="no"
+     startMenu="no"
+     startup="no" />
+
+   <shortcut
+     name="Documentation"
+     description="Callisto user documentation (HTML format)"
+     target="${INSTALL_PATH}/docs/index.html"
+     programGroup="yes"
+     desktop="no"
+     applications="no"
+     startMenu="no"
+     startup="no">
+     <createForPack name="Documentation" />
+   </shortcut>
+   
+   <shortcut
+     name="Uninstall Callisto"
+     description="Remove Callisto from this System"
+     target="${INSTALL_PATH}/Uninstaller/uninstaller.jar"
+     programGroup="yes" />
+   
+</shortcuts>

@@ -1,0 +1,55 @@
+2004-10-07
+Version 1.2.0
+
+Please read the README.txt file in the same directory as this file
+before continuing. It contains more general project information. An
+installer is distributed for Callisto to install prebuilt binaries on
+your machine.  This file documents the process for building and
+installing from source.
+
+Binary distributeions of the Callisto code are available at
+http://callisto.mitre.org/
+
+You should be familiar with Java programming and the environment in
+which you plan to use the code before moving forward. Sun Microsystems
+has a great deal of documentation online at http://java.sun.com/
+
+Note that while java works on many platforms, we have adopted the UNIX
+style when discussing directory structures and environment variables:
+please make the neccissary coversions for your platform.
+
+There are a few dependent Java class libraries required to build the
+Callisto.jar file and any Task jar files, but these have been included
+in the distribution. Source code for them may be included in the
+material you recieved, or you can download them online from their
+respective web sites.
+
+The binary Callisto jar files, and included tasks can easily be built
+using the java build tool "ant".  You can find ant files, installation
+instructions and documentation at http://ant.apache.org/
+
+After unpacking this release run ant with the target 'build'.
+
+$ cd $CALLISTO_HOME
+$ ant build
+
+This will compile the Callisto source, and create the Callisto.jar
+file, and included task files in the $CALLISTO_HOME/build directory. A
+copy of the neccissary third-party libraries are copied in as well so
+that you may run Callisto directly from there.
+
+Other ant targets of interst:
+
+$ ant -projecthelp
+Buildfile: build.xml
+Main targets:
+
+ build    Create jar file in 'build' and copy third-party jars as well.
+ compile  Compile class files into 'classes'.
+ dist     Build all distribution jar files, including tasks.
+ javadoc  Creates javadoc in 'docs/apidocs'
+ run      Run Callisto from the compiled .class files.
+ runjar   Run Callisto from the jar file.
+ src      Create a tarball of the source tree
+
+Default target: build

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="TIMEX2 Tasks" default="build">
+
+  <!-- This ant file makes use of build.common.xml, which defines
+       generic targets for Callisto tasks. This file merely defines
+       properties and filesets used by those targets.
+
+       For more information, see comments in
+       ${CALLISTO_HOME}/tasks/build.common.xml
+    -->
+
+  <property file="build.properties"/>
+  <property file="${user.home}/build.properties" />
+
+  <!-- REQUIRED -->
+
+  <!-- Properties and filesets reqired by build.common.xml -->
+  <!-- If copying this file, see the comments there for further help. -->
+
+  <property name="name"       value="timex2" />
+  <property name="Name"       value="TIMEX2" />
+
+  <!-- Indicate this plugin has directory strucure, or a simple jar file -->
+  <!-- Class of plugin, ignored if plugin is structured -->
+  <property name="plugin.structured" value="false" />
+  <property name="plugin.class" value="org.mitre.timex2.callisto.TIMEX2Task" />
+
+  <!-- Non .class files included in the task .jar file. -->
+  <fileset id="resource.files" dir=".">
+    <include name="resource/*.maia.xml" />
+    <include name="resource/maia.dtd" />
+  </fileset>
+
+  <!-- Files placed in task plugin dir. NO dir structure is maintained. -->
+  <fileset id="plugin.files" dir=".">
+    <include name="plugin.xml" />
+    <include name="resource/${name}.rng" /> <!-- may not be present -->
+  </fileset>
+
+  <!-- /All/ files distributed in source tarball: keeps dir structure. -->
+  <fileset id="source.files" dir=".">
+    <include name="README.txt" />
+    <include name="build.xml" />
+    <include name="build.properties" />
+
+    <include name="plugin.xml" />
+    <include name="resource/${name}.rng" />
+
+    <include name="resource/*.maia.xml" />
+    <include name="resource/maia.dtd" />
+
+    <include name="org/**/*.java" />
+    <include name="org/**/*.html" />
+  </fileset>
+
+
+  <!-- OPTIONAL -->
+  <!-- strongly consider not duplicating these legacy hacks -->
+
+  <!-- legacy override default ('src') -->
+  <property name="src.dir" value="." />
+  <!-- legacy override default (${name}-task) -->
+  <property name="task.name" value="TIMEX2Task" />
+
+
+  <!-- specific to timex2 -->
+  <property name="convert.jar" value="Timex2BatchConvert.jar" />
+
+  <!-- the special jar for simple conversions (called at tail of 'build') -->
+  <target name="convert" depends="compile">
+    <mkdir dir="${build.dir}/${task.dir}" />
+    <jar destfile="${build.dir}/${task.dir}/${convert.jar}" 
+         basedir="${classes.dir}"
+	 includes="org/**/BatchExportTIMEX2.class">
+      <manifest>
+        <attribute name="Main-Class"
+                   value="org.mitre.timex2.callisto.BatchExportTIMEX2" />
+        <attribute name="Class-Path" 
+                   value="../../Callisto.jar ../../lib/jATLAS.jar ../../lib/dom4j.jar ../../lib/log4j.jar ../../lib/junit.jar Timex2Task.jar" />
+      </manifest>
+    </jar>
+  </target>
+
+  <!-- overidden to make sure convert target is called -->
+  <target name="build" depends="compile,convert">
+    <antcall target="common.task.build" />
+  </target>
+
+
+  <!-- IMPORT COMMON TARGETS -->
+
+  <!-- ${callisto.home} is defined in build.properties -->
+  <import file="${callisto.home}/tasks/build.common.xml" />
+
+</project>

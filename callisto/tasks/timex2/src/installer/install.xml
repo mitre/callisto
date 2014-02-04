@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<installation version="1.0">
+  <info>
+    <appname>Callisto</appname>
+    <appversion>1.1.1</appversion>
+    <url>http://callisto.mitre.org/</url>
+    <javaversion>1.4</javaversion>
+  </info>
+    
+  <guiprefs width="640" height="480" resizable="no" />
+    
+  <locale>
+    <langpack iso3="eng" />
+  </locale>
+
+  <variables>
+    <!-- <variable name="" value="" /> -->
+  </variables>
+
+  <!--
+        The resources section.
+    -->
+  <resources>
+    <res id="InfoPanel.info" src="README.txt" />
+    <res id="LicencePanel.licence" src="LICENSE.txt" />
+    <res id="useNativeLAF" src="src/installer/useNativeLAF" />
+  </resources>
+    
+  <!--
+        The panels section.
+    -->
+  <panels>
+    <panel classname="HelloPanel" />
+    <panel classname="InfoPanel" />
+    <panel classname="LicencePanel" />
+    <panel classname="TargetPanel" /> 
+    <panel classname="InstallPanel" />
+    <panel classname="FinishPanel" />
+  </panels>
+
+  <!--
+        The packs section.
+    -->
+  <packs>
+    <pack name="TIMEX2" required="yes">
+      <description>TIMEX2 Task</description>
+      <fileset dir="." targetdir="${INSTALL_PATH}/tasks/timex2">
+        <include name="README.txt" />
+        <include name="INSTALL.txt" />
+        <include name="LICENSE.txt" />
+        <exclude name="**/CVS/" />
+      </fileset>
+      <fileset dir="target" targetdir="${INSTALL_PATH}/tasks">
+        <include name="timex2/" />
+      </fileset>
+      <!-- delete the old style install artifact -->
+      <updatecheck>
+        <include name="tasks/TIMEX2Task.jar" />
+      </updatecheck>
+    </pack>
+  </packs>
+    
+</installation>

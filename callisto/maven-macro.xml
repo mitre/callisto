@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="maven" basedir=".">
+	<description>
+  + ==\_/============J=A=V=A=G=E=N===A=N=T===M=O=D=U=L=E=S================= +
+  +  \(_)/                                                                  +
+  +  -(_)-                   Execute Maven from Ant                         +
+  +  /(_)\                                                                  +
+  + ======================================================================= +
+  +    Copyright (c) 2002-2005 Outsource Cafe, Inc.  All rights reserved.   +
+  + ======================================================================= +
+  +
+  + This macro allows execution of Maven from Ant. 
+  +
+  + Dependencies:
+  +   maven.home - required.  Will be automaticly set if MAVEN_HOME is defined.
+  +   tools.jar - default location is: ${env.JAVA_HOME}\lib\tools.jar
+  +
+  + developer: RichardEasterling@OutsourceCafe.com
+  + ======================================================================= +
+  + Licensed under the Apache License, Version 2.0 (the "License");
+  + you may not use this file except in compliance with the License.
+  + You may obtain a copy of the License at
+  +
+  +   http://www.apache.org/licenses/LICENSE-2.0
+  +
+  + Unless required by applicable law or agreed to in writing, software
+  + distributed under the License is distributed on an "AS IS" BASIS,
+  + WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  + See the License for the specific language governing permissions and
+  + limitations under the License.
+  + =J=A=M===========================================J=A=V=A=G=E=N=.=C=O=M= +
+	</description>
+	<!-- example usage:
+      Maven: maven clean 
+      JAM: <maven.macro goal="clean"/>
+
+      Maven: maven -Dgoal=clean,plugin:install multiproject:goal
+      JAM: <maven.macro goal="multiproject:goal">
+             <arg.tag>
+               <arg value="-Dgoal=clean,plugin:install"/>
+             </arg.tag>
+           </maven.macro>
+
+	-->
+	<property name="MAVEN.PRESENT" value="true"></property>
+	<!-- =================================================================== -->
+        <!--
+             Sanity checks - Disabled here, and copied to master build file.
+             Most of our devs don't have maven installed, as it's only used
+             for documentation. Including this file caused certain failure.
+             Thus this file is imported 'optionally' and the test is done in a
+             target of the master build, used only by targets that require it.
+          -->
+	<!-- =================================================================== -->
+	<condition property="maven.home" value="${env.MAVEN_HOME}">
+		<isset property="env.MAVEN_HOME"></isset>
+	</condition>
+        <!--
+	<fail unless="maven.home" message="Apache Maven must be installed and MAVEN_HOME set."></fail>
+        -->
+	<!-- =================================================================== -->
+	<!-- call maven macro -->
+	<!-- =================================================================== -->
+	<macrodef name="maven.macro">
+		<attribute name="goal"></attribute>
+		<attribute name="pom" default="${basedir}/project.xml"></attribute>
+		<attribute name="tools.jar" default="file://${tools.jar}"></attribute>
+		<attribute name="forehead.conf" default="${maven.home}/bin/forehead.conf"></attribute>
+		<attribute name="maxmemory" default="128m"></attribute>
+		<attribute name="fork" default="yes"></attribute>
+		<attribute name="failonerror" default="true"></attribute>
+		<attribute name="maven.home" default="${maven.home}"></attribute>
+		<element name="arg.tag" optional="yes"></element>
+		<element name="sysproperty.tag" optional="yes"></element>
+		<sequential>
+			<echo>MAVEN-MACRO goal =@{goal}</echo>
+			<echo>MAVEN-MACRO pom =@{pom}</echo>
+			<java classname="com.werken.forehead.Forehead" fork="@{fork}" failonerror="@{failonerror}" maxmemory="@{maxmemory}">
+				<arg.tag></arg.tag>
+				<arg value="-p"></arg>
+				<arg file="@{pom}"></arg>
+				<arg value="@{goal}"></arg>
+				<classpath>
+					<fileset dir="@{maven.home}/lib">
+						<include name="forehead-*.jar"></include>
+					</fileset>
+				</classpath>
+				<sysproperty.tag></sysproperty.tag>
+				<sysproperty key="maven.home" value="@{maven.home}"></sysproperty>
+				<sysproperty key="tools.jar" value="@{tools.jar}"></sysproperty>
+				<sysproperty key="forehead.conf.file" file="@{forehead.conf}"></sysproperty>
+			</java>
+		</sequential>
+	</macrodef>
+</project>

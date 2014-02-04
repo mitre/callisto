@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- ***************************************************************** -->
+<!--
+
+     Collection of targets for building a Callisto Task. Define the
+     following Properties and Filesets in your build.xml, and lastly
+     import this file. Several examples are available in the Callisto
+     distribution.
+
+     Build.xml files importing this file can be invoked from the
+     task's directory, to build the individual task. If the task's
+     directory is a subdirectory of ${CALLISTO_HOME}/tasks/, it will
+     be invoked as part of the Callisto build process, and the results
+     integrated with the callisto build.
+
+     Targets defined: compile, build, dist, src, and install, as well
+     as several internal ones for initialization and error checking.
+
+     Required Properties:
+
+        name:           "ID" name of task, no spaces, punctuation, etc
+        Name:           Human form of name, using spaces, uppercase, etc
+        callisto.home:  Installation directory of Callisto
+
+     Required Filesets:
+
+        resource.files: Non .class files included in the task .jar
+                        include maia files, etc (remember to include
+                        any directory structure needed)
+        source.files: /All/ files to be included in source
+                      distribution (not just java files)
+
+     Optional Properties:
+
+        plugin.structured: Set to "false" (or unset) for a "Simple
+                           Task" consisting of just a .jar file, and
+                           set to "true" (or any value) to build a
+                           "Structured Task" which has a directory
+                           structure holding user modifiable files,
+                           3rd party libs, etc.  If set,
+                           "plugin.files" must be specified.
+        plugin.class: Class that extends Task.class, Required if
+                      "plugin.structured" is not true, else ignored.
+
+     Optional Filesets:
+
+        plugin.files: Files placed in the Task plugin directory when
+                      installed. The task .jar is automatically
+                      included. Also include plugin.xml, ${name}.rng
+                      and any third party libraries.
+                      Ignored if "plugin.structured" is set.
+
+     - - - -
+     Overridable Propertes:
+
+        Define these before importing this file to override defaults
+        (in parenthesis).
+
+        debug:        turns on debugging in comiled files (true)
+        optimize:     turns on optimized java compiles (true)
+        deprecation:  turns on deprecation warnings when compiling (true)
+
+        src.dir:      source of java files (src) (define a value not location)
+        build.dir:    build space
+        classes.dir:  output of java compiilation (${build.dir}/classes)
+        dist.dir:     output of tarballs and installer (dist)
+
+     - - - -
+     Overriding Targets:
+
+        To get additional functionality from a target, overide it and
+        call this file's target by name (see the ant manual for task
+        "import"). For example, you might do the following:
+
+        <target name="build">
+          <echo message="This overrides build!" />
+          <antcall target="common.task.build"
+                   inheritAll="true" inheritRefs="true" />
+        </target>
+
+        We recommend calling this files's target at the /end/ of your
+        version, because some targets (e.g. build and src) move files
+        into callisto last.
+
+-->
+<!-- ***************************************************************** -->
+
+
+<!-- To change behavior, override the target in the importing build.xml -->
+<project name="common.task">
+
+  <!-- all properties may be overridden, though not recommended -->
+
+  <property name="task.dir"    value="${name}" />
+  <property name="task.name"   value="${name}-task" />
+  <property name="task.jar"    value="${task.name}.jar" />
+
+  <property name="debug"       value="true" />
+  <property name="optimize"    value="true" />
+  <property name="deprecation" value="false" />
+
+  <!-- Use simple values (not locations), or things will break -->
+  <property name="src.dir"     value="src" />
+  <property name="lib.src.dir" value="lib" />
+
+  <property name="build.dir"    location="build" />
+  <property name="classes.dir"  location="${build.dir}/classes" />
+
+  <property name="dist.dir"     location="dist" />
+  <property name="installer.jar"
+            location="${dist.dir}/${task.name}-installer.jar" />
+
+
+  <!-- Uses ${callisto.home}, which 'compile' tests for correctness -->
+  <path id="callisto.cp">
+    <fileset dir="${callisto.home}">
+      <include name="*.jar" />
+      <include name="lib/*.jar" />
+    </fileset>
+  </path>
+
+  <!-- Uses ${izpack.home}, which 'install' tests for correctness -->
+  <path id="installer.cp">
+    <pathelement location="${izpack.home}/lib/compiler.jar"/>
+  </path>
+
+  <!-- Callisto and 3rd party libs (base '.' in case 'libs' doesn't exist) -->
+  <path id="classpath">
+    <path refid="callisto.cp" />
+    <fileset id="ext.libs" dir="${basedir}">
+      <include name="${lib.src.dir}/*.jar" />
+    </fileset>
+  </path>
+
+  <!-- ************************************** -->
+  <!-- Initialization targets -->
+  <!-- ************************************** -->
+
+  <!-- Tests for required properties and filesets and other initialization -->
+  <target name="init">
+    <!-- Sanity check for build files importing this one. -->
+    <condition property="required.properties">
+      <and>
+        <isset property="name" />
+        <isset property="Name" />
+        <isreference refid="resource.files" type="fileset" />
+        <isreference refid="source.files" type="fileset" />
+        <!-- if plugin.structured isn't true, plugin.files must be set -->
+        <or>
+          <not><equals arg1="${plugin.structured}" arg2="true" />
+          </not>
+          <isreference refid="plugin.files" type="fileset" />
+        </or>
+      </and>
+    </condition>
+
+    <!-- Silly stuff used for repporting in case of failure -->
+    <condition property="is.structured" value="true">
+      <equals arg1="${plugin.structured}" arg2="true" />
+    </condition>
+    <condition property="resource.files" value="[OK]">
+      <isreference refid="resource.files" type="fileset" />
+    </condition>
+    <condition property="plugin.files" value="[OK]">
+      <isreference refid="plugin.files" type="fileset" />
+    </condition>
+    <condition property="source.files" value="[OK]">
+      <isreference refid="source.files" type="fileset" />
+    </condition>
+    <property name="resource.files" value="[not specified]" />
+    <property name="plugin.files" value="[not specified]" />
+    <property name="source.files" value="[not specified]" />
+
+    <fail unless="required.properties">
+      name=${name}
+      Name=${Name}
+      plugin.structured=${is.structured}
+      resource.files=${resource.files}
+      plugin.files=${plugin.files}
+      source.files=${source.files}
+
+      Build files which import build-targets.xml must define the following
+      properties:
+         name           Simple name of the task, no spaces, lower case
+         Name           Human readable name of the task (spaces and Caps ok)
+         plugin.structured "true" specifies that plugin has a full dir structure
+         resource.files Non .class files included in task .jar
+         plugin.files   files (in addition to task .jar) placed in plugin dir
+                        (NO dir structure is maintained)
+         source.files   All files included in source distribution
+
+      See comments in build.common.xml for more information.
+    </fail>
+
+    <echo message="${task.name}" />
+    <tstamp/>
+
+    <!-- names for distribution files (may use timestamp) -->
+    <property name="task.dist.name" value="${task.name}-${DSTAMP}"/>
+    <property name="task.dist.tgz" value="${dist.dir}/${task.dist.name}.tar.gz"/>
+    <property name="task.src.tgz" value="${dist.dir}/${task.dist.name}-src.tar.gz"/>
+
+    <!-- delete task.properties if the build.xml has been modified. -->
+    <dependset>
+      <srcfilelist dir="${basedir}" files="build.xml" />
+      <targetfilelist dir="${classes.dir}" files="task.properties" />
+    </dependset>
+
+    <!-- If task.properties needs to be created. -->
+    <condition property="need.task.properties">
+      <not>
+        <or>
+          <isset property="is.structured" />
+          <available file="${classes.dir}/task.properties" />
+        </or>
+      </not>
+    </condition>
+
+  </target>
+
+  <!-- Init which also copies 3rd party libs not needed for some targets -->
+  <target name="init-libs" depends="init">
+    <!-- Remove legacy build directory -->
+    <delete dir="${basedir}/target" />
+  </target>
+
+  <!-- ************************************** -->
+  <!-- Environment testing targets -->
+  <!-- ************************************** -->
+
+  <target name="check-callisto">
+    <condition property="callisto.present">
+      <and>
+        <available file="${callisto.home}"/>
+        <available property="callisto.present"
+                   classname="org.mitre.jawb.Jawb"
+                   classpathref="callisto.cp" />
+      </and>
+    </condition>
+    <fail unless="callisto.present">
+    Could not find Callisto in specified home: '${callisto.home}'. Be
+    sure Callisto is compiled, then set callisto.home by one of the following
+       - Build as sub-project of callisto (callisto.home set automatically)
+       - Specify command-line: -Dcallisto.home="c:/path/callisto"
+       - Specify in "build.properties" file (next to "build.xml" or in
+         your home dir.
+    </fail>
+
+    <available property="jatlas.present"
+               classname="gov.nist.atlas.Annotation"
+               classpathref="classpath" />
+    <fail unless="jatlas.present">
+      Could not find jATLAS. Make sure the jATLAS jar is in the "lib"
+      subdirectory of the Callisto home dir: '${callisto.home}'
+    </fail>
+  </target>
+
+  <target name="check-junit">
+    <available property="junit.present"
+               classname="junit.framework.TestCase"
+               classpathref="ext.cp" />
+    <!-- We aren't even using it now -->
+  </target>
+
+  <target name="check-izpack">
+    <available property="izpack.present"
+               classname="com.izforge.izpack.ant.IzPackTask"
+               classpathref="installer.cp" />
+    <fail unless="izpack.present">
+
+       The IzPack program is not available.  Download it from
+       http://www.izforge.com/izpack/.  Install it, and set the
+       'izpack.home' property in your local build.properties.
+    </fail>
+    <taskdef name="izpack"
+             classname="com.izforge.izpack.ant.IzPackTask"
+             classpathref="installer.cp"/>
+  </target>
+
+  <!-- ************************************** -->
+  <!-- Compilation targets -->
+  <!-- ************************************** -->
+
+  <!-- Compile the java code from ${src.dir} into ${classes.dir} -->
+  <target name="compile"
+          depends="init-libs,check-callisto,compile-simple-props,init-debug"
+          description="Compile java source code and copy jar resources">
+    <!-- program resources -->
+    <copy todir="${classes.dir}">
+      <fileset refid="resource.files" />
+    </copy>
+
+    <javac target="1.5"
+	   srcdir="${src.dir}"
+           destdir="${classes.dir}"
+           classpathref="classpath"
+           debug="${debug}"
+           optimize="${optimize}"
+           deprecation="${deprecation}" />
+  </target>
+
+  <!-- Creates the task.properties file for original, jar file only plugins -->
+  <target name="compile-simple-props" depends="init"
+          if="need.task.properties" >
+    <!-- This will always generate a file, which we don't want it to do. -->
+    <!--   thus the need.task.properties check -->
+    <mkdir dir="${classes.dir}" />
+    <echo file="${classes.dir}/task.properties">#Callisto Task
+task.class.0=${plugin.class}
+    </echo>
+  </target>
+
+ <condition property="callisto.debug.prefs">
+  <istrue value="${callisto.debug}"/>
+ </condition>
+
+ <target name="init-debug-check-prefs" if="callisto.debug.prefs">
+   <tempfile property="temp.file"/>
+   <echo file="${temp.file}">^user.task.dir.[0-9]+=${classes.dir}</echo>
+   <replace file="${temp.file}" token="\" value="/" />
+   <replace file="${temp.file}" token=":" value="\\:" />
+   <loadfile property="task.pattern0" srcfile="${temp.file}" />
+   <property name="task.pattern" value="${task.pattern0}\s*" />
+   <echo message="task.pattern: ${task.pattern}" />
+   <copy file="${temp.file}" tofile="prefs.0"/>
+   <delete file="${temp.file}" quiet="true" failonerror="false" />
+   <copy file="${callisto.prefs.debug}" tofile="${temp.file}">
+     <filterchain>
+       <linecontainsregexp>
+         <regexp pattern="${task.pattern}"/>
+       </linecontainsregexp>
+     </filterchain>
+   </copy>
+   <copy file="${temp.file}" tofile="prefs.1"/>
+   <condition property="debug.prefs.present">
+     <length file="${temp.file}" when="greater" length="0"/>
+   </condition>
+   <delete file="${temp.file}" quiet="true" failonerror="false" />
+   <echo message="debug.prefs.present=${debug.prefs.present}"/>
+  </target>
+
+  <target name="init-debug" if="callisto.debug.prefs" depends="init-debug-check-prefs" unless="debug.prefs.present">
+   <echo message="init-debug" />
+   <tempfile property="temp.file"/>
+   <copy file="${callisto.prefs.debug}" tofile="${temp.file}">
+    <filterchain>
+     <linecontainsregexp>
+      <regexp pattern="user\.task\.dir\.[0-9]+=.*$"/>
+     </linecontainsregexp>
+    </filterchain>
+   </copy>
+   <replaceregexp file="${temp.file}" match="^.*$\s*" replace=" " flags="gm" />
+   <copy file="${temp.file}" tofile="prefs.2"/>
+   <length property="tasks.count" file="${temp.file}"/>
+   <delete file="${temp.file}" quiet="true" failonerror="false" />
+   <echo file="${temp.file}">user.task.dir.${tasks.count}=${classes.dir}</echo>
+   <replace file="${temp.file}" token="\" value="/" />
+   <replace file="${temp.file}" token=":" value="\:" />
+   <loadfile property="task.pref" srcfile="${temp.file}" />
+   <delete file="${temp.file}" quiet="true" failonerror="false" />
+   <echo append="true" file="${callisto.prefs.debug}">${task.pref}
+</echo>
+ </target>
+
+
+  <!-- ************************************** -->
+  <!-- Build targets -->
+  <!-- ************************************** -->
+
+  <!--
+
+     When building, simple tasks only have the task jar file, directly
+     in the target. Structured tasks have an entire directory (which
+     includes user modifiable files).  "build-structured" and
+     "build-simple" are executed conditionally on the property
+     "is.structured" (mirrors "plugin.structured"). They set the
+     property "build.artifact" which is copied to the main Callisto
+     build dir, if build was called from the Callisto.
+
+    -->
+
+  <!-- Build task directory, including jar file and resources -->
+  <target name="build" depends="compile,build-simple,build-structured"
+          description="Compile and create plugin in ${build.dir}">
+    <!-- pass in the build artifact reference so it copies the right file(s) -->
+    <antcall target="build-callisto" inheritAll="true">
+      <reference refid="build.artifact" />
+    </antcall>
+  </target>
+
+  <!-- Build a simple .jar only plugin -->
+  <target name="build-simple" unless="is.structured">
+    <jar destfile="${build.dir}/${task.jar}" basedir="${classes.dir}" />
+
+    <!-- Artifact fileset is just the .jar (see build-callisto) -->
+    <fileset id="build.artifact" dir="${build.dir}" includes="${task.jar}" />
+  </target>
+
+  <!-- Build a structured plugin with directory structure -->
+  <target name="build-structured" if="is.structured">
+    <copy todir="${build.dir}/${task.dir}" flatten="true">
+      <fileset refid="plugin.files" />
+    </copy>
+    <copy todir="${build.dir}/${task.dir}" failonerror="false">
+      <fileset refid="ext.libs" />
+    </copy>
+    <jar destfile="${build.dir}/${task.dir}/${task.jar}"
+         basedir="${classes.dir}" />
+
+    <!-- Artifact fileset is an entire dir structure (see build-callisto) -->
+    <fileset id="build.artifact" dir="${build.dir}" includes="${task.dir}/" />
+  </target>
+
+  <!-- copy build artifact (simple or structured) to parent, when appropriate -->
+  <target name="build-callisto" if="callisto.tasks.build">
+    <copy todir="${callisto.tasks.build}" >
+      <fileset refid="build.artifact" />
+    </copy>
+  </target>
+
+  <!-- ************************************** -->
+  <!-- Installer targets -->
+  <!-- ************************************** -->
+
+  <!-- Create installer (needs better test for IzPack) -->
+  <target name="installer" depends="init-libs,check-izpack,build"
+          description="Create an installer jar using IzPack">
+    <echo message="${izpack.home}"/>
+    <mkdir dir="${dist.dir}"/>
+    <izpack input="src/installer/install.xml"
+            output="${installer.jar}"
+            installerType="standard"
+            basedir="."
+            izPackDir="${izpack.home}">
+      <property name="app.name" value="${Name}" />
+      <property name="app.version" value="${version}" />
+    </izpack>
+  </target>
+
+  <!-- ************************************** -->
+  <!-- Distribution targets -->
+  <!-- ************************************** -->
+
+  <!--
+
+     Simple tasks only have the task jar file, directly in the
+     target. Structured tasks have an entire directory (which includes
+     user modifyable files).  "dist-structured" and "dist-simple" are
+     executed conditionally on the property "is.structured". They set
+     the property "dist.artifact" which is copied to the main
+     Callisto target, if build was called from the Callisto.
+
+     For either version, A directory "tasks" is created (as is in the
+     CALLISTO_HOME dir) and the plugin's jar or dir structure is
+     copied there, exactly as it would be to install.  This is then
+     tarballed, and can be uncompressed into the CALLISTO_HOME
+     Directory.
+
+     This target depends on the "build" target, which will set the
+     "build.artifact" fileset, which is also used here.
+
+    -->
+
+  <!-- Create distribution tarballs -->
+  <target name="dist" depends="build"
+          description="Create a distribution tarball of the build artifact">
+    <property name="dist.tmp" value="${dist.dir}/tasks" />
+    <delete dir="${dist.tmp}" includeEmptyDirs="true" quiet="true" />
+
+    <copy todir="${dist.tmp}/">
+      <fileset refid="build.artifact" />
+    </copy>
+    <tar destfile="${task.dist.tgz}" compression="gzip"
+         basedir="${dist.dir}" includes="tasks/" />
+
+    <!-- clean up -->
+    <delete dir="${dist.tmp}" includeEmptyDirs="true" quiet="true" />
+  </target>
+
+  <!-- Create a source tarball from ${source.files} -->
+  <target name="src" depends="init"
+          description="Create a source dist tarball from ${source.files}">
+    <property name="dist.src.tmp" value="${dist.dir}/${task.dir}"/>
+    <delete dir="${dist.src.tmp}" includeEmptyDirs="true" quiet="true" />
+
+    <copy todir="${dist.src.tmp}">
+      <fileset refid="source.files" />
+    </copy>
+
+    <tar destfile="${task.src.tgz}" compression="gzip"
+         basedir="${dist.dir}" includes="${task.dir}/" />
+
+    <antcall target="src-callisto"
+             inheritAll="true" inheritRefs="true" />
+
+    <!-- clean up -->
+    <delete dir="${dist.src.tmp}" includeEmptyDirs="true" quiet="true" />
+  </target>
+
+  <!-- copy source tarball to parent when appropriate -->
+  <target name="src-callisto" if="callisto.tasks.dist">
+    <copy todir="${callisto.tasks.dist}" file="${task.src.tgz}" />
+  </target>
+
+  <!-- ************************************** -->
+  <!-- Clean up targets -->
+  <!-- ************************************** -->
+
+  <!-- Delete the task jar, source and dist tgz files -->
+  <target name="clean" depends="init">
+    <delete quiet="true" includeEmptyDirs="true">
+      <fileset dir="${build.dir}/" defaultExcludes="no" />
+      <fileset dir="${dist.dir}/" defaultExcludes="no" />
+    </delete>
+  </target>
+
+</project>

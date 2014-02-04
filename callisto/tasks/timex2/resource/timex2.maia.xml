@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE Scheme SYSTEM 'maia.dtd'>
+
+<!-- The Scheme name here is the same as the task name. which needn't
+     correspond exactly to the class name, it need only be unambiguous
+     amongst Callisto Tasks.
+  -->
+<Scheme name="org.mitre.timex2">
+  <TypeDefinitions>
+    <SignalType name="text" mimeClass="text"/>
+
+    <ParameterType name="char"/>    
+    <ParameterType name="string"/>
+
+    <AnchorType name="text-point">
+      <SignalType ref="text" role="text"/>
+      <ParameterType ref="char" role="char"/>
+    </AnchorType>
+
+    <RegionType name="text-extent">
+      <AnchorType ref="text-point" role="start"/>
+      <AnchorType ref="text-point" role="end"/>
+    </RegionType>
+
+
+    <ContentType name="timex-content">
+      <ParameterType ref='string' role='val'/>
+      <ParameterType ref='string' role='mod'/>
+      <ParameterType ref='string' role='set'/> 
+      <ParameterType ref='string' role='non-specific'/>
+      <ParameterType ref='string' role='anchor-val'/>
+      <ParameterType ref='string' role='anchor-dir'/>
+      <ParameterType ref='string' role='comment'/> 
+      <ParameterType ref='string' role='no-val'/>
+    </ContentType>
+
+    <AnnotationType name="TIMEX2">
+      <RegionType ref="text-extent" role="text-extent"/>
+      <ContentType ref="timex-content" role="content"/>
+    </AnnotationType>
+
+    <AnalysisType name="timex-set">
+      <AnnotationType ref="TIMEX2" hasIndefiniteCardinality="true"/>
+    </AnalysisType>
+
+    <CorpusType name="timex2">
+      <SignalType ref="text" hasIndefiniteCardinality="true"/>
+      <AnchorType ref="text-point" hasIndefiniteCardinality="true"/>
+      <RegionType ref="text-extent" hasIndefiniteCardinality="true"/>
+      <AnalysisType ref="timex-set" role="timex-set" />      
+    </CorpusType>
+
+  </TypeDefinitions>
+</Scheme>
