@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Callisto - Using Callisto</title>
+    <style type="text/css" media="all">
+          @import url("../style/maven-base.css");
+          
+			    @import url("../style/maven-theme.css");@import url("../style/project.css");</style>
+    <link rel="stylesheet" href="../style/print.css" type="text/css"
+      media="print">
+    <meta http-equiv="Content-Type" content="text/html;
+      charset=windows-1252">
+    <meta name="author" content="Chadwick McHenry">
+    <meta name="email" content="red AT mitre DOT org">
+  </head>
+  <body class="composite">
+    <div id="banner"><a href="http://www.mitre.org"
+        id="organizationLogo"><img alt="The MITRE Corp."
+          src="../images/mitre.png"></a><a
+        href="http://callisto.mitre.org" id="projectLogo"><img
+          alt="Callisto" src="../images/callisto.supernova.png"></a>
+      <div class="clear">
+        <hr></div>
+    </div>
+    <div id="breadcrumbs">
+      <div class="xleft">&nbsp; <br>
+      </div>
+      <div class="xright"> <a href="http://www.mitre.org"
+          class="externalLink" title="External Link">MITRE</a> </div>
+      <div class="clear">
+        <hr></div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+        <div id="menuCallisto">
+          <h5>Callisto</h5>
+          <ul>
+            <li class="none"><a href="../index.html">Home</a></li>
+            <li class="none"><a href="download.html">Download</a></li>
+            <li class="none"><a href="../mail.html">Mailing Lists</a></li>
+            <li class="none"><a href="../contact.html">Contact</a></li>
+            <li class="none"><a href="../license.html">License</a></li>
+            <li class="none"><a href="../links.html">Links</a></li>
+          </ul>
+        </div>
+        <div id="menuDocumentation">
+          <h5>Documentation</h5>
+          <ul>
+            <li class="none"><a href="../faq.html">FAQs</a></li>
+            <li class="expanded"><a href="../manual/index.html">Manual</a>
+              <ul>
+                <li class="none"><a href="../manual/install.html">Install
+                    and Run</a></li>
+                <li class="none"><a href="../manual/features.html">Features</a></li>
+                <li class="none"><strong><a href="../manual/use.html">Using
+                      Callisto</a></strong></li>
+                <li class="none"><a href="../manual/tasks.html">Creating
+                    Tasks</a></li>
+                <li class="none"><a href="../license.html">License</a></li>
+                <li class="none"><a href="../manual/about.html">About</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="bodyColumn">
+      <div class="contentBox">
+        <div class="section"><a name="ACE_Annotation_Task_Tutorial"></a>
+          <h2>ACE Annotation Task Tutorial</h2>
+          <p> The ACE annotation task is also known as the RDC
+            annotation task.
+          </p>
+          <div class="subsection"><a name="Opening_files_for_annotation"></a>
+            <h3>Opening files for annotation</h3>
+            <p> There are three ways to begin annotating a file:
+            </p>
+            <ol>
+              <li>File-&gt;New will create a new annotation file for a
+                raw data file</li>
+              <li>File-&gt;Open will open an AIF file previously created
+                by Callisto.</li>
+              <li>File-&gt;Import will use a Task specific mechanism to
+                convert from some other data type to the task specified</li>
+            </ol>
+            <p> The RDC Task defines a single importer for the ACE Pilot
+              Format (APF).
+            </p>
+            <p> All data annotated by this version of Callisto are saved
+              in AIF format. Tasks may also define Exporters, which
+              would convert to an external format of the Tasks choosing.
+            </p>
+            <p> Note that when loading an APF file, the "signal" file
+              (or "source document") annotated by the APF stand off
+              annotations will be a separate file. This source document
+              file annotated by the APF is indicated within the APF
+              itself and must (obviously) be present in order to perform
+              annotation. The APF2AIF conversion process that happens
+              automatically when loading an APF file is able to find the
+              name of this source document file. Since the source
+              document file is specified without any directory prefixes,
+              it is assumed and required that the source document is
+              located within the same directory as the APF file being
+              opened. The APF2AIF conversion process then creates a raw
+              text file (called ${source-document}.txt, where
+              ${source-document} is the name of the source document
+              annotated by the APF, *not* the APF file itself).
+            </p>
+            <p> In order to load annotations created by an earlier
+              session with Callisto, one needs to load the AIF file
+              associated with those earlier annotations. Thus, even if
+              one specified a raw text file "foo.txt" as input to an
+              earlier Callisto annotation session, all the annotations
+              associated with that session will be saved in an AIF file
+              (for example, "foo.txt.aif"). To see and update these
+              earlier annotations one must open the AIF file
+              ("foo.txt.aif"). Since AIF, like APF, is a stand off XML
+              annotation format, there are mechanisms within the AIF
+              file that refer to the original raw text file (referred to
+              in the ATLAS annotation model as the "signal"), so
+              Callisto will be able to retrieve this original text file
+              in order to properly display it along with the annotations
+              on that file. (See the bug/limitations notes below on
+              moving or transporting AIF files.)
+            </p>
+            <p> To make it easy to revert to earlier versions of a set
+              of annotations, Callisto generates backup copies of the
+              annotations files that are saved separately from the
+              primary named annotation file. The format of these backup
+              files is *.aif.${integer}.xml, where ${integer} takes on
+              ever increasing values as new versions are saved to disk.
+              The user can select in the preferences window how many
+              previous versions are to be maintained at any given time.
+            </p>
+            <p> Here are some examples of entering files into Callisto,
+              using sample ACE (RDC) data found in the <code>${CALLISTO}/data/ACE/</code>
+              directory. Entering (and saving) files involve the use of
+              "File" drop-down menu, which is in the upper left-hand
+              corner of the Callisto window (circled in dashed red in
+              the image below):
+            </p>
+            <img src="../images/callisto-initial-pt-to-file.jpg"
+              alt="[callisto window image]" height="223" width="271">
+            <ul>
+              <li>Enter a "New" raw file to be annotated (like a *.txt
+                file in the samples):
+                <ol>
+                  <li>Mouse on: "File" -&gt; "New"<br>
+                    <br>
+                    A pop-up window will appear.</li>
+                  <li>Browse to get to the new file to enter</li>
+                  <li>Select "RDC Task" for "Task"</li>
+                  <li>Uncheck the "Parse as SGML/XML" box</li>
+                  <li>Leave the file encoding at UTF-8</li>
+                  <li>Press "Annotate"</li>
+                </ol>
+              </li>
+              <li>"Open" an existing AIF file (like an *.aif.xml file in
+                the samples):
+                <ol>
+                  <li>Mouse on: "File" -&gt; "Open"<br>
+                    <br>
+                    A pop-up window will appear.</li>
+                  <li>Browse to get to the file to open</li>
+                  <li>Press "Open"</li>
+                </ol>
+              </li>
+              <li>"Import" a APF format file (like an *.apf.xml file in
+                the samples):
+                <ol>
+                  <li>Mouse on: "File" -&gt; "Import"<br>
+                    <br>
+                    A pop-up window will appear.</li>
+                  <li>Browse to get to the file to import</li>
+                  <li>Select "RDC Task" for "Available Importers"<br>
+                    <br>
+                    "APF" will be a forced choice.</li>
+                  <li>Leave the file encoding at UTF-8</li>
+                  <li>Press "Import"</li>
+                </ol>
+              </li>
+            </ul>
+          </div>
+          <div class="subsection"><a name="Saving_annotations"></a>
+            <h3>Saving annotations</h3>
+            <p> To save your annotation, you must choose a file name
+              which will be recognized as AIF, having an extension as
+              listed above (*.aif, *.aif.xml, *.aif.*.xml). Once saved,
+              do not move the signal file. Callisto uses standoff
+              annotation, and enforces a 'no change to the signal'
+              policy that includes the signal's location. If the signal
+              file is moved in any way, (even if the annotation file
+              moves with it) you will no longer be able to reload the
+              annotations (see Known Bugs and Limitations #1 below, for
+              more information). This restriction can be surmounted by
+              carefully editing the AIF file itself. If you need to do
+              this, please contact MITRE.
+            </p>
+            <p> To save out the annotations (using the AIF format): </p>
+            <ol>
+              <li>Mouse on: "File" -&gt; "Save As"<br>
+                <br>
+                A pop-up window will appear.</li>
+              <li>Browse to where you want the saved file to go</li>
+              <li>Change the file name to save out to what you would
+                like</li>
+              <li>Press "Save"</li>
+            </ol>
+            <p></p>
+          </div>
+          <div class="subsection"><a
+              name="The_Callisto_Interface_for_ACE"></a>
+            <h3>The Callisto Interface for ACE</h3>
+            <p> Upon opening a file for ACE annotation in Callisto, one
+              is presented with a main text screen in which the raw text
+              of the original file is displayed. At the bottom of the
+              main window are a number of distinct "sheets" that can be
+              displayed in the same space by selecting the appropriate
+              "tab" indicating their contents: Mention, Entities,
+              Relations. These tables are used to display the various
+              kinds of ACE annotations. A useful layout is to "tear off"
+              the Entity and Relations tables to enable them to be
+              placed in a separate location on the user's desktop. This
+              can be done by clicking on the icon (looks like two
+              overlapping rectangles) immediately to the left of the tab
+              labels. Another useful "default" layout selection is to
+              select (check the box) of the "Text Palette" option
+              underneath the "Edit" pull down menu.
+            </p>
+            <p> Text in the main text viewing window can be selected by
+              swiping the mouse while depressing the left button. The
+              default behavior is to have the tool itself automatically
+              select words at what it deems are word boundaries. If this
+              default behavior interferes with sub-word selections, the
+              user can change this preference from the "Selection Mode"
+              option underneath the "Edit" pull down menu (changing it
+              to Character mode). Selecting text does not itself create
+              a mention annotation. A mention annotation is created when
+              text has been selected and then either (a) the right
+              button is selected and an appropriate action is selected
+              from the pop-up menu, (b) the desired action is selected
+              directly from the "Text Palette" widget, or (c) the user
+              presses the middle button, in which case the default
+              action associated with the "Text Palette" widget
+              (indicated by the black circle button in the right hand
+              column) is taken. It will often be useful to have the
+              default action be "New Mention", which will enable the
+              annotator to only rarely be forced to use either the
+              text-centered pop-up menu of actions or the text palette
+              actions.
+            </p>
+            <p> Mention annotations can be selected by clicking on them
+              (by default the most recently created mention is the
+              current selection). When selected, a small line on top and
+              below the annotated text appears to indicate that it is
+              the selection mention. If a given bit of text has multiple
+              mention annotations, the user can place the mouse directly
+              over the multiply-annotated text and hit tab to "cycle"
+              through the various co-extensive annotations.
+            </p>
+            <p> Creating a mention creates two phrases at once that are
+              linked together: the "full" extent of the mention, and the
+              "head" of the mention. A new entry in the Mentions table
+              is created in which the various attributes of the mention
+              are displayed explicitly. By default the head and full
+              extent of a mention are co-extensive. To change the extent
+              of either the head (the usual case when a modification is
+              necessary) or the full extent, one swipes the desired text
+              to create a new selection, then either (a) clicks the
+              right button and selects the "Modify Head Extent" entry of
+              the pop-up menu, (b) selects the same entry from the
+              free-standing "Text Palette," or (c) clicks the middle
+              button if it so happens that the user has selected "Modify
+              Head Extent" as the default action in the Text Palette
+              window (indicated by the black circle to its left).
+              Attributes of mentions besides their textual extent can be
+              modified directly from within the mentions table.
+            </p>
+            <p> To create an EDT entity, one selects a row in the
+              mention table or selects a mention annotation from within
+              the text window pane, and then clicks right to get the
+              pop-up window. This will present "Add to Entity" and
+              "Create new Entity" as two options. If one selects "Add to
+              Entity", the tool expects the user to immediately follow
+              that selection with a left mouse click on the row in the
+              entity table that indicates the entity to which the
+              mention should be attached. A similar action, but with a
+              different action selected, allows one to add a selected
+              mention to a relation (either as an Arg1 or Arg2 filler.
+              The other attributes of entities and relations are set
+              just as in the mentions table --- these values are all
+              drop-menus that are set by clicking on the cell and
+              selecting from the pop-up menu.
+            </p>
+          </div>
+          <div class="subsection"><a name="Sample_ACE_data"></a>
+            <h3>Sample ACE data</h3>
+            <p> Some sample ACE data is provided in the <code>${CALLISTO}/data/ACE/</code>
+              directory. There are four types of files:
+            </p>
+            <ol>
+              <li>*.sgm.tmx.rdc.apf.xml: An APF file. Can input into
+                Callisto via "Import".</li>
+              <li>*.sgm: An sgml file. In these samples, they are the
+                "signal" files that the *.sgm.tmx.rdc.apf.xml files
+                point to.</li>
+              <li>*.sgm.tmx.rdc.apf.xml.txt.aif.xml: An AIF file. What
+                Callisto saves out. Can input into Callisto via "Open".<br>
+                <br>
+                Note: some versions of Callisto save out in a slightly
+                different format. But these sample files are still
+                readable by Callisto.</li>
+              <li>*.sgm.tmx.rdc.apf.xml.txt: A plain text file. Can
+                input into Callisto via "New".<br>
+                <br>
+                In these samples, they are also the "signal" files that
+                the *.sgm.tmx.rdc.apf.xml.txt.aif.xml files point to.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clear">
+      <hr></div>
+    <div id="footer">
+      <div class="xright">© 2002-2013, The MITRE Corp.</div>
+      <div class="clear">
+        <hr></div>
+    </div>
+  </body>
+</html>

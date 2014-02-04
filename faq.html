@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Callisto - Frequently Asked Questions</title>
+    <style type="text/css" media="all">
+          @import url("./style/maven-base.css");
+          
+			    @import url("./style/maven-theme.css");@import url("./style/project.css");</style>
+    <link rel="stylesheet" href="./style/print.css" type="text/css"
+      media="print">
+    <meta http-equiv="Content-Type" content="text/html;
+      charset=windows-1252">
+  </head>
+  <body class="composite">
+    <div id="banner"><a href="http://www.mitre.org"
+        id="organizationLogo"><img alt="The MITRE Corp."
+          src="./images/mitre.png"></a><a
+        href="http://callisto.mitre.org" id="projectLogo"><img
+          alt="Callisto" src="./images/callisto.supernova.png"></a>
+      <div class="clear">
+        <hr></div>
+    </div>
+    <div id="breadcrumbs">
+      <div class="xleft">&nbsp; <br>
+      </div>
+      <div class="xright"> <a href="http://www.mitre.org"
+          class="externalLink" title="External Link">MITRE</a> </div>
+      <div class="clear">
+        <hr></div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+        <div id="menuCallisto">
+          <h5>Callisto</h5>
+          <ul>
+            <li class="none"><a href="index.html">Home</a></li>
+            <li class="none"><a href="download.html">Download</a></li>
+            <li class="none"><a href="mail.html">Mailing Lists</a></li>
+            <li class="none"><a href="contact.html">Contact</a></li>
+            <li class="none"><a href="license.html">License</a></li>
+            <li class="none"><a href="links.html">Links</a></li>
+          </ul>
+        </div>
+        <div id="menuDocumentation">
+          <h5>Documentation</h5>
+          <ul>
+            <li class="none"><strong><a href="faq.html">FAQs</a></strong></li>
+            <li class="collapsed"><a href="manual/index.html">Manual</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="bodyColumn">
+      <div class="contentBox">
+        <div class="section"><a name="Frequently_Asked_Questions"></a>
+          <h2>Frequently Asked Questions</h2>
+          <p> <strong>General</strong> </p>
+          <ol>
+            <li> <a href="#what-is-callisto"> What is Callisto? </a> </li>
+            <li> <a href="#where-get-help"> Where do I get help on
+                Callisto? </a> </li>
+            <li> <a href="#requirements"> What System Requirements does
+                Callisto have? </a> </li>
+          </ol>
+          <p> <strong>Using Callisto</strong> </p>
+          <ol>
+            <li> <a href="#file-encoding"> Can I annotate files which
+                are <em>not</em> UTF-8 encoded? </a> </li>
+            <li> <a href="#bad-offsets"> Why are tag offsets in my
+                colleague's file wrong? </a> </li>
+          </ol>
+        </div>
+        <div class="section"><a name="General"></a>
+          <h2>General</h2>
+          <title>General</title>
+          <dl>
+            <dt><a name="what-is-callisto">What is Callisto?</a></dt>
+            <dd>
+              <p> Callisto is an annotation tool developed to support
+                linguistic annotation of textual sources for any
+                Unicode-supported language. It is written in Java, and
+                The initial development of the tool by the MITRE
+                Corporation was funded by the U. S. government. </p>
+            </dd>
+          </dl>
+          <dl>
+            <dt><a name="where-get-help">Where do I get help on
+                Callisto?</a></dt>
+            <dd>
+              <p> This FAQ answers some frequent questions already. If
+                you do not find the answer to your question here,
+                consider joining the <a href="contact.html"><code>callisto-users-list</code></a>
+                and posting your question there. <br>
+              </p>
+            </dd>
+          </dl>
+          <dl>
+            <dt><a name="requirements">What System Requirements does
+                Callisto have?</a></dt>
+            <dd>
+              <p> Callisto requires Java version 1.5 or better to run. </p>
+              <p> If you're developing programs, you want the SDK. To
+                just use Java programs you want the JRE. <br>
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <div class="section"><a name="Using_Callisto"></a>
+          <h2>Using Callisto</h2>
+          <title>Using Callisto</title>
+          <dl>
+            <dt><a name="file-encoding">Can I annotate files which are <em>not</em>
+                UTF-8 encoded?</a></dt>
+            <dd>
+              <p> Yes, you can specify the character encoding (which
+                defaults to UTF-8) of the signal file when opening or
+                importing. If you choose the wrong encoding, you may see
+                your text in the wrong font, or some characters will
+                look meaningless (Though this can also be caused by
+                using a font that does not have all the characters in
+                the text). You can re-read the file in a different
+                encoding by selecting a different "Character Encoding"
+                from the "Format" menu. </p>
+            </dd>
+          </dl>
+          <dl>
+            <dt><a name="bad-offsets">Why are tag offsets in my
+                colleague's file wrong?</a></dt>
+            <dd>
+              <p> This is almost always caused by some program changing
+                the new-line characters <em>automatically</em>, while
+                exchanging the files.&nbsp; This should not occur in the
+                latest versions of Callisto because we now do encode the
+                original signal in the annotation file.<br>
+              </p>
+              <ul>
+                <li><a href="#bad-offsets_cause">The cause of the
+                    problem</a></li>
+                <li><a href="#bad-offsets_fix">How you can fix it</a></li>
+                <li><a href="#bad-offsets_prevent">How you can prevent
+                    it</a></li>
+              </ul>
+              <p><a name="bad-offsets_cause"><strong>The cause of the
+                    problem:</strong></a></p>
+              <p> Different operating systems use different characters
+                to represent "new-line": some use two characters, while
+                others use only one. With stand-off annotation, if the
+                data-files have the new-lines changed, the
+                annotation-file must have all of it's offsets updated,
+                or each annotation will be "off by one" for each
+                preceding newline. </p>
+              <p> The following means are known to "auto-convert" files:
+              </p>
+              <ul>
+                <li>Using <strong>FTP</strong> to transfer files in
+                  ASCII mode</li>
+                <li>Using <strong>WinZip</strong> to un-zip archives
+                  (WinZip's default settings will convert automatically,
+                  though you can change that in it's preferences</li>
+                <li>Sending files as <strong>text attachments</strong>
+                  in e-mail. Many e-mail clients will convert when
+                  attaching and detaching.</li>
+              </ul>
+              <p><a name="bad-offsets_fix"><strong>How you can fix it</strong></a></p>
+              <p> We've considered several means of automatically
+                correcting the problem in Callisto. Unfortunately,
+                without embedding the original data file in the standoff
+                annotation file, it's impossible to automatically
+                correct all problems. </p>
+              <p> That said, correction <em>could</em> be as easy as
+                changing all new-lines to DOS or UNIX style. This can be
+                done in several ways. </p>
+              <ul>
+                <li>Good text editors can save using different new-lines
+                  (eg. emacs, EditPlus, JEdit, BBEdit)</li>
+                <li>There are several utilities that just change
+                  new-lines (eg. dos2unix, unix2dos, d2u, u2d)</li>
+                <li>If you have Perl, these one-liners will work:
+                  <table class="bodyTable">
+                    <tbody>
+                      <tr class="a">
+                        <th>Conversion</th>
+                        <th>Perl script</th>
+                      </tr>
+                      <tr class="b">
+                        <td>DOS to UNIX</td>
+                        <td><code>perl -i -pe 's/\x0d\x0a/\x0a/g'
+                            &lt;filename&gt;</code></td>
+                      </tr>
+                      <tr class="a">
+                        <td>UNIX to DOS</td>
+                        <td><code>perl -i -pe 's/\x0a/\x0d\x0a/g'
+                            &lt;filename&gt;</code></td>
+                      </tr>
+                      <tr class="b">
+                        <td>MAC to DOS</td>
+                        <td><code>perl -i -pe 's/\x0d/\x0d\x0a/g'
+                            &lt;filename&gt;</code></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </li>
+              </ul>
+              <p><a name="bad-offsets_prevent"><strong>How you can
+                    prevent it</strong></a></p>
+              <p> The Most reliable mechanism we have found is to use
+                the "tar" (and optionally "gzip") utilities to archive
+                and unpack files before transferring them. Windows users
+                can get these command line tools with the <a
+                  href="http://www.cygwin.com/" class="externalLink"
+                  title="External Link">cygwin tools</a>. </p>
+              <p> Windows users can use WinZip <em>if</em> the
+                preferences are corrected on the machine where they are
+                unpacked. Open WinZip, and open the
+                "Options-&gt;Configuration" menu. Under the
+                "Miscellaneous" tab, in the "Other" group, un-check the
+                "TAR file smart CR/LF conversion" option. </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="clear">
+      <hr></div>
+    <div id="footer">
+      <div class="xright">© 2002-2013, The MITRE Corp.</div>
+      <div class="clear">
+        <hr></div>
+    </div>
+  </body>
+</html>

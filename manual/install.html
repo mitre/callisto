@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Callisto - Install</title>
+    <style type="text/css" media="all">
+          @import url("../style/maven-base.css");
+          
+			    @import url("../style/maven-theme.css");@import url("../style/project.css");</style>
+    <link rel="stylesheet" href="../style/print.css" type="text/css"
+      media="print">
+    <meta http-equiv="Content-Type" content="text/html;
+      charset=windows-1252">
+    <meta name="author" content="Chadwick McHenry">
+    <meta name="email" content="red AT mitre DOT org">
+  </head>
+  <body class="composite">
+    <div id="banner"><a href="http://www.mitre.org"
+        id="organizationLogo"><img alt="The MITRE Corp."
+          src="../images/mitre.png"></a><a
+        href="http://callisto.mitre.org" id="projectLogo"><img
+          alt="Callisto" src="../images/callisto.supernova.png"></a>
+      <div class="clear">
+        <hr></div>
+    </div>
+    <div id="breadcrumbs">
+      <div class="xleft">&nbsp; <br>
+      </div>
+      <div class="xright"> <a href="http://www.mitre.org"
+          class="externalLink" title="External Link">MITRE</a> </div>
+      <div class="clear">
+        <hr></div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+        <div id="menuCallisto">
+          <h5>Callisto</h5>
+          <ul>
+            <li class="none"><a href="../index.html">Home</a></li>
+            <li class="none"><a href="download.html">Download</a></li>
+            <li class="none"><a href="../mail.html">Mailing Lists</a></li>
+            <li class="none"><a href="../contact.html">Contact</a></li>
+            <li class="none"><a href="../license.html">License</a></li>
+            <li class="none"><a href="../links.html">Links</a></li>
+          </ul>
+        </div>
+        <div id="menuDocumentation">
+          <h5>Documentation</h5>
+          <ul>
+            <li class="none"><a href="../faq.html">FAQs</a></li>
+            <li class="expanded"><a href="../manual/index.html">Manual</a>
+              <ul>
+                <li class="none"><strong><a
+                      href="../manual/install.html">Install and Run</a></strong></li>
+                <li class="none"><a href="../manual/features.html">Features</a></li>
+                <li class="none"><a href="../manual/use.html">Using
+                    Callisto</a></li>
+                <li class="none"><a href="../manual/tasks.html">Creating
+                    Tasks</a></li>
+                <li class="none"><a href="../license.html">License</a></li>
+                <li class="none"><a href="../manual/about.html">About</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="bodyColumn">
+      <div class="contentBox">
+        <div class="section"><a name="Installing_Callisto"></a>
+          <h2>Installing Callisto</h2>
+          <p> You must first <a
+              href="http://callisto.mitre.org/download.html"
+              class="externalLink" title="External Link">download</a>
+            Callisto from the website. This document describes how to
+            install Callisto on your system, and how additional
+            functionality can be added. </p>
+          <p> Callisto may be installed anywhere on your computer you
+            choose. We refer to that as the <code>${CALLISTO}</code>
+            directory. </p>
+          <ul>
+            <li><a href="#Install_Java">Java 1.4 or later</a></li>
+            <li><a href="#Install_Callisto">Install Callisto</a></li>
+            <li><a href="#Running_Callisto">Running Callisto</a></li>
+            <li><a href="#Language_Support">Language Support</a></li>
+            <li><a href="#Annotation_Tasks">Annotation Tasks</a></li>
+          </ul>
+          <div class="subsection"><a name="Install_Java"></a>
+            <h3>Install Java</h3>
+            <p> Callisto is implemented in Java. To run Callisto on any
+              platform, install the Java 2 Runtime Environment 1.5 or
+              later. Java is available for free from <a
+                href="http://java.com/" class="externalLink"
+                title="External Link">http://java.com/</a> for all major
+              operating systems. </p>
+            <p> Java is already installed in many systems. Before
+              installing, check to see if you already have it, and which
+              version: </p>
+            <p> For Sun Solaris, Linux, Mac OsX, Cygwin (on Windows) and
+              other "Unix-like" systems, two quick tests are: </p>
+            <ul>
+              <li> Run the command <code>which java</code> to learn
+                where java (if it is installed) is located in your file
+                system. </li>
+              <li> If installed, run the command <code>java -version</code>
+                to determine which version you are accessing. </li>
+            </ul>
+            <p> For Windows (2000, XP): </p>
+            <ol>
+              <li>Click on <code>Start-&gt;Settings-&gt;Control Panel</code></li>
+              <li>Select "Add or Remove Programs". This will list the
+                installed programs.</li>
+              <li>You are looking for "Java 2 Runtime Environment, SE
+                x.y.z", where "x.y.z" gives the version number.</li>
+              <li>Close the "Control Panel" and "Add or Remove Programs"
+                windows.</li>
+            </ol>
+          </div>
+          <div class="subsection"><a name="Install_Callisto"></a>
+            <h3>Install Callisto</h3>
+            <p> Callisto, as of version 1.0.10, is distributed as an
+              installer program which unpacks all necessary files, and
+              installs them into the directory you specify. This can be
+              anywhere on your system. We will refer to that as your <code>${CALLISTO}</code>
+              directory. Older versions of Callisto were distributed as
+              a compressed archive that unpacked the <code>${CALLISTO}</code>.
+            </p>
+            <p> Double-click the <strong>callisto-v.v.v-installer.jar</strong>
+              icon, or use the following command to start the installer:
+            </p>
+            <div class="source">
+              <pre>$ &gt; java -jar callisto-v.v.v-installer.jar</pre>
+            </div>
+            <p> Callisto now distributes shell scripts for windows and
+              Unix. Add the <code>${CALLISTO}/bin</code> directory to
+              your <code>PATH</code>, (filling in the appropriate value
+              for ${CALLISTO}) and you will be able to invoke Callisto
+              easily from the command line. </p>
+          </div>
+          <div class="subsection"><a name="Running_Callisto"></a>
+            <h3>Running Callisto</h3>
+            <p> If you added <code>${CALLISTO}/bin</code> to your path
+              you can invoke Callisto from the command line: </p>
+            <div class="source">
+              <pre>$ &gt; callisto</pre>
+            </div>
+            <p> Otherwise, execute the <code>${CALLISTO}/Callisto.jar</code>
+              file. </p>
+            <dl>
+              <dt>Windows 95, 98, ME, 2000, XP, MacOSX</dt>
+              <dd>Double-click the Callisto.jar file. (You can also run
+                Callisto from the Windows or Mac command line as
+                described for Sun/Linux, below.)
+                <ol>
+                  <li> Windows 95, 98, ME, 2000, XP: In addition, in
+                    newer versions of Callisto (1.0.10 or later?), the
+                    installer should create icons in your Start Menu.
+                    Look for <code>Start-&gt;Programs-&gt;Callisto</code>
+                    group, and select the Callisto icon. You may also
+                    have chosen to put an icon on your desktop.</li>
+                  <li> MacOSX: Running on MacOSX is known to have
+                    problems.</li>
+                </ol>
+              </dd>
+              <dt>Sun Solaris, Linux:</dt>
+              <dd>At a shell prompt, cd into the <code>${CALLISTO}</code>
+                directory.<br>
+                <br>
+                Then run java, invoking the Callisto application:
+                <div class="source">
+                  <pre>$ &gt; java -jar Callisto.jar</pre>
+                </div>
+              </dd>
+            </dl>
+          </div>
+          <div class="subsection"><a name="Language_Support"></a>
+            <h3>Language Support</h3>
+            <p> Java, the language in which Callisto has been written,
+              can render any UTF-8 file for which your computer has the
+              appropriate fonts. Java 1.4 provides default fonts for
+              English, most European languages, and Arabic. </p>
+            <p> If you are having trouble viewing texts in the
+              appropriate font, try to view this same file in your web
+              browser, setting the character encoding as appropriate. If
+              this succeeds and you are still having trouble getting
+              Callisto/Java to render the text file as appropriate,
+              please <a href="../contact.html">contact us</a>. </p>
+            <p> Not all languages are supported by the default font.
+              Callisto will automatically attempt to recognize most CJK
+              (Chinese, Japanese and Korean) documents, but will not do
+              an exhaustive search of all fonts. In the "Format" menu,
+              select "Format-&gt;Font-&gt;Auto-Detect Font" to guess
+              which font best displays the current document. You can
+              manually select the font of your choice from the
+              "Format-&gt;Font" menu. </p>
+            <p> More fonts may be added to those tested when auto
+              detecting. Open the "Edit-&gt;Preferences", and going to
+              the "General/Fonts" pane. The more fonts that are auto
+              detected, the slower the process will be. </p>
+            <p> Note for users of Windows 95, 98, 2000. The following is
+              from the Microsoft web site: <a
+                href="http://office.microsoft.com/en-us/assistance/HA010549991033.aspx"
+                class="externalLink" title="External Link">http://office.microsoft.com/en-us/assistance/HA010549991033.aspx</a>
+            </p>
+            <div class="source">
+              <pre>Multilingual system support in Windows 95, Windows 98, or
+Windows 2000
+
+  1. On the Windows Start menu, point to Settings, and then click
+     Control Panel.
+  2. Do one of the following:
+   - In Windows 95 or Windows 98, double-click the Add/Remove
+     Programs icon, and then click the Windows Setup tab.
+   - In Windows 2000, double-click the Regional Options icon, and
+     then click the General tab.
+  3. Do one of the following:
+   - In Windows 95 or Windows 98, click Multilanguage Support in
+     the Components list, and then click Details. Then select the
+     check boxes next to the language you want to use.
+   - In Windows 2000, select the check box next to the language
+     group you want under Language settings for the system.
+  4. Repeat step 3 for each language you want to use.
+</pre>
+            </div>
+          </div>
+          <div class="subsection"><a name="Annotation_Tasks"></a>
+            <h3>Annotation Tasks</h3>
+            <p> Install a task module by placing its .jar file, or
+              directory, into the appropriate <code>tasks</code>
+              directory and it will be available automatically the next
+              time Callisto starts up. </p>
+            <p> There are two <code>tasks</code> directories: <em>installation</em>
+              and <em>personal</em>. Most users will find it easiest to
+              install tasks to the installation task directory, though,
+              when an installation is shared, individuals can choose to
+              test new Tasks by using the personal task directory. </p>
+            <ul>
+              <li> The <em>installation</em> tasks directory is <code>${CALLISTO}/tasks/</code>,
+                and annotation tasks installed here are available to all
+                users on the system. </li>
+              <li> The <em>personal</em> tasks directory is <code>${HOME}/.callisto/tasks/</code>,
+                where <code>${HOME}</code> on various systems is: </li>
+            </ul>
+            <table class="bodyTable">
+              <tbody>
+                <tr class="b">
+                  <th>OS</th>
+                  <th>Location of <code>${HOME}</code></th>
+                </tr>
+                <tr class="a">
+                  <td>Windows 95, 98, ME</td>
+                  <td>These systems consider <code>C:\</code> the <code>${HOME}.</code></td>
+                </tr>
+                <tr class="b">
+                  <td>Windows 2000, XP</td>
+                  <td>Each users has their own <code>${HOME}</code>
+                    directory found at <code>C:\Documents and
+                      Settings\${USERNAME}\</code>.</td>
+                </tr>
+                <tr class="a">
+                  <td>Solaris, Linux, MacOSX</td>
+                  <td>These system use the <code>${HOME}</code>
+                    variable in your environment. Mac users cannot see
+                    ".callisto" using the Finder, and must use the
+                    command line.</td>
+                </tr>
+              </tbody>
+            </table>
+            <p> Tasks in the personal tasks directory will supersede
+              those in the installation tasks directory if they have the
+              same identifier (Each task has an ID which is independent
+              of the name of the .jar file). </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clear">
+      <hr></div>
+    <div id="footer">
+      <div class="xright">© 2002-2013, The MITRE Corp.</div>
+      <div class="clear">
+        <hr></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+##<!-- Content Stylesheet for Faq -->
+## This must jump immidiately to the document macro: xml decl must be first
+#document()
+
+## This is where the macro's live
+
+#macro (document)
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+  <properties>
+    <title>$root.getAttributeValue("title")</title>
+  </properties>
+  <body>
+    <section name="Downloads">
+      <p>
+        Below is a list of all files released by this project. Before
+        downloading, you may want to read Release Notes and ChangeLog.
+      </p>
+
+      <table class="groupTable">
+        <tr><th rowspan="2">Package</th>
+            <th rowspan="2">Release &#38; Notes</th>
+            <th rowspan="2">File Name</th>
+            <th colspan="2">Date</th></tr>
+        <tr><th>Size</th>
+            <th>Arch</th></tr>
+#foreach ( $package in $root.selectNodes("package") )
+        <tr class="groupRow"><td colspan="5"><strong>$package.getAttributeValue("name")</strong></td></tr>
+#foreach ( $release in $package.selectNodes("release") )
+        <tr><td colspan="3">&#160;&#160;&#160;<strong>$release.getAttributeValue("name") <a class="footnote" href="$!release.getAttributeValue('notes')">[Release Notes]</a></strong></td>
+            <td colspan="2" align="center"><strong>$release.getAttributeValue("date")</strong></td></tr>
+#foreach ( $file in $release.selectNodes("file") )
+        <tr><td colspan="3">&#160;&#160;&#160;&#160;&#160;&#160;<a href="$file.getAttributeValue('href')">$file.getAttributeValue("name")</a></td>
+            <td align="right">$!file.getAttributeValue("size")</td>
+            <td>$!file.getAttributeValue("arch")</td></tr>
+#end
+#end
+#end
+      </table>
+    </section>
+  </body>
+</document>
+#end

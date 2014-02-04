@@ -1,0 +1,81 @@
+/* better table definition, important for laptops */
+table {
+  border: 1px solid #aaa;
+  width: 96%;
+  margin-left: 2%;
+  dmargin-right: 2%;
+}
+
+/* News FAQ items more prominent. Narrow the selector if its too strong */
+.section dl dt {
+  margin-top: 12px;
+  padding-bottom: 2px;
+  font-weight: bold;
+  border-bottom: 1px solid #aaa;
+}
+
+/* Forces Left column to edges */
+#leftColumn {
+  margin: 0;
+}
+
+/* For our download page */
+td .date {
+  font-size: smaller;
+}
+
+p.footnote {
+  font-size: smaller;
+}
+
+/* --------- color changes ---------- */
+
+a:link {
+  color: #66f;
+  text-decoration: underline;
+}
+a:visited {
+  color: #33c;
+  text-decoration: underline;
+}
+a:active {
+  color: #609;
+}
+#navcolumn a:hover {
+  color: #fff;
+  background-color: #03c;
+}
+#navcolumn a:link, #leftColumn a:visited {
+  text-decoration: none;  
+}
+
+h1, h2, h3 {
+  color: #03c;
+}
+#banner {
+  background-color: #000;
+  border: none;
+  /* why does moz need this to keep banner/breadcrumbs separate?? */
+  border-bottom: 1px solid #000;
+}
+#breadcrumbs {
+  margin: 0;
+  background-color: #ccc;
+  border: none;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #999;
+}
+/* next to work in conjunction to pad navbar when powered by missing */
+#navcolumn {
+  padding-bottom: 20px;
+}
+#poweredBy img {
+  margin-bottom: 0px;
+}
+#leftColumn {
+  background-color: #eee;
+  border-right: 1px solid #999;
+  border-left: none;
+  border-bottom: 1px solid #999;
+  border-top: 1px solid #fff;
+}

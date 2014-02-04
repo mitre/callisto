@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Callisto - Creating Tasks</title>
+    <style type="text/css" media="all">
+          @import url("../style/maven-base.css");
+          
+			    @import url("../style/maven-theme.css");@import url("../style/project.css");</style>
+    <link rel="stylesheet" href="../style/print.css" type="text/css"
+      media="print">
+    <meta http-equiv="Content-Type" content="text/html;
+      charset=windows-1252">
+    <meta name="author" content="Chadwick McHenry">
+    <meta name="email" content="red AT mitre DOT org">
+  </head>
+  <body class="composite">
+    <div id="banner"><a href="http://www.mitre.org"
+        id="organizationLogo"><img alt="The MITRE Corp."
+          src="../images/mitre.png"></a><a
+        href="http://callisto.mitre.org" id="projectLogo"><img
+          alt="Callisto" src="../images/callisto.supernova.png"></a>
+      <div class="clear">
+        <hr></div>
+    </div>
+    <div id="breadcrumbs">
+      <div class="xleft">&nbsp; <br>
+      </div>
+      <div class="xright"> <a href="http://www.mitre.org"
+          class="externalLink" title="External Link">MITRE</a> </div>
+      <div class="clear">
+        <hr></div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+        <div id="menuCallisto">
+          <h5>Callisto</h5>
+          <ul>
+            <li class="none"><a href="../index.html">Home</a></li>
+            <li class="none"><a href="download.html">Download</a></li>
+            <li class="none"><a href="../mail.html">Mailing Lists</a></li>
+            <li class="none"><a href="../contact.html">Contact</a></li>
+            <li class="none"><a href="../license.html">License</a></li>
+            <li class="none"><a href="../links.html">Links</a></li>
+          </ul>
+        </div>
+        <div id="menuDocumentation">
+          <h5>Documentation</h5>
+          <ul>
+            <li class="none"><a href="../faq.html">FAQs</a></li>
+            <li class="expanded"><a href="../manual/index.html">Manual</a>
+              <ul>
+                <li class="none"><a href="../manual/install.html">Install
+                    and Run</a></li>
+                <li class="none"><a href="../manual/features.html">Features</a></li>
+                <li class="none"><a href="../manual/use.html">Using
+                    Callisto</a></li>
+                <li class="none"><strong><a href="../manual/tasks.html">Creating
+                      Tasks</a></strong></li>
+                <li class="none"><a href="../license.html">License</a></li>
+                <li class="none"><a href="../manual/about.html">About</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="bodyColumn">
+      <div class="contentBox">
+        <div class="section"><a name="Creating_Tasks"></a>
+          <h2>Creating Tasks</h2>
+          <p> While Callisto can represent complex annotation
+            structures, most annotation tasks can be represented with
+            simple text spans and attributes, as defined by a DTD. As of
+            version 1.2, Callisto can generate annotation tasks
+            automatically from these simple DTD's.
+          </p>
+          <p> Generated tasks will display the text in the top pane, and
+            tables below, one table per tag type. Attributes may be
+            modified in the tables.
+          </p>
+          <p> These tasks are then packaged in a Java archive (jar file)
+            which can be given to other Callisto users to annotate with
+            the same tag definitions.
+          </p>
+          <p> For more information about DTD's, New Mexico Tech has a
+            good page about <a
+              href="http://infohost.nmt.edu/tcc/help/pubs/dtd/"
+              class="externalLink" title="External Link">Constructing a
+              DocumentType Definition</a>
+          </p>
+          <p> Sample DTD's <code>food-example.dtd</code> and <code>generic.dtd</code>
+            are in the <code>${CALLISTO}/data</code> directory.
+          </p>
+          <ul>
+            <li><a href="#Task_Meta-data">Task Meta-data</a></li>
+            <li><a href="#Supported_Elements">Supported Elements</a></li>
+            <li><a href="#Creating_and_Installing">Creating and
+                Installing</a></li>
+            <li><a href="#Distributing">Distributing</a></li>
+            <li><a href="#Example_Task">Example Task</a></li>
+          </ul>
+          <div class="subsection"><a name="Task_Meta-data"></a>
+            <h3>Task Meta-data</h3>
+            <p> Tasks require certain meta-data to be incorporated into
+              Callisto. This meta-data may be declared in the DTD by
+              declaring <code>ENTITIES</code> having specific names,
+              with the value you wish to set.
+            </p>
+            <p> This is a bit of a hack: technically it means that if
+              entity name appears in your document, it would be replaced
+              with the meta-data value. The risk is only slight, and if
+              you anticipate a problem, don't use the <code>ENTITIES</code>:
+              enter the meta-data manually when compiling the task.
+            </p>
+            <p> The following example and table shows the meta-data
+              required.
+            </p>
+            <div class="source">
+              <pre>&lt;!ENTITY callisto_task_name "org.mitre.example.food"&gt;</pre>
+            </div>
+            <table class="bodyTable">
+              <tbody>
+                <tr class="b">
+                  <th>ENTITY</th>
+                  <th>Description</th>
+                </tr>
+                <tr class="a">
+                  <td>callisto_task_name</td>
+                  <td>Unique ID for your task. This must follow reversed
+                    Internet domain name conventions, like Java
+                    packages, like this: <code>com.company.annot-project</code>.
+                    Use alpha numeric characters, <code>'.'</code>, and
+                    <code>'-'</code>, and <code>'_'</code>. Name
+                    collisions within a company need to be handled by
+                    convention within the company. There is no limit to
+                    how long the name can be, as long as it is unique.</td>
+                </tr>
+                <tr class="b">
+                  <td>callisto_task_title</td>
+                  <td>Human readable title for your task. Try to keep
+                    this short.</td>
+                </tr>
+                <tr class="a">
+                  <td>callisto_task_version</td>
+                  <td>Version string to identify when changes are made
+                    to the task.</td>
+                </tr>
+                <tr class="b">
+                  <td>callisto_task_description</td>
+                  <td>Free text description describing the task to
+                    users. This is currently displayed in the "Annotate
+                    New File" dialog when users select which task to
+                    annotate with.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="subsection"><a name="Supported_Elements"></a>
+            <h3>Supported Elements</h3>
+            <p> Within the DTD, only <code>ELEMENT</code>, and <code>ATTLIST</code>
+              tags are supported (with the exception of general <code>ENTITIES</code>
+              used for <a href="#Task_Meta-data">task meta-data</a>).
+              The following <a href="#Example_Task">example Task</a> is
+              included at <code>${CALLISTO}/data/food-example.dtd</code>.
+            </p>
+            <p> <code>ELEMENTS</code> may currently only have <code>#PCDATA</code>
+              as their content. Callisto does not currently require tags
+              to being nested (like XML), or even from overlapping each
+              other. Attempting to declare structure, will cause an
+              error when the task is built.
+            </p>
+            <div class="source">
+              <pre>&lt;!ELEMENT tag-name (#PCDATA)&gt;</pre>
+            </div>
+            <p> Attributes may define an enumeration of values allowed
+              for the attribute, otherwise annotators enter text freely.
+            </p>
+            <p> Boolean attributes are defined with the enumeration <code>(true|false)</code>
+              (case insensitive, order irrelevant). This allows Callisto
+              to display a checkbox in the corresponding table column.
+              Default values are respected.
+            </p>
+            <p> At the time, all attributes must be <code>IMPLIED</code>,
+              or have a default value set. Implied simply means that the
+              data need not be supplied.
+            </p>
+            <div class="source">
+              <pre>&lt;!ATTLIST tag-name attribute1 CDATA #IMPLIED
+                   attribute2 (valA|valB|valC) "valC"&gt;</pre>
+            </div>
+          </div>
+          <div class="subsection"><a name="Creating_and_Installing"></a>
+            <h3>Creating and Installing</h3>
+            <p> To "compile" your task for Callisto, open the "DTD Task
+              Compiler" from the Tools Menu. Select the DTD you have
+              created by typing it in, or using the browse button. It
+              will be parsed, and the meta-data filled in if you
+              inserted the correct <code>ENTITY</code> tags.
+            </p>
+            <p> Click the "Compile" button, which will validate the
+              data, and the contents of the DTD. On success, a message
+              will be shown indicating where the tasks jar file was
+              created. By default it is placed next to the DTD it was
+              created from.
+            </p>
+            <p> If the "Install Now" check-box is selected when you
+              compile, the jar will be installed in your version of
+              Callisto. Restart Callisto to annotate a document with
+              your new task.
+            </p>
+          </div>
+          <div class="subsection"><a name="Distributing"></a>
+            <h3>Distributing</h3>
+            <p> To distribute the task to colleagues, simply send the
+              jar file created by the compile step to them via whatever
+              means you choose. Jar files are already compressed, so
+              attaching it to an e-mail is a good mechanism.
+            </p>
+            <p> To install the task, your colleague must copy your task
+              jar to one of their task directories as described in the <a
+                href="install.html#Annotation_Tasks">install section</a>
+              of this manual.
+            </p>
+          </div>
+          <div class="subsection"><a name="Example_Task"></a>
+            <h3>Example Task</h3>
+            <p> An example DTD to show possible uses.
+            </p>
+            <div class="source">
+              <pre>&lt;!--
+    You may omit the ENTITY tags, as these may be entered using the
+    Callisto GUI, but by setting them the values will be filled in
+    automatically.
+ --&gt;
+
+&lt;!-- Unique name for task disambiguation --&gt;
+&lt;!ENTITY callisto_task_name "org.mitre.example.food"&gt;
+
+&lt;!-- Human readable title for display in GUI --&gt;
+&lt;!ENTITY callisto_task_title "Food Annotation Task"&gt;
+
+&lt;!-- Version string --&gt;
+&lt;!ENTITY callisto_task_version "1.0"&gt;
+
+&lt;!-- Optional human readable description for display in GUI --&gt;
+&lt;!ENTITY callisto_task_description
+         "Annotate food and associated data"&gt;
+
+&lt;!-- An annotation type --&gt;
+&lt;!ELEMENT food (#PCDATA)&gt;
+
+  &lt;!-- Two attributes, each with an enumeration of values, and no default --&gt;
+  &lt;!ATTLIST food type (fruit|grain|proteins|dairy|vegetable) #IMPLIED
+                 taste (salty|sour|sweet|bitter|umami) #IMPLIED&gt;
+
+  &lt;!-- An attribute with any text as value --&gt;
+  &lt;!ATTLIST food color CDATA #IMPLIED&gt;
+
+  &lt;!-- An attribute with an enumeration of values and a default --&gt;
+  &lt;!ATTLIST food flavor (awful|bad|bland|good|delicious) "bland"&gt;
+
+  &lt;!-- A boolean attribute and default which uses a checkbox in the table --&gt;
+  &lt;!ATTLIST food perishable (true|false) "false"&gt;
+
+
+&lt;!-- Another annotation type with a single attribute --&gt;
+&lt;!ELEMENT consumption (#PCDATA)&gt;
+  &lt;!ATTLIST consumption timeframe (past|present|future) #IMPLIED&gt;
+</pre>
+            </div>
+            <p> Graphic components generated from the example.
+            </p>
+            <img src="../images/food-example.png" alt="Screenshot of
+              food example" align="middle"></div>
+        </div>
+      </div>
+    </div>
+    <div class="clear">
+      <hr></div>
+    <div id="footer">
+      <div class="xright">© 2002-2013, The MITRE Corp.</div>
+      <div class="clear">
+        <hr></div>
+    </div>
+  </body>
+</html>
