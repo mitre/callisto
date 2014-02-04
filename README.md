@@ -25,6 +25,7 @@ the MITRE Corporation was funded by the U. S. government.
  - Release Contents
  - Requirements
  - Installation
+ - Build
  - Support
  - Documentation
  - Acknowledgements
@@ -45,13 +46,14 @@ this.
 If you are using Windows, a "Callisto" program group will be created
 in the "Start->Programs" menu.
 
-The directory structure looks like this.
+The directory structure created by the installer looks like this:
 
+```
 Callisto/                  (aka $CALLISTO_HOME)
     bin/                   (scripts to launch callisto and other tasks)
     data/                  (sample data)
-    docs/
-        index.html         (detailed installation and use)
+    docs/                   
+        index.html         (top-level of html documentation)
         [files with licenses]
     lib/                   (third party libraries
         dom4j-1.5.2.jar
@@ -64,9 +66,8 @@ Callisto/                  (aka $CALLISTO_HOME)
     Callisto.jar
     INSTALL.txt
     LICENSE.txt            (Callisto license)
-    README.txt             (this File)
     Uninstaller/
-
+```
 
 ## Requirements
 
