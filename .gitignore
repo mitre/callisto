@@ -1,2 +1,5 @@
 ### Java ###
 *.class
+
+# ignore emacs backup files
+*~
