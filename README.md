@@ -8,8 +8,11 @@
 mostly still apply to 1.8, but documentation has not been updated since the
 1.5 release.
 
-## Overview
+Additional information and a basic user manual are available at http://mitre.github.io/callisto
 
+Callisto is no longer being actively supported, and is provided as-is.  The [Callisto users mailing list] (http://mitre.github.io/callisto/mail.html) is not very active, but you may be able to get some help there.
+
+## Overview
 
 Callisto is an annotation tool developed for linguistic annotation of
 textual data. Any Unicode-supported language can be annotated, and
@@ -29,8 +32,11 @@ the MITRE Corporation was funded by the U. S. government.
 
 ## Release Contents
 
-Callisto is distributed as in installer program, or as a source distribution, both to be available here shortly.
+Callisto is distributed as in installer program, or as a source distribution.
 
+To download an installer, select the `Download` link from http://mitre.github.io/callisto
+
+To download the source, clone the master branch of the git repository.
 
 By default, the installer will create a "Callisto" directory where
 programs on your operating system normally go.  You may also change
@@ -49,7 +55,7 @@ Callisto/                  (aka $CALLISTO_HOME)
         [files with licenses]
     lib/                   (third party libraries
         dom4j-1.5.2.jar
-        jATLAS.jar
+        Jatlas.jar
         jaxen-1.1-beta-4.jar
         junit.jar
         log4j.jar
