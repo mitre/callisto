@@ -29,8 +29,8 @@ the MITRE Corporation was funded by the U. S. government.
 
 ## Release Contents
 
-Callisto is distributed as in installer program, available at
-http://callisto.mitre.org/.
+Callisto is distributed as in installer program, or as a source distribution, both to be available here shortly.
+
 
 By default, the installer will create a "Callisto" directory where
 programs on your operating system normally go.  You may also change
